@@ -1,0 +1,9 @@
+table {
+  width: 90%;
+  background-color: white;
+}
+
+.operation-button{
+  color: white;
+  background-color: #4070f4;
+}

@@ -1,0 +1,33 @@
+<div class="form-centered">
+  <div class="container">
+    <h2 class="heading">{{ title }}</h2>
+    <form [formGroup]="userForm" (ngSubmit)="submitForm()">
+
+      <div class="form-group" *ngFor="let attribute of attributes ">
+        <div *ngIf="attribute.inputType!='select'">
+          <label for="{{attribute.labelForValue}}">{{ attribute.value }}</label>
+          <input *ngIf="attribute.inputType === 'date'" type="{{attribute.inputType}}" class="form-control" id="{{attribute.inputId}}"
+                 formControlName="{{attribute.formControlName}}" max="{{attribute.dateTypeMaxValue}}">
+          <input *ngIf="attribute.inputType != 'date'" type="{{attribute.inputType}}" class="form-control" id="{{attribute.inputId}}"
+                 formControlName="{{attribute.formControlName}}">
+          <div *ngIf="userForm?.get(''+attribute.inputId)?.invalid && userForm?.get(''+attribute.inputId)?.touched"
+               class="text-danger">
+            {{ attribute.value }} is required.
+          </div>
+        </div>
+        <div *ngIf="attribute.inputType==='select'">
+          <label for="{{attribute.labelForValue}}">{{ attribute.value }}</label>
+          <select class="form-control" id="{{attribute.inputId}}" formControlName="{{attribute.formControlName}}">
+            <option *ngFor="let option of attribute.options" value="{{option}}">
+              {{option}}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="align-center-with-flexbox-container">
+        <button type="submit" class="btn btn-primary margin-top-15px" [disabled]="userForm.invalid">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>

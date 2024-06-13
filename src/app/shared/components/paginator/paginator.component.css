@@ -1,0 +1,10 @@
+.paginator-width {
+  width: 600px;
+}
+
+@media screen and (max-width: 800px) {
+  .paginator-width {
+    width: 300px;
+  }
+}
+

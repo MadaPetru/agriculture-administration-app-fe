@@ -1,0 +1,118 @@
+.main-container-without-hover {
+  width: 280px;
+  height: 299px;
+  float: left; /* stack each div horizontally */
+}
+
+.delete-button {
+  position: relative;
+  float: right;
+  margin-right: 10px;
+  cursor: pointer; /* Change cursor to indicate clickability */
+  color: black; /* Optional: Change color to indicate delete action */
+}
+
+.edit-button {
+  position: relative;
+  float: right;
+  margin-right: 10px;
+  cursor: pointer; /* Change cursor to indicate clickability */
+  color: black; /* Optional: Change color to indicate delete action */
+}
+
+
+.main-container {
+  width: 280px;
+  height: 299px;
+  float: left; /* stack each div horizontally */
+}
+
+img {
+  border-radius: 10px;
+}
+
+.back h2 {
+  position: relative;
+}
+
+.back div {
+  position: relative;
+  font-size: 15px;
+}
+
+.front h2 {
+  position: relative;
+  padding: 1%;
+  align-content: center;
+  color: #000;
+}
+
+.front {
+  border-radius: 10%;
+  background-color: white;
+}
+
+.container-stats-front {
+  text-align: center;
+  cursor: pointer;
+}
+
+.container-stats-front > div {
+  padding: 1%;
+  text-align: justify;
+  position: relative;
+  float: left;
+}
+
+.stats-front {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+/* style the maincontainer class with all child div's of class .front */
+.main-container > .front {
+  position: relative;
+  transform: perspective(600px) rotateY(0deg);
+
+  width: 250px;
+  height: 260px;
+
+  backface-visibility: hidden; /* cant see the backside elements as theyre turning around */
+  transition: transform .5s linear 0s;
+}
+
+/* style the maincontainer class with all child div's of class .back */
+.main-container > .back {
+  position: absolute;
+  transform: perspective(600px) rotateY(180deg);
+  background: #262626;
+  color: #fff;
+  width: 250px;
+  height: 260px;
+  border-radius: 10px;
+  padding: 5px;
+  backface-visibility: hidden; /* cant see the backside elements as theyre turning around */
+  transition: transform .5s linear 0s;
+}
+
+/* style the maincontainer class with all child div's of class .front */
+.main-container-without-hover > .front {
+  position: relative;
+  transform: perspective(600px) rotateY(0deg);
+
+  width: 250px;
+  height: 260px;
+
+  backface-visibility: hidden; /* cant see the backside elements as theyre turning around */
+  transition: transform .5s linear 0s;
+}
+
+.main-container:hover > .front {
+  transform: perspective(600px) rotateY(-180deg);
+}
+
+.main-container:hover > .back {
+  transform: perspective(600px) rotateY(0deg);
+}

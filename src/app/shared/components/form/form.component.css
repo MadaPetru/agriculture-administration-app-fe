@@ -1,0 +1,26 @@
+.margin-top-15px {
+  margin-top: 15px;
+}
+
+.align-center-with-flexbox-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-centered {
+  overflow-y: scroll;
+  background-color: var(--white-color);
+  position: fixed;
+  height: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 1px var(--grey-color-light);
+  transition: all 0.5s ease;
+  border-radius: 5%;
+}
+
+.form-centered::-webkit-scrollbar {
+  display: none;
+}

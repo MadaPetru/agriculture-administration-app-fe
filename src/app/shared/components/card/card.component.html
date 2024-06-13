@@ -1,0 +1,21 @@
+<div [ngClass]="{ 'main-container': allowedCardToRotateOnHover, 'main-container-without-hover': !allowedCardToRotateOnHover }">
+  <div class="back" *ngIf="allowedCardToRotateOnHover">
+    <h2>{{ title }}</h2>
+  </div>
+  <div class="front">
+    <div class="delete-button" *ngIf="deleteButtonVisible" (click)="deleteField()">
+      <i class="fa fa-remove"></i>
+    </div>
+    <div class="edit-button" *ngIf="deleteButtonVisible" (click)="editField()">
+      <i class="fa fa-edit"></i>
+    </div>
+    <div class="container-stats-front" (click)="onClickFrontCard()">
+      <h2>{{ title }}</h2>
+      <div class="stats-front">
+        <div *ngFor="let stat of stats">
+          {{ stat }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
