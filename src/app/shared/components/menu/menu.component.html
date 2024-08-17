@@ -9,11 +9,11 @@
               </span>
           <span class="navlink">{{ item.text }}</span>
         </a>
-        <div class = "nav_link" *ngIf="item.link === null" (click)="onClickCallFunction(item.onClickFunction)">
+        <div class="nav_link" *ngIf="item.link === null" (click)="onClickCallFunction(item.onClickFunction)">
         <span class="navlink_icon">
                 <i class="{{item.icon}}"></i>
               </span>
-          <span class="navlink" *ngIf="item.link === null">{{ item.text }}</span>
+          <span class="navlink">{{ item.text }}</span>
         </div>
       </li>
     </ul>
