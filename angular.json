@@ -35,8 +35,10 @@
               "./node_modules/bootstrap/dist/js/bootstrap.min.js"
             ],
             "server": "src/main.server.ts",
-            "prerender": false,
-            "ssr": false
+            "prerender": true,
+            "ssr": {
+              "entry": "server.ts"
+            }
           },
           "configurations": {
             "production": {
