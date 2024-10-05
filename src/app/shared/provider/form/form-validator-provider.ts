@@ -1,22 +1,23 @@
 import {Validators} from "@angular/forms";
 import {formatDate} from "@angular/common";
 import {TableOperationHistory} from "../../model/table/operations-history/table-operation-history";
+import {EntitySelector} from "../../entity-selector";
 
 export class FormValidatorProvider {
 
-  public static getUserFormValidatorFields(type: string) {
-    if (type === 'field') return this.getUserFormValidatorFieldsFieldForm();
-    if (type === 'operation') return this.getUserFormValidatorFieldsOperationForm();
+  public static getUserFormValidatorFields(type: EntitySelector) {
+    if (type === EntitySelector.FIELD) return this.getUserFormValidatorFieldsFieldForm();
+    if (type === EntitySelector.FIELD_OPERATION) return this.getUserFormValidatorFieldsOperationForm();
     return this.getUserFormValidatorFieldsOperationForm();
   }
 
-  public static getUserEditFormValidatorFields(type: string, data: any) {
-    if (type === 'operation') return this.getUserFormValidatorFieldsOperationEditForm(data);
+  public static getUserEditFormValidatorFields(type: EntitySelector, data: any) {
+    if (type === EntitySelector.FIELD_OPERATION) return this.getUserFormValidatorFieldsOperationEditForm(data);
     return this.getUserFormValidatorFieldForm(data);
   }
 
-  public static getFormValue(value: any, type: string) {
-    if (type === 'field') return {
+  public static getFormValue(value: any, type: EntitySelector) {
+    if (type === EntitySelector.FIELD) return {
       id: value.id,
       version: value.version,
       title: value.title,
@@ -26,7 +27,7 @@ export class FormValidatorProvider {
       areaUnitType: value.areaUnitType,
       roughlyDistanceFromFarmUnitType: value.roughlyDistanceFromFarmUnitType
     };
-    if (type === 'operation') return {
+    if (type === EntitySelector.FIELD_OPERATION) return {
       id: value.id,
       version: value.version,
       farmingLandId: value.farmingLandId,
@@ -34,7 +35,7 @@ export class FormValidatorProvider {
       estimatedCost: value.estimatedCost,
       estimatedHarvest: value.estimatedHarvest,
       createdBy: 'adi',
-      plantType: value.typeOfPlant === 'NONE' ? null : value.typeOfPlant,
+      plantType: value.typeOfPlant,
       estimatedRevenueCurrencyType: value.estimatedRevenueCurrencyType,
       estimatedRevenue: value.estimatedRevenue,
       appliedAt: value.appliedAt,
@@ -47,10 +48,10 @@ export class FormValidatorProvider {
   private static getUserFormValidatorFieldsOperationForm() {
     let todayDate = formatDate(new Date(), 'yyyy-MM-dd', 'en');
     return {
-      operation: ['', Validators.required],
-      estimatedCost: ['', Validators.required],
-      estimatedHarvest: [''],
-      estimatedRevenue: [''],
+      operation: ['ARAT', Validators.required],
+      estimatedCost: [0, [Validators.required, Validators.min(0)]],
+      estimatedHarvest: [0, [Validators.required, Validators.min(0)]],
+      estimatedRevenue: [0, [Validators.required, Validators.min(0)]],
       estimatedRevenueCurrencyType: ['RON'],
       typeOfPlant: ['NONE'],
       appliedAt: [todayDate, Validators.required],
@@ -59,7 +60,7 @@ export class FormValidatorProvider {
     }
   }
 
-  private static getUserFormValidatorFieldForm(value:any) {
+  private static getUserFormValidatorFieldForm(value: any) {
     return {
       id: value.id,
       version: value.version,
@@ -83,8 +84,8 @@ export class FormValidatorProvider {
       estimatedRevenueCurrencyType: [value.estimatedRevenueCurrencyType],
       typeOfPlant: [value.typeOfPlant],
       appliedAt: [value.date, Validators.required],
-      estimatedHarvestMeasureType: [value.estimatedHarvestMeasureType, Validators.required],
-      estimatedCostCurrencyType: [value.estimatedCostCurrencyType, Validators.required]
+      estimatedHarvestMeasureType: [value.estimatedHarvestMeasureType],
+      estimatedCostCurrencyType: [value.estimatedCostCurrencyType]
     }
   }
 
@@ -94,7 +95,7 @@ export class FormValidatorProvider {
       area: ['', Validators.required],
       distanceFromFarm: ['', Validators.required],
       roughlyDistanceFromFarmUnitType: ['KM'],
-      areaUnitType: ['HM']
+      areaUnitType: ['AR']
     }
   }
 }

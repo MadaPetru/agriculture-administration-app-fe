@@ -2,3 +2,63 @@
   float: right;
   margin-bottom: 15px;
 }
+
+.dashboard-container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: var(--white-color);
+  border-radius: 10px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Section for stats */
+.stats-section {
+  background-color: #f9fbff;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+/* Chart card for individual stats */
+.chart-card {
+  flex: 1;
+  max-width: 45%;
+  background-color: var(--white-color);
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Year picker next to charts */
+.year-picker {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+}
+
+/* Buttons inside the year picker */
+button {
+  background-color: var(--blue-color);
+  color: var(--white-color);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+  background-color: #3059c8;
+  transform: translateY(-2px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .chart-card {
+    max-width: 100%;
+  }
+}

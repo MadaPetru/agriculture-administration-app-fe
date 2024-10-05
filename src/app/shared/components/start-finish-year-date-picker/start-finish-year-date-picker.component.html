@@ -1,0 +1,7 @@
+<div id="education-range">
+  <div>Year from:</div>
+  <input type="text" [(ngModel)]="startYear">
+  <div>to</div>
+  <input type="text" [(ngModel)]="endYear">
+  <button mat-flat-button (click)="emitYearsInterval()">Calculate</button>
+</div>

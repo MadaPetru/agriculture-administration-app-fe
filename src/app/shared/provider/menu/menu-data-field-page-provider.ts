@@ -3,7 +3,7 @@ import {MenuDataCommonProvider} from "./menu-data-common-provider";
 import {Injectable} from "@angular/core";
 import {MatDialog} from "@angular/material/dialog";
 import {FormComponent} from "../../components/form/form.component";
-import {FormAttributeProvider} from "../form/form-attribute-provider";
+import {EntitySelector} from "../../entity-selector";
 
 @Injectable()
 export class MenuDataFieldPageProvider {
@@ -51,7 +51,7 @@ export class MenuDataFieldPageProvider {
 
   onOpenAddNewField() {
     this.dialog.open(FormComponent, {
-      data: {title: 'Add new field', attributes: FormAttributeProvider.getAttributesForFieldAddForm(), type: 'field'}
+      data: {title: 'Add new field', type: EntitySelector.FIELD}
     });
   }
 
@@ -59,8 +59,7 @@ export class MenuDataFieldPageProvider {
     this.dialog.open(FormComponent, {
       data: {
         title: 'Add new operation',
-        attributes: FormAttributeProvider.getAttributesForOperationForm(),
-        type: 'operation'
+        type: EntitySelector.FIELD_OPERATION
       }
     });
   }

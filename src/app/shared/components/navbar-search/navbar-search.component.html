@@ -4,13 +4,13 @@
     AgroAdmin
   </div>
 
-  <div class="search_bar">
-    <input type="text" placeholder="Search" />
+  <div class="search_bar" *ngIf="this.searchIsVisible">
+    <input type="text" placeholder="Search" [(ngModel)]="valueFromSearchInput" (ngModelChange)="emitSearchValue()"/>
   </div>
 
   <div class="navbar_content">
     <i class="bi bi-grid"></i>
     <i class='bx bx-sun' id="darkLight"></i>
-    <i class='bx bx-bell' ></i>
+    <i class='bx bx-bell'></i>
   </div>
 </nav>

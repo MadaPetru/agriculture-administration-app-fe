@@ -8,6 +8,7 @@ import {FieldPaginatedResponse} from "./dto/response/field-paginated-response";
 import {FieldResponse} from "./dto/response/field-response";
 import {CreateFieldRequest} from "./dto/request/create-field-request";
 import {UpdateFieldRequest} from "./dto/request/update-field-request";
+import {environment} from "../../../environments/environment";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -18,11 +19,11 @@ const httpOptions = {
 
 @Injectable()
 export class FieldService {
-  SEARCH_FIELDS_URL = 'http://localhost:8080/v1/farming-lands/search';
-  SAVE_FIELD_URL = 'http://localhost:8080/v1/farming-lands';
-  UPDATE_FIELD_URL = 'http://localhost:8080/v1/farming-lands';
-  FIND_FIELD_BY_TITLE_URL = 'http://localhost:8080/v1/farming-lands/title/{title}';
-  DELETE_FIELD_BY_TITLE_URL = 'http://localhost:8080/v1/farming-lands/id/{id}';
+  SEARCH_FIELDS_URL = environment.apiUrl + '/v1/farming-lands/search';
+  SAVE_FIELD_URL = environment.apiUrl + '/v1/farming-lands';
+  UPDATE_FIELD_URL = environment.apiUrl + '/v1/farming-lands';
+  FIND_FIELD_BY_TITLE_URL = environment.apiUrl + '/v1/farming-lands/title/{title}';
+  DELETE_FIELD_BY_ID_URL = environment.apiUrl + '/v1/farming-lands/issuer/{issuer}/id/{id}';
 
   constructor(
     private http: HttpClient) {
@@ -45,8 +46,9 @@ export class FieldService {
     return this.http.put<void>(this.UPDATE_FIELD_URL, request);
   }
 
-  deleteField(identifier: any): Observable<void> {
-    let url = this.DELETE_FIELD_BY_TITLE_URL.replace("{id}", identifier);
+  deleteField(issuer: any, identifier: any): Observable<void> {
+    let url = this.DELETE_FIELD_BY_ID_URL.replace("{id}", identifier)
+      .replace("{issuer}", issuer);
     return this.http.delete<void>(url);
   }
 }
