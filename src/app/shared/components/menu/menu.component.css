@@ -211,3 +211,84 @@
     left: -100%;
   }
 }
+
+@media screen and (max-width: 768px) {
+  /* Sidebar width is reduced to half */
+  .sidebar {
+    width: 115px; /* Half the original width */
+    left: 0; /* Keep it within the screen */
+    padding: 60px 10px; /* Adjust padding for smaller sidebar */
+  }
+
+  /* For the collapsed sidebar */
+  .sidebar.close {
+    width: 60px; /* Half the original collapsed width */
+    padding: 40px 0; /* Adjust padding for collapsed state */
+  }
+
+  .menu_title {
+    padding: 6px 10px; /* Reduce padding for small sidebar */
+    font-size: 14px; /* Adjust font size */
+  }
+
+  .navlink_icon {
+    font-size: 18px; /* Adjust icon size */
+    min-width: 35px; /* Make icons smaller */
+  }
+
+  .nav_link {
+    padding: 4px 10px; /* Adjust padding */
+    font-size: 10px;
+    margin-left: -25px;
+  }
+
+  .navlink_icon::before {
+    width: calc(100% + 40px); /* Reduce the width for smaller sidebar */
+  }
+
+  .submenu .sublink {
+    padding: 15px 10px 15px 40px; /* Adjust padding for submenu */
+  }
+
+  .bottom_content {
+    width: 100px; /* Match the sidebar width */
+    left: 15px;
+  }
+
+  .bottom {
+    padding: 18px 0; /* Adjust padding for bottom section */
+  }
+
+  /* Hide the text in the sidebar when collapsed */
+  .sidebar.close .navlink {
+    display: none;
+  }
+
+  /* Adjust the bottom content */
+  .sidebar.close .bottom_content {
+    width: 60px; /* Adjust for collapsed bottom section */
+  }
+
+  /* Add a better transition for collapsing the sidebar */
+  .sidebar {
+    transition: width 0.3s ease, left 0.3s ease;
+  }
+
+  /* Ensure that the toggle button is still visible on small screens */
+  #sidebarOpen {
+    display: block;
+    font-size: 25px;
+    margin-right: 10px;
+    cursor: pointer;
+    color: var(--grey-color);
+  }
+
+  /* Adjust the expanded and collapsed states for mobile */
+  .sidebar.close {
+    left: -100%;
+  }
+
+  .sidebar.close .bottom_content {
+    left: -100%;
+  }
+}

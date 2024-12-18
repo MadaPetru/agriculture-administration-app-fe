@@ -1,5 +1,5 @@
 .navbar {
-  position: fixed;
+  position: sticky;
   top: 0;
   width: 100%;
   left: 0;
@@ -7,7 +7,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 15px 30px;
+  padding: 10px 20px; /* Adjusted padding for smaller screens */
   z-index: 1000;
   box-shadow: 0 0 2px var(--grey-color-light);
 }
@@ -15,52 +15,48 @@
 .logo_item {
   display: flex;
   align-items: center;
-  column-gap: 10px;
-  font-size: 22px;
+  column-gap: 8px; /* Reduced gap */
+  font-size: 18px; /* Adjusted font size */
   font-weight: 500;
   color: var(--blue-color);
 }
 
-.navbar img {
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
+.navbar_content {
+  display: flex;
+  align-items: center;
+  column-gap: 20px; /* Reduced gap */
+}
+
+.navbar_content i {
+  cursor: pointer;
+  font-size: 18px; /* Reduced icon size */
+  color: var(--grey-color);
+}
+
+/* Sidebar menu toggle */
+#sidebarOpen {
+  display: none;
 }
 
 .search_bar {
-  height: 47px;
-  max-width: 430px;
+  height: 40px;
+  max-width: 300px; /* Adjusted width for smaller screens */
   width: 100%;
 }
 
 .search_bar input {
   height: 100%;
   width: 100%;
-  border-radius: 25px;
-  font-size: 18px;
+  border-radius: 20px; /* Slightly reduced */
+  font-size: 16px; /* Smaller font size */
   outline: none;
   background-color: var(--white-color);
   color: var(--grey-color);
   border: 1px solid var(--grey-color-light);
-  padding: 0 20px;
+  padding: 0 15px;
 }
 
-.navbar_content {
-  display: flex;
-  align-items: center;
-  column-gap: 25px;
-}
-
-.navbar_content i {
-  cursor: pointer;
-  font-size: 20px;
-  color: var(--grey-color);
-}
-
-#sidebarOpen {
-  display: none;
-}
-
+/* Responsive adjustments for tablets */
 @media screen and (max-width: 768px) {
   #sidebarOpen {
     font-size: 25px;
@@ -70,15 +66,58 @@
     color: var(--grey-color);
   }
 
-  .sidebar.close {
-    left: -100%;
+  .search_bar {
+    display: none; /* Hide search bar on tablets */
+  }
+
+  .navbar_content i {
+    font-size: 18px; /* Adjust icon size */
+  }
+}
+
+/* Responsive adjustments for smartphones */
+@media screen and (max-width: 480px) {
+  .navbar {
+    padding: 10px; /* Smaller padding */
+  }
+
+  .logo_item {
+    font-size: 16px; /* Smaller font size */
+  }
+
+  .navbar_content {
+    column-gap: 10px; /* Reduce gap between icons */
+  }
+
+  .navbar_content i {
+    font-size: 16px; /* Smaller icons */
+  }
+
+  #sidebarOpen {
+    font-size: 22px; /* Slightly smaller toggle icon */
   }
 
   .search_bar {
-    display: none;
+    display: none; /* Hide search bar completely on smartphones */
   }
 
-  .sidebar.close .bottom_content {
-    left: -100%;
+  /* Optional: Show the search bar as a dropdown or modal on smartphones */
+  .search_bar.active {
+    display: block;
+    position: absolute;
+    top: 60px; /* Below the navbar */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%; /* Full width minus padding */
+    z-index: 1100;
+    background-color: var(--white-color);
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .search_bar input {
+    height: 35px;
+    font-size: 14px;
+    padding: 0 10px;
   }
 }
