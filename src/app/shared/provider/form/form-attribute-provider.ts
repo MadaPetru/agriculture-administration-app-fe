@@ -1,5 +1,6 @@
 import {FormAttribute} from "../../model/form/form-attribute";
 import {formatDate} from "@angular/common";
+import {EntitySelector} from "../../entity-selector";
 
 export class FormAttributeProvider {
 
@@ -12,16 +13,8 @@ export class FormAttributeProvider {
     this.attributesForFieldAddForm = this.initDataForFieldAddForm();
   }
 
-  public static getAttributes(type:string): FormAttribute[] {
-    if(type === 'operation') return FormAttributeProvider.attributesForOperationForm;
-    return FormAttributeProvider.attributesForFieldAddForm;
-  }
-
-  public static getAttributesForOperationForm(): FormAttribute[] {
-    return FormAttributeProvider.attributesForOperationForm;
-  }
-
-  public static getAttributesForFieldAddForm(): FormAttribute[] {
+  public static getAttributes(type: EntitySelector): FormAttribute[] {
+    if (type === EntitySelector.FIELD_OPERATION) return FormAttributeProvider.attributesForOperationForm;
     return FormAttributeProvider.attributesForFieldAddForm;
   }
 
@@ -32,7 +25,8 @@ export class FormAttributeProvider {
       value: 'Operation',
       labelForValue: 'operation',
       formControlName: 'operation',
-      inputType: 'text'
+      inputType: 'select',
+      options: ['ARAT', 'SEMĂNAT', 'RECOLTARE', 'DISCUIT', 'SCARIFICAT', 'IERBICIDAT']
     });
     data.push({
       inputId: 'estimatedCost',
@@ -42,6 +36,7 @@ export class FormAttributeProvider {
     });
     data.push({
       inputId: 'estimatedCostCurrencyType',
+      parentInputIdNeeded: 'estimatedCost',
       value: 'Estimated cost currency Type',
       labelForValue: 'estimatedCostCurrencyType',
       formControlName: 'estimatedCostCurrencyType', inputType: 'select',
@@ -56,6 +51,7 @@ export class FormAttributeProvider {
     });
     data.push({
       inputId: 'estimatedHarvestMeasureType',
+      parentInputIdNeeded: 'estimatedHarvest',
       value: 'Estimated harvest measure type',
       labelForValue: 'estimatedHarvestMeasureType',
       formControlName: 'estimatedHarvestMeasureType', inputType: 'select',
@@ -75,7 +71,7 @@ export class FormAttributeProvider {
       labelForValue: 'typeOfPlant',
       formControlName: 'typeOfPlant',
       inputType: 'select',
-      options: ['NONE', 'CORN', 'WHEAT']
+      options: ['NONE', 'PORUMB', 'GRÂU', 'ORZ', 'OVĂZ', 'LUCERNĂ', 'TRIFOI', 'ORZOAICĂ']
     });
     data.push({
       inputId: 'estimatedRevenue',
@@ -86,6 +82,7 @@ export class FormAttributeProvider {
     });
     data.push({
       inputId: 'estimatedRevenueCurrencyType',
+      parentInputIdNeeded: 'estimatedRevenue',
       value: 'Estimated revenue currency type',
       labelForValue: 'estimatedRevenueCurrencyType',
       formControlName: 'estimatedRevenueCurrencyType',
@@ -118,7 +115,7 @@ export class FormAttributeProvider {
       labelForValue: 'areaUnitType',
       formControlName: 'areaUnitType',
       inputType: 'select',
-      options: ['HM', 'AR']
+      options: ['AR', 'HM']
     });
     return data;
   }

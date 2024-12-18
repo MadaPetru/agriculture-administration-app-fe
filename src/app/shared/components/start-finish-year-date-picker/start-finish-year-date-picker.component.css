@@ -1,0 +1,32 @@
+#education-range {
+  display: flex;
+  flex-wrap: wrap; /* Wrap to a new line on smaller screens */
+  align-items: center;
+  gap: 10px; /* Adjust the gap between elements as needed */
+}
+
+#education-range input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+}
+
+#education-range div {
+  font-weight: bold;
+}
+
+button {
+  background-color: var(--blue-color);
+  color: var(--white-color);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+  background-color: #3059c8;
+  transform: translateY(-2px);
+}

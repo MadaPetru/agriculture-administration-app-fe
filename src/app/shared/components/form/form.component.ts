@@ -5,6 +5,8 @@ import {FormSharedService} from "./form-shared-service";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FormAttribute} from "../../model/form/form-attribute";
 import {FormValidatorProvider} from "../../provider/form/form-validator-provider";
+import {FormAttributeProvider} from "../../provider/form/form-attribute-provider";
+import {EntitySelector} from "../../entity-selector";
 
 @Component({
   selector: 'app-form',
@@ -21,23 +23,23 @@ export class FormComponent implements OnInit {
   userForm: any;
   value: any;
   title: string = 'Add field';
-  type: string = '';
+  type: EntitySelector;
   attributes: FormAttribute[] = [];
   useForEdit: boolean = false;
 
   constructor(private formBuilder: FormBuilder, private fieldsSharedService: FormSharedService,
               private matDialogRef: MatDialogRef<FormComponent>,
               @Inject(MAT_DIALOG_DATA) public data: {
-                title: string, attributes: [], type: string, value: any, edit: boolean
+                title: string, type: EntitySelector, value: any, edit: boolean
               }) {
     this.useForEdit = data.edit;
     this.title = data.title;
     this.type = data.type;
     this.value = data.value;
-    this.attributes = data.attributes;
   }
 
   ngOnInit(): void {
+    this.attributes = FormAttributeProvider.getAttributes(this.type);
     let controls;
     if (this.value != null) {
       controls = FormValidatorProvider.getUserEditFormValidatorFields(this.type, this.value);

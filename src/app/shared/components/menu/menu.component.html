@@ -1,4 +1,4 @@
-<nav class="sidebar">
+<nav class="sidebar" [ngClass]="{'close': !isSidebarExpanded}">
   <div class="menu_content">
     <ul class="menu_items" *ngFor="let group of menuGroups">
       <div class="menu_title {{group.title}}"></div>
@@ -19,12 +19,12 @@
     </ul>
     <!-- Sidebar Open / Close -->
     <div class="bottom_content">
-      <div class="bottom expand_sidebar">
-        <span> Expand</span>
+      <div class="bottom">
+        <span (click)=toggleSideBar()> Expand</span>
         <i class='bx bx-log-in'></i>
       </div>
-      <div class="bottom collapse_sidebar">
-        <span> Collapse</span>
+      <div class="bottom">
+        <span (click)=toggleSideBar()> Collapse</span>
         <i class='bx bx-log-out'></i>
       </div>
     </div>

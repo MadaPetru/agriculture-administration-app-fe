@@ -26,10 +26,9 @@ import {
 } from "../../shared/components/delete-confirmation-modal/delete-confirmation-modal-shared-service";
 import {FieldService} from "../../domains/field/field-service";
 import {FormAttributeProvider} from "../../shared/provider/form/form-attribute-provider";
-import {
-  UpdateFieldOperationHistory
-} from "../../domains/field-operation-history/dto/request/update-field-operation-history";
 import {UpdateFieldRequest} from "../../domains/field/dto/request/update-field-request";
+import {EntitySelector} from "../../shared/entity-selector";
+import {NavbarSearchSharedService} from "../../shared/components/navbar-search/navbar-search-shared.service";
 
 @Component({
   selector: 'app-fields-page',
@@ -54,26 +53,9 @@ export class FieldsPageComponent implements OnInit, OnDestroy {
   pageable: PageableRequest = {size: 10, page: 0};
   searchFieldsRequest: SearchFieldsRequest = {pageable: this.pageable};
 
-  constructor(private fieldsPageService: FieldService, private menuDataFieldPageProvider: MenuDataFieldPageProvider,
-              private formSharedService: FormSharedService, private cardSharedService: CardSharedService, private dialog: MatDialog,
-              private confirmationModalSharedService: DeleteConfirmationModalSharedService) {
-  }
-
-  ngOnDestroy(): void {
-    this.unsubscribe.next();
-    this.unsubscribe.complete();
-  }
-
-  onPaginationChanged(pageEvent: PageEvent) {
-    let size = pageEvent.pageSize;
-    let page = pageEvent.pageIndex;
-    let pageable: PageableRequest = {size: size, page: page};
-    this.searchFieldsRequest = {pageable: pageable}
-    this.searchFields(this.searchFieldsRequest);
-  }
-
   ngOnInit(): void {
     this.searchFields(this.searchFieldsRequest);
+    this.subscribeNavbarSearchInput();
     this.subscribeFieldAddForm();
     this.subscribeFieldEditForm();
     this.subscribeFieldCardEditPopUpModal();
@@ -81,12 +63,29 @@ export class FieldsPageComponent implements OnInit, OnDestroy {
     this.subscribeConfirmationModalDeleteAction();
   }
 
+  ngOnDestroy(): void {
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
+  }
+
+  constructor(private fieldsPageService: FieldService, private menuDataFieldPageProvider: MenuDataFieldPageProvider,
+              private formSharedService: FormSharedService, private cardSharedService: CardSharedService, private dialog: MatDialog,
+              private confirmationModalSharedService: DeleteConfirmationModalSharedService, private navbarSearchSharedService: NavbarSearchSharedService) {
+  }
+
+  onPaginationChanged(pageEvent: PageEvent) {
+    let size = pageEvent.pageSize;
+    let page = pageEvent.pageIndex;
+    this.searchFieldsRequest.pageable = {size: size, page: page};
+    this.searchFields(this.searchFieldsRequest);
+  }
+
   private subscribeConfirmationModalDeleteAction() {
     this.confirmationModalSharedService.currentIdentifierToDelete.pipe(takeUntil(this.unsubscribe))
       .subscribe({
         next: (identifier: any) => {
           if (!identifier) return;
-          this.deleteField(identifier).subscribe(() => {
+          this.deleteField('adi', identifier).subscribe(() => {
             this.searchFields(this.searchFieldsRequest);
           });
         },
@@ -116,10 +115,10 @@ export class FieldsPageComponent implements OnInit, OnDestroy {
         this.dialog.open(FormComponent, {
           data: {
             edit: true,
-            value:editDetails,
-            type: 'field',
+            value: editDetails,
+            type: EntitySelector.FIELD,
             title: 'Update Field',
-            attributes: FormAttributeProvider.getAttributes('field')
+            attributes: FormAttributeProvider.getAttributes(EntitySelector.FIELD)
           }
         });
       });
@@ -154,6 +153,21 @@ export class FieldsPageComponent implements OnInit, OnDestroy {
       });
   }
 
+  private subscribeNavbarSearchInput() {
+    this.navbarSearchSharedService.currentFormValue.pipe(takeUntil(this.unsubscribe))
+      .subscribe({
+        next: (value: string) => {
+          if (!value || value.trim() === '') {
+            this.searchFieldsRequest = {pageable: this.pageable};
+            this.searchFields(this.searchFieldsRequest);
+            return;
+          }
+          this.searchFieldsRequest.searchBy = {titleLikeSearch: value};
+          this.searchFields(this.searchFieldsRequest);
+        }
+      })
+  }
+
   private saveField(request: CreateFieldRequest) {
     return this.fieldsPageService.saveField(request);
   }
@@ -162,8 +176,8 @@ export class FieldsPageComponent implements OnInit, OnDestroy {
     return this.fieldsPageService.updateField(request);
   }
 
-  private deleteField(identifier: any) {
-    return this.fieldsPageService.deleteField(identifier);
+  private deleteField(issuer: any, identifier: any) {
+    return this.fieldsPageService.deleteField(issuer, identifier);
   }
 
   private searchFields(request: SearchFieldsRequest) {

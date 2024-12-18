@@ -3,7 +3,7 @@ import {MatPaginator, PageEvent} from "@angular/material/paginator";
 import {FormsModule} from "@angular/forms";
 import {MatSlideToggle} from "@angular/material/slide-toggle";
 import {MatFormField, MatLabel} from "@angular/material/form-field";
-import {JsonPipe, NgClass} from "@angular/common";
+import {JsonPipe, NgClass, NgIf} from "@angular/common";
 import {MatInput} from "@angular/material/input";
 
 @Component({
@@ -17,7 +17,8 @@ import {MatInput} from "@angular/material/input";
     MatFormField,
     JsonPipe,
     MatInput,
-    NgClass
+    NgClass,
+    NgIf
   ],
   templateUrl: './paginator.component.html',
   styleUrl: './paginator.component.css'

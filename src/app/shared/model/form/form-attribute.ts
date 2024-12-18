@@ -6,5 +6,5 @@ export interface FormAttribute {
   formControlName: string;
   options?: Array<string>;
   dateTypeMaxValue?: string;
-  defaultValue?: string;
+  parentInputIdNeeded?: string;
 }

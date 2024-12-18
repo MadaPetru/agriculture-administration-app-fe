@@ -20,7 +20,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {DeleteConfirmationModalComponent} from "../delete-confirmation-modal/delete-confirmation-modal.component";
 import {TableOperationHistory} from "../../model/table/operations-history/table-operation-history";
 import {FormComponent} from "../form/form.component";
-import {FormAttributeProvider} from "../../provider/form/form-attribute-provider";
+import {EntitySelector} from "../../entity-selector";
 
 @Component({
   selector: 'app-table',
@@ -50,7 +50,7 @@ import {FormAttributeProvider} from "../../provider/form/form-attribute-provider
 export class TableComponent {
   @Input({alias: 'inputDeleteButtonVisible'}) deleteButtonVisible: boolean = false;
   @Input({alias: 'inputEditButtonVisible'}) editButtonVisible: boolean = false;
-  @Input({alias: 'inputTableUsedAt'}) usedAt: string = '';
+  @Input({alias: 'inputTableUsedAt'}) usedAt: EntitySelector = EntitySelector.FIELD;
   @Input({alias: 'inputColumns'}) columns: string[] = TableOperationsHistoryProvider.columns;
   @Input({alias: 'inputData'}) dataSource: TableOperationHistory[] = [];
   @Input({
@@ -71,10 +71,14 @@ export class TableComponent {
   onDelete(id: any) {
     this.dialog.open(DeleteConfirmationModalComponent, {data: {identifier: id, valueToDisplayForModal: 'this'}});
   }
+
   onEdit(element: any) {
-    this.dialog.open(FormComponent, {data: {value: element,
-        type:'operation',
-        edit: true,
-        attributes:FormAttributeProvider.getAttributesForOperationForm()}});
+    this.dialog.open(FormComponent, {
+      data: {
+        value: element,
+        type: this.usedAt,
+        edit: true
+      }
+    });
   }
 }

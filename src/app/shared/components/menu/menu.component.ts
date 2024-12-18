@@ -15,10 +15,16 @@ import {MenuGroup} from "../../model/menu/menu-group";
 })
 export class MenuComponent {
   @Input({alias: 'inputMenuGroups'}) menuGroups: MenuGroup[] = new Array<MenuGroup>;
+  isSidebarExpanded = true;
 
   onClickCallFunction(menuValueMethodToBeCalled: Function | undefined): void {
     if (menuValueMethodToBeCalled) {
       menuValueMethodToBeCalled();
     }
+  }
+
+  toggleSideBar() {
+    console.log(this.isSidebarExpanded);
+    this.isSidebarExpanded = !this.isSidebarExpanded;
   }
 }

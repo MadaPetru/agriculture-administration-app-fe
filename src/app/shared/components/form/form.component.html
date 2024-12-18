@@ -4,24 +4,31 @@
     <form [formGroup]="userForm" (ngSubmit)="submitForm()">
 
       <div class="form-group" *ngFor="let attribute of attributes ">
-        <div *ngIf="attribute.inputType!='select'">
-          <label for="{{attribute.labelForValue}}">{{ attribute.value }}</label>
-          <input *ngIf="attribute.inputType === 'date'" type="{{attribute.inputType}}" class="form-control" id="{{attribute.inputId}}"
-                 formControlName="{{attribute.formControlName}}" max="{{attribute.dateTypeMaxValue}}">
-          <input *ngIf="attribute.inputType != 'date'" type="{{attribute.inputType}}" class="form-control" id="{{attribute.inputId}}"
-                 formControlName="{{attribute.formControlName}}">
-          <div *ngIf="userForm?.get(''+attribute.inputId)?.invalid && userForm?.get(''+attribute.inputId)?.touched"
-               class="text-danger">
-            {{ attribute.value }} is required.
+        <div *ngIf="!attribute.parentInputIdNeeded || (userForm?.get(''+attribute.parentInputIdNeeded)?.valid)">
+          <div *ngIf="attribute.inputType!='select'">
+            <label for="{{attribute.labelForValue}}">{{ attribute.value }}</label>
+            <input *ngIf="attribute.inputType === 'date'" type="{{attribute.inputType}}" class="form-control"
+                   id="{{attribute.inputId}}"
+                   formControlName="{{attribute.formControlName}}" max="{{attribute.dateTypeMaxValue}}">
+            <input *ngIf="attribute.inputType === 'text'" type="{{attribute.inputType}}" class="form-control"
+                   id="{{attribute.inputId}}"
+                   formControlName="{{attribute.formControlName}}">
+            <input *ngIf="attribute.inputType === 'number'" type="{{attribute.inputType}}" class="form-control"
+                   id="{{attribute.inputId}}"
+                   formControlName="{{attribute.formControlName}}">
+            <div *ngIf="userForm?.get(''+attribute.inputId)?.invalid && userForm?.get(''+attribute.inputId)?.touched"
+                 class="text-danger">
+              {{ attribute.value }} is required.
+            </div>
           </div>
-        </div>
-        <div *ngIf="attribute.inputType==='select'">
-          <label for="{{attribute.labelForValue}}">{{ attribute.value }}</label>
-          <select class="form-control" id="{{attribute.inputId}}" formControlName="{{attribute.formControlName}}">
-            <option *ngFor="let option of attribute.options" value="{{option}}">
-              {{option}}
-            </option>
-          </select>
+          <div *ngIf="attribute.inputType==='select'">
+            <label for="{{attribute.labelForValue}}">{{ attribute.value }}</label>
+            <select class="form-control" id="{{attribute.inputId}}" formControlName="{{attribute.formControlName}}">
+              <option *ngFor="let option of attribute.options" value="{{option}}">
+                {{ option }}
+              </option>
+            </select>
+          </div>
         </div>
       </div>
 

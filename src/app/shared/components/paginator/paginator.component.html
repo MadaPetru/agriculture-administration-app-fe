@@ -1,4 +1,4 @@
-<mat-paginator
+<mat-paginator *ngIf="length > 0"
   class="paginator-width"
   (page)="handlePageEvent($event)"
   [length]="length"
