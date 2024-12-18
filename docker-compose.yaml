@@ -7,5 +7,5 @@ services:
     ports:
       - "4200:80"
     build:
-      context: .
+      context: ./local.Dockerfile
     container_name: agro-admin-fe

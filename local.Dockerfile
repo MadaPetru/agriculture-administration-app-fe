@@ -13,8 +13,8 @@ RUN npm install
 #Copy other files and folder to working directory
 COPY . .
 
-#Build Angular application in PROD mode
-RUN npm run build
+#Build Angular application in local mode
+RUN npm run build:local
 
 #Download NGINX Image
 FROM nginx:alpine

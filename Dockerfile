@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
 
 #Build Angular application in PROD mode
-RUN npm run build --production
+RUN npm run build:prod
 
 #Download NGINX Image
 FROM nginx:alpine
