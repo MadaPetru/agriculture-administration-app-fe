@@ -4,12 +4,15 @@ import {Injectable} from "@angular/core";
 import {MatDialog} from "@angular/material/dialog";
 import {FormComponent} from "../../components/form/form.component";
 import {EntitySelector} from "../../entity-selector";
+import {MenuValue} from "../../model/menu/menu-value";
 
 @Injectable()
 export class MenuDataFieldPageProvider {
 
   private static dataFieldsPage: MenuGroup[];
   private static dataFieldPage: MenuGroup[];
+  private static menuValuesFieldsPage: MenuValue[];
+  private static menuValuesFieldPage: MenuValue[];
 
   constructor(private dialog: MatDialog) {
 
@@ -47,6 +50,29 @@ export class MenuDataFieldPageProvider {
     menuGroups.push(editorGroup);
     MenuDataFieldPageProvider.dataFieldPage = menuGroups;
     return MenuDataFieldPageProvider.dataFieldPage;
+  }
+
+  public getMenuValuesForFieldsPage(): MenuValue[] {
+    if (MenuDataFieldPageProvider.menuValuesFieldsPage != null && MenuDataFieldPageProvider.menuValuesFieldsPage.length > 0) {
+      return MenuDataFieldPageProvider.menuValuesFieldsPage;
+    }
+    let uploadNew = MenuDataCommonProvider.getUploadNew();
+    uploadNew.onClickFunction = () => this.onOpenAddNewField();
+    MenuDataFieldPageProvider.menuValuesFieldsPage = Array.of(
+      uploadNew, MenuDataCommonProvider.home);
+    return MenuDataFieldPageProvider.menuValuesFieldsPage;
+  }
+
+  public getMenuValuesForFieldPage(): MenuValue[] {
+    if (MenuDataFieldPageProvider.menuValuesFieldPage != null && MenuDataFieldPageProvider.menuValuesFieldPage.length > 0) {
+      return MenuDataFieldPageProvider.menuValuesFieldPage;
+    }
+    let uploadNew = MenuDataCommonProvider.getUploadNew();
+    uploadNew.onClickFunction = () => this.onOpenAddNewOperation();
+    uploadNew.text = 'Add operation';
+    MenuDataFieldPageProvider.menuValuesFieldPage = Array.of(
+      uploadNew, MenuDataCommonProvider.home, MenuDataCommonProvider.fields);
+    return MenuDataFieldPageProvider.menuValuesFieldPage;
   }
 
   onOpenAddNewField() {

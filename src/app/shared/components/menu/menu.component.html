@@ -1,21 +1,18 @@
 <nav class="sidebar" [ngClass]="{'close': !isSidebarExpanded}">
   <div class="menu_content">
-    <ul class="menu_items" *ngFor="let group of menuGroups">
-      <div class="menu_title {{group.title}}"></div>
-      <li class="item" *ngFor="let item of group.group">
-        <a routerLink="{{item.link}}" class="nav_link" *ngIf="item.link != null">
+    <ul class="menu_items" *ngFor="let item of menuValues">
+      <a routerLink="{{item.link}}" class="nav_link" *ngIf="item.link != null">
               <span class="navlink_icon">
                 <i class="{{item.icon}}"></i>
               </span>
-          <span class="navlink">{{ item.text }}</span>
-        </a>
-        <div class="nav_link" *ngIf="item.link === null" (click)="onClickCallFunction(item.onClickFunction)">
+        <span class="navlink">{{ item.text }}</span>
+      </a>
+      <div class="nav_link" *ngIf="item.link === null" (click)="onClickCallFunction(item.onClickFunction)">
         <span class="navlink_icon">
                 <i class="{{item.icon}}"></i>
               </span>
-          <span class="navlink">{{ item.text }}</span>
-        </div>
-      </li>
+        <span class="navlink">{{ item.text }}</span>
+      </div>
     </ul>
     <!-- Sidebar Open / Close -->
     <div class="bottom_content">

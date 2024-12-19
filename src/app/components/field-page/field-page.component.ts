@@ -1,6 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FieldResponse} from "../../domains/field/dto/response/field-response";
-import {MenuGroup} from "../../shared/model/menu/menu-group";
 import {ActivatedRoute, Router} from "@angular/router";
 import {MenuDataFieldPageProvider} from "../../shared/provider/menu/menu-data-field-page-provider";
 import {PaginatorComponent} from "../../shared/components/paginator/paginator.component";
@@ -50,6 +49,7 @@ import {
   FarmingLandStatisticsProfitabilityPerYearResponse
 } from "../../domains/farming-lang-statistics/dto/response/farming-land-statistics-profitability-per-year-response";
 import {FarmingLandStatisticsService} from "../../domains/farming-lang-statistics/farming-land-statistics.service";
+import {MenuValue} from "../../shared/model/menu/menu-value";
 
 
 @Component({
@@ -72,7 +72,7 @@ import {FarmingLandStatisticsService} from "../../domains/farming-lang-statistic
 export class FieldPageComponent implements OnInit, OnDestroy {
   field?: FieldResponse;
   totalNumberOfOperations: number = 0;
-  menuGroups: MenuGroup[] = this.menuDataFieldPageProvider.getMenuGroupsForFieldPage();
+  menuValues: MenuValue[] = this.menuDataFieldPageProvider.getMenuValuesForFieldPage();
   unsubscribe = new Subject<void>();
   pageable: PageableRequest = {size: 10, page: 0};
   farmingLandOperationHistorySearchBy: SearchByFieldOperationHistoryRequest = {farmingLandId: this.field != null ? this.field.id : -1};

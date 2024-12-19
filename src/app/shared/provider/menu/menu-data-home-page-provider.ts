@@ -1,15 +1,16 @@
 import {MenuGroup} from "../../model/menu/menu-group";
 import {MenuDataCommonProvider} from "./menu-data-common-provider";
+import {MenuValue} from "../../model/menu/menu-value";
 
 export class MenuDataHomePageProvider extends MenuDataCommonProvider {
 
-  private static data: MenuGroup[];
+  private static data: MenuValue[];
 
   static {
-    MenuDataHomePageProvider.data = MenuDataHomePageProvider.initMenuGroups();
+    MenuDataHomePageProvider.data = MenuDataHomePageProvider.initMenuValues();
   }
 
-  public static getMenuGroups(): MenuGroup[] {
+  public static getMenuGroups(): MenuValue[] {
     return MenuDataHomePageProvider.data;
   }
 
@@ -27,5 +28,10 @@ export class MenuDataHomePageProvider extends MenuDataCommonProvider {
       this.fields), 'menu_dashboard');
     menuGroups.push(adminGroup);
     return menuGroups;
+  }
+
+  private static initMenuValues(): MenuValue[] {
+    return Array.of(
+      this.fields);
   }
 }

@@ -3,7 +3,6 @@ import {CardComponent} from "../../shared/components/card/card.component";
 import {MenuComponent} from "../../shared/components/menu/menu.component";
 import {NavbarSearchComponent} from "../../shared/components/navbar-search/navbar-search.component";
 import {NgForOf} from "@angular/common";
-import {MenuGroup} from "../../shared/model/menu/menu-group";
 import {MenuDataFieldPageProvider} from "../../shared/provider/menu/menu-data-field-page-provider";
 import {Card} from "../../shared/model/card/card";
 import {RouterLink} from '@angular/router';
@@ -29,6 +28,7 @@ import {FormAttributeProvider} from "../../shared/provider/form/form-attribute-p
 import {UpdateFieldRequest} from "../../domains/field/dto/request/update-field-request";
 import {EntitySelector} from "../../shared/entity-selector";
 import {NavbarSearchSharedService} from "../../shared/components/navbar-search/navbar-search-shared.service";
+import {MenuValue} from "../../shared/model/menu/menu-value";
 
 @Component({
   selector: 'app-fields-page',
@@ -46,7 +46,7 @@ import {NavbarSearchSharedService} from "../../shared/components/navbar-search/n
   styleUrls: ['./fields-page.component.css', '../../shared/shared.css']
 })
 export class FieldsPageComponent implements OnInit, OnDestroy {
-  menuGroups: MenuGroup[] = this.menuDataFieldPageProvider.getMenuGroupsForFieldsPage();
+  menuValues: MenuValue[] = this.menuDataFieldPageProvider.getMenuValuesForFieldsPage();
   cards = new Array<Card>();
   totalNumberOfCards = 0;
   unsubscribe = new Subject<void>();

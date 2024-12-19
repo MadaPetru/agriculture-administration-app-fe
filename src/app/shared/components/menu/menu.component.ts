@@ -2,6 +2,7 @@ import {Component, Input} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {RouterLink} from "@angular/router";
 import {MenuGroup} from "../../model/menu/menu-group";
+import {MenuValue} from "../../model/menu/menu-value";
 
 @Component({
   selector: 'app-menu',
@@ -14,7 +15,7 @@ import {MenuGroup} from "../../model/menu/menu-group";
   styleUrl: './menu.component.css'
 })
 export class MenuComponent {
-  @Input({alias: 'inputMenuGroups'}) menuGroups: MenuGroup[] = new Array<MenuGroup>;
+  @Input({alias: 'inputMenuGroups'}) menuValues: MenuValue[] = new Array<MenuValue>;
   isSidebarExpanded = true;
 
   onClickCallFunction(menuValueMethodToBeCalled: Function | undefined): void {

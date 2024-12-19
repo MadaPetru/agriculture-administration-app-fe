@@ -3,7 +3,6 @@ import {MenuComponent} from "../../shared/components/menu/menu.component";
 import {CommonModule} from "@angular/common";
 import {NavbarSearchComponent} from "../../shared/components/navbar-search/navbar-search.component";
 import {CardComponent} from "../../shared/components/card/card.component";
-import {MenuGroup} from "../../shared/model/menu/menu-group";
 import {MenuDataHomePageProvider} from "../../shared/provider/menu/menu-data-home-page-provider";
 import {PaginatorComponent} from "../../shared/components/paginator/paginator.component";
 import {Chart} from "chart.js";
@@ -19,6 +18,7 @@ import {MatInput} from "@angular/material/input";
 import {
   StartFinishYearDatePickerComponent
 } from "../../shared/components/start-finish-year-date-picker/start-finish-year-date-picker.component";
+import {MenuValue} from "../../shared/model/menu/menu-value";
 
 
 @Component({
@@ -35,6 +35,7 @@ export class HomePageComponent implements OnInit {
   lineChart?: Chart;
   barChartForCostPerOperationForCertainYears?: Chart;
   barChartForRevenuePerOperationForCertainYears?: Chart;
+  menuValues: MenuValue[] = MenuDataHomePageProvider.getMenuGroups();
 
   ngOnInit(): void {
     this.buildChartForProfitabilityForCeratinIntervalOfYears('adi', 2024, 2024);
@@ -103,8 +104,6 @@ export class HomePageComponent implements OnInit {
         this.lineChart = this.buildLineChart(xValues, xDataSet, yDataSet);
       });
   }
-
-  menuGroups: MenuGroup[] = MenuDataHomePageProvider.getMenuGroups();
 
   constructor(private farmingLandStatisticsService: FarmingLandStatisticsService) {
   }

@@ -1,9 +1,9 @@
-.paginator-width {
+.paginator {
   width: 600px;
 }
 
-@media screen and (max-width: 800px) {
-  .paginator-width {
+@media screen and (max-width: 768px) {
+  .paginator {
     width: 300px;
   }
 }

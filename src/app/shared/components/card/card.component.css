@@ -116,3 +116,84 @@ img {
 .main-container:hover > .back {
   transform: perspective(600px) rotateY(0deg);
 }
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+
+  .delete-button {
+    font-size: 10px;
+    position: relative;
+    float: right;
+    margin-right: 2px;
+    cursor: pointer; /* Change cursor to indicate clickability */
+    color: black; /* Optional: Change color to indicate delete action */
+  }
+
+  .edit-button {
+    font-size: 10px;
+    position: relative;
+    float: right;
+    margin-right: 2px;
+    cursor: pointer; /* Change cursor to indicate clickability */
+    color: black; /* Optional: Change color to indicate delete action */
+  }
+
+  .main-container-without-hover {
+    width: 120px;
+    height: 90px;
+    float: left; /* stack each div horizontally */
+  }
+
+  /* style the maincontainer class with all child div's of class .front */
+  .main-container-without-hover > .front {
+    position: relative;
+    transform: perspective(600px) rotateY(0deg);
+
+    width: 120px;
+    height: 90px;
+
+    backface-visibility: hidden; /* cant see the backside elements as theyre turning around */
+    transition: transform .5s linear 0s;
+  }
+
+
+  .main-container {
+    width: 100px;
+    height: 299px;
+    float: left; /* stack each div horizontally */
+  }
+
+  img {
+    border-radius: 10px;
+  }
+
+  .front {
+    width: 100px;
+    height: 199px;
+  }
+
+  .container-stats-front {
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .container-stats-front > div {
+    cursor: pointer;
+    padding: 1%;
+    font-size: 8px;
+    text-align: justify;
+    position: relative;
+    float: left;
+  }
+
+  .container-stats-front > h2 {
+    font-size: 12px;
+  }
+
+  .stats-front {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+}

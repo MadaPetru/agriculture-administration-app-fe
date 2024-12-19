@@ -72,7 +72,6 @@
   position: relative;
   font-size: 22px;
   min-width: 50px;
-  line-height: 40px;
   display: inline-block;
   text-align: center;
   border-radius: 6px;
@@ -94,7 +93,6 @@
   display: flex;
   align-items: center;
   width: 100%;
-  padding: 4px 15px;
   border-radius: 8px;
   text-decoration: none;
   color: var(--grey-color);
@@ -195,6 +193,7 @@
 }
 
 @media screen and (max-width: 768px) {
+
   #sidebarOpen {
     font-size: 25px;
     display: block;
@@ -210,12 +209,9 @@
   .sidebar.close .bottom_content {
     left: -100%;
   }
-}
-
-@media screen and (max-width: 768px) {
   /* Sidebar width is reduced to half */
   .sidebar {
-    width: 115px; /* Half the original width */
+    width: 65px; /* Half the original width */
     left: 0; /* Keep it within the screen */
     padding: 60px 10px; /* Adjust padding for smaller sidebar */
   }
@@ -227,19 +223,28 @@
   }
 
   .menu_title {
+    margin-left: -10px;
     padding: 6px 10px; /* Reduce padding for small sidebar */
-    font-size: 14px; /* Adjust font size */
+    font-size: 10px; /* Adjust font size */
   }
 
   .navlink_icon {
-    font-size: 18px; /* Adjust icon size */
+    font-size: 15px; /* Adjust icon size */
     min-width: 35px; /* Make icons smaller */
   }
 
   .nav_link {
-    padding: 4px 10px; /* Adjust padding */
-    font-size: 10px;
-    margin-left: -25px;
+    font-size: 8px;
+    margin-left: -15px;
+  }
+
+  .navlink {
+    font-size: 8px;
+    display: inline-block; /* Allows width and text wrapping */
+    max-width: 40px; /* Set the maximum width */
+    word-wrap: break-word; /* Breaks long words onto the next line */
+    overflow-wrap: break-word; /* Ensures text wraps correctly */
+    white-space: normal; /* Allows the text to wrap */
   }
 
   .navlink_icon::before {
