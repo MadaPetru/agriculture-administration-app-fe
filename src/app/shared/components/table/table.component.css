@@ -7,3 +7,28 @@ table {
   color: white;
   background-color: #4070f4;
 }
+
+@media screen and (max-width: 768px) {
+  table {
+    width: 200px;
+    background-color: white;
+  }
+
+  td{
+    width: 10px;
+    font-size: 8px;
+  }
+
+  th{
+    font-size: 8px;
+  }
+
+  mat-icon{
+    font-size: 20px;
+  }
+
+  .operation-button{
+    width: 30px;
+    height: 30px;
+  }
+}

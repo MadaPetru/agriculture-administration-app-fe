@@ -1,5 +1,5 @@
 .dashboard-container {
-  margin: 20px; /* Reduce margin for smaller screens */
+  margin-left: 245px;
   padding: 10px; /* Adjust padding */
   display: flex;
   flex-direction: column;
@@ -63,7 +63,7 @@ button:hover {
   }
 
   .dashboard-container {
-    margin: 10px; /* Smaller margin for tablets */
+    margin-left: 65px; /* Smaller margin for tablets */
   }
 
   button {
@@ -75,7 +75,7 @@ button:hover {
 /* Responsive adjustments for smartphones */
 @media (max-width: 480px) {
   .dashboard-container {
-    margin: 5px; /* Minimal margin for very small screens */
+    margin-left: 65px;
     padding: 5px;
     gap: 10px;
   }

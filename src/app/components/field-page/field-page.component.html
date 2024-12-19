@@ -1,7 +1,7 @@
 <app-navbar-search></app-navbar-search>
 <app-menu [inputMenuGroups]="menuValues"></app-menu>
-<div class="margin-left-245px margin-right-15px">
-  <div class="margin-top-15px">
+<div class="main-container margin-right-15px margin-top-70px">
+  <div class="margin-top-15px details">
     <h2>Operations histories for field: {{ field?.title }} </h2>
     <h6>Area: {{ field?.area }} {{ field?.areaUnitType }}</h6>
     <h6>Roughly distance from
@@ -40,13 +40,13 @@
     </div>
   </div>
   <div class="margin-top-15px align-center-with-flexbox-container">
-    <h2>Operation histories</h2>
+    <h2 class="operation-histories-title">Operation histories</h2>
   </div>
   <div class="margin-top-15px">
     <div class="create-button-operation">
       <button mat-flat-button (click)="onSaveNewOperationHistory()">Create new Operation</button>
     </div>
-    <app-table
+    <app-table class="operation-histories-table"
       [inputData]="this.operationHistories"
       [inputTableUsedAt]=EntitySelector.FIELD_OPERATION
       [inputColumns]="TableOperationsHistoryProvider.columns"

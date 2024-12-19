@@ -1,4 +1,10 @@
 /* General Styling */
+
+.main-container{
+  margin-left: 245px;
+}
+
+
 .create-button-operation {
   float: right;
   margin-bottom: 15px;
@@ -88,6 +94,33 @@ button:hover {
 }
 
 @media (max-width: 768px) {
+  .operation-histories-title{
+    font-size: 13px;
+  }
+
+  .create-button-operation > button{
+    float: left;
+    font-size: 10px;
+    text-align: center; /* Center-align the button */
+  }
+
+  .operation-histories-table{
+    width: 300px;
+    font-size: 10px;
+  }
+
+  .main-container{
+    margin-left: 70px;
+  }
+
+  .details > h2{
+    font-size: 10px;
+  }
+
+  .details > h6{
+    font-size: 8px;
+  }
+
   /* For smaller screens (mobile phones) */
   .dashboard-container {
     padding: 10px; /* Reduce padding for smaller screens */
@@ -119,28 +152,5 @@ button:hover {
   .align-center-with-flexbox-container {
     margin-top: 15px; /* Space between paginator and other content */
     justify-content: center; /* Center the paginator */
-  }
-}
-
-@media (max-width: 576px) {
-  /* For extra small screens (portrait mode on small phones) */
-  .create-button-operation {
-    margin-bottom: 10px; /* Smaller margin for the button */
-  }
-
-  .chart-card {
-    margin-bottom: 10px; /* Less spacing between cards */
-  }
-
-  .stats-section {
-    gap: 10px; /* Smaller gap between chart cards */
-  }
-
-  .year-picker {
-    margin-top: 10px; /* Reduced margin for year picker */
-  }
-
-  .create-button-operation {
-    margin-bottom: 15px; /* Adequate margin for the button */
   }
 }

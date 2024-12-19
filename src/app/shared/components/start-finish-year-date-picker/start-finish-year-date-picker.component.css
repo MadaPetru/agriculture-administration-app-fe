@@ -30,3 +30,31 @@ button:hover {
   background-color: #3059c8;
   transform: translateY(-2px);
 }
+
+@media (max-width: 768px) {
+  #education-range input {
+    padding: 3px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+    width: 50px;
+    font-size: 10px;
+  }
+
+  #education-range div {
+    font-weight: bold;
+    font-size: 10px;
+  }
+
+  button {
+    background-color: var(--blue-color);
+    color: var(--white-color);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    font-size: 10px;
+    width: 40px;
+    height: 15px;
+  }
+}

@@ -35,7 +35,7 @@ body {
 }
 
 /* Set width for containers */
-.width-100-per-cent {
+.margin-left-paginator {
   width: 100%;
 }
 
@@ -68,7 +68,7 @@ body {
     margin-top: 30px; /* Further reduce the top margin */
   }
 
-  .width-100-per-cent {
+  .margin-left-paginator {
     padding-left: 20px;
     padding-right: 20px;
   }

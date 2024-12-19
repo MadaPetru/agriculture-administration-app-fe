@@ -25,6 +25,6 @@ export class MenuComponent {
   }
 
   toggleSideBar() {
-    this.isSidebarExpanded = !this.isSidebarExpanded;
+    // this.isSidebarExpanded = !this.isSidebarExpanded;
   }
 }

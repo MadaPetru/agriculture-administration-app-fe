@@ -193,7 +193,6 @@
 }
 
 @media screen and (max-width: 768px) {
-
   #sidebarOpen {
     font-size: 25px;
     display: block;
@@ -256,12 +255,21 @@
   }
 
   .bottom_content {
-    width: 100px; /* Match the sidebar width */
+    width: 50px; /* Match the sidebar width */
     left: 15px;
   }
 
   .bottom {
+    font-size: 10px;
     padding: 18px 0; /* Adjust padding for bottom section */
+  }
+
+  .bottom i {
+    font-size: 8px;
+  }
+
+  .bottom span {
+    font-size: 8px;
   }
 
   /* Hide the text in the sidebar when collapsed */
