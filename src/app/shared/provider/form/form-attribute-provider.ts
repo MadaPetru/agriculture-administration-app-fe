@@ -71,7 +71,7 @@ export class FormAttributeProvider {
       labelForValue: 'typeOfPlant',
       formControlName: 'typeOfPlant',
       inputType: 'select',
-      options: ['NONE', 'PORUMB', 'GRÂU', 'ORZ', 'OVĂZ', 'LUCERNĂ', 'TRIFOI', 'ORZOAICĂ']
+      options: ['NONE', 'PORUMB', 'GRAU', 'ORZ','OVAZ', 'LUCERNA', 'TRIFOI', 'ORZOAICA']
     });
     data.push({
       inputId: 'estimatedRevenue',
