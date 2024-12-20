@@ -71,36 +71,3 @@ button:hover {
     padding: 8px 10px;
   }
 }
-
-/* Responsive adjustments for smartphones */
-@media (max-width: 480px) {
-  .dashboard-container {
-    margin-left: 65px;
-    padding: 5px;
-    gap: 10px;
-  }
-
-  .stats-section {
-    gap: 10px;
-  }
-
-  .chart-card {
-    max-width: 100%; /* Full width for smaller screens */
-    padding: 10px; /* Reduce padding */
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-  }
-
-  canvas {
-    width: 100% !important; /* Ensure charts take full width */
-    height: auto !important;
-  }
-
-  .year-picker {
-    margin-top: 5px;
-  }
-
-  button {
-    font-size: 12px; /* Smaller button font size */
-    padding: 6px 8px; /* Reduce padding */
-  }
-}
