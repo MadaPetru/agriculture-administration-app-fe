@@ -8,6 +8,14 @@ table {
   background-color: #4070f4;
 }
 
+td{
+  font-size: 65%;
+}
+
+th{
+  font-size: 65%;
+}
+
 @media screen and (max-width: 768px) {
   table {
     width: 200px;
@@ -15,12 +23,11 @@ table {
   }
 
   td{
-    width: 10px;
-    font-size: 8px;
+    font-size: 40%;
   }
 
   th{
-    font-size: 8px;
+    font-size: 40%;
   }
 
   mat-icon{
