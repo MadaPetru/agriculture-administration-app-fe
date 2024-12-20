@@ -26,7 +26,7 @@ export class FormAttributeProvider {
       labelForValue: 'operation',
       formControlName: 'operation',
       inputType: 'select',
-      options: ['ARAT', 'SEMĂNAT', 'RECOLTARE', 'DISCUIT', 'SCARIFICAT', 'IERBICIDAT']
+      options: ['ARAT', 'SEMANAT', 'RECOLTARE', 'DISCUIT', 'SCARIFICAT', 'IERBICIDAT']
     });
     data.push({
       inputId: 'estimatedCost',
