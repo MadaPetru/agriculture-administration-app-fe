@@ -9,7 +9,7 @@ body {
 }
 
 .cards {
-  width: 80%;
+  width: 90%;
   display: flex; /* Enables flexbox for the parent */
   flex-direction: row; /* Ensures child divs are aligned in a row */
   justify-content: flex-start; /* Aligns children at the start */
