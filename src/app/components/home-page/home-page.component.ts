@@ -32,15 +32,23 @@ import {MenuValue} from "../../shared/model/menu/menu-value";
 })
 export class HomePageComponent implements OnInit {
 
+  numberOfHaFieldsAdministrated?: number;
   lineChart?: Chart;
   barChartForCostPerOperationForCertainYears?: Chart;
   barChartForRevenuePerOperationForCertainYears?: Chart;
   menuValues: MenuValue[] = MenuDataHomePageProvider.getMenuGroups();
 
   ngOnInit(): void {
+    this.initNumberOfHaFieldsAdministrated();
     this.buildChartForProfitabilityForCeratinIntervalOfYears('adi', 2024, 2024);
     this.buildChartForCostPerOperationForCertainIntervalOfYears('adi', 2024, 2024);
     this.buildChartForRevenuePerOperationForCertainIntervalOfYears('adi', 2024, 2024);
+  }
+
+  initNumberOfHaFieldsAdministrated() {
+    this.farmingLandStatisticsService.haAdministrated().subscribe((number) => {
+      this.numberOfHaFieldsAdministrated = number;
+    })
   }
 
   onYearsIntervalChangedForRevenues(yearsIntervalEvent: { startYear: number, endYear: number }) {

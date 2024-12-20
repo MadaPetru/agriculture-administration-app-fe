@@ -1,29 +1,38 @@
 <app-navbar-search></app-navbar-search>
 <app-menu [inputMenuGroups]="menuValues"></app-menu>
-<div class="dashboard-container margin-top-70px">
-  <div class="stats-section">
-    <div class="chart-card">
-      <canvas id="all-costs-vs-all-revenue"> {{ lineChart }}</canvas>
-      <div class="year-picker">
-        <start-finish-year-date-picker
-          (outputYearsInterval)="onYearsIntervalChangedForProfitability($event)">
-        </start-finish-year-date-picker>
-      </div>
+<div class="margin-top-70px main-container">
+  <div class="general-info">
+    <div>
+      <span class="icon">🌾</span>
+      Number of fields administrated: {{ numberOfHaFieldsAdministrated }} HA
     </div>
-    <div class="chart-card">
-      <canvas id="operation-type-costs"> {{ barChartForCostPerOperationForCertainYears }}</canvas>
-      <div class="year-picker">
-        <start-finish-year-date-picker
-          (outputYearsInterval)="onYearsIntervalChangedForCosts($event)">
-        </start-finish-year-date-picker>
+  </div>
+
+  <div class="dashboard-container">
+    <div class="stats-section">
+      <div class="chart-card">
+        <canvas id="all-costs-vs-all-revenue"> {{ lineChart }}</canvas>
+        <div class="year-picker">
+          <start-finish-year-date-picker
+            (outputYearsInterval)="onYearsIntervalChangedForProfitability($event)">
+          </start-finish-year-date-picker>
+        </div>
       </div>
-    </div>
-    <div class="chart-card">
-      <canvas id="operation-type-revenues"> {{ barChartForRevenuePerOperationForCertainYears }}</canvas>
-      <div class="year-picker">
-        <start-finish-year-date-picker
-          (outputYearsInterval)="onYearsIntervalChangedForRevenues($event)">
-        </start-finish-year-date-picker>
+      <div class="chart-card">
+        <canvas id="operation-type-costs"> {{ barChartForCostPerOperationForCertainYears }}</canvas>
+        <div class="year-picker">
+          <start-finish-year-date-picker
+            (outputYearsInterval)="onYearsIntervalChangedForCosts($event)">
+          </start-finish-year-date-picker>
+        </div>
+      </div>
+      <div class="chart-card">
+        <canvas id="operation-type-revenues"> {{ barChartForRevenuePerOperationForCertainYears }}</canvas>
+        <div class="year-picker">
+          <start-finish-year-date-picker
+            (outputYearsInterval)="onYearsIntervalChangedForRevenues($event)">
+          </start-finish-year-date-picker>
+        </div>
       </div>
     </div>
   </div>

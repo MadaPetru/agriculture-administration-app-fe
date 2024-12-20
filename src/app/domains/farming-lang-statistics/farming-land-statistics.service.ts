@@ -14,6 +14,7 @@ import {environment} from "../../../environments/environment";
 })
 export class FarmingLandStatisticsService {
 
+  HA_FARMING_LANDS_ADMINISTRATED = environment.apiUrl + '/v1/farming-lands/statistics/farming-lands/ha/administrated/{username}';
   PROFITABILITY_PER_YEAR_URL = environment.apiUrl + '/v1/farming-lands/statistics/profitability/from/year/{startYear}/to/year/{endYear}';
   PROFITABILITY_PER_OPERATION_AND_YEAR_URL = environment.apiUrl + '/v1/farming-lands/statistics/operations/types/profitability/from/year/{startYear}/to/year/{endYear}';
   PROFITABILITY_PER_YEAR_URL_FOR_FARMING_LAND = environment.apiUrl + '/v1/farming-lands/statistics/farming-land/{farmingLandId}/profitability/from/year/{startYear}/to/year/{endYear}';
@@ -21,6 +22,12 @@ export class FarmingLandStatisticsService {
 
   constructor(
     private http: HttpClient) {
+  }
+
+  haAdministrated(): Observable<number> {
+    let createdBy = 'adi';
+    let url = this.HA_FARMING_LANDS_ADMINISTRATED.replace("{username}", createdBy);
+    return this.http.get<number>(url);
   }
 
   profitabilityPerYear(createdBy: string, startYear: number, endYear: number): Observable<FarmingLandStatisticsProfitabilityPerYearResponse[]> {

@@ -1,5 +1,4 @@
 .dashboard-container {
-  margin-left: 245px;
   padding: 10px; /* Adjust padding */
   display: flex;
   flex-direction: column;
@@ -7,6 +6,10 @@
   background-color: var(--white-color);
   border-radius: 10px;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.main-container{
+  margin-left: 245px;
 }
 
 /* Section for stats */
@@ -56,14 +59,42 @@ button:hover {
   transform: translateY(-2px);
 }
 
+/* Updated styling for .general-info */
+.general-info {
+  background-color: #eef4ff; /* Light blue background for a clean look */
+  border: 1px solid #d0e2ff; /* Subtle border to frame the content */
+  border-radius: 8px; /* Rounded corners for a modern feel */
+  padding: 15px 20px; /* Comfortable padding */
+  margin-bottom: 20px; /* Space below the section */
+  font-size: 16px; /* Slightly larger text for readability */
+  font-weight: 500; /* Medium weight for better emphasis */
+  color: #003366; /* Dark blue text for good contrast */
+  display: flex; /* Flexbox for alignment */
+  align-items: center; /* Vertically center content */
+  justify-content: space-between; /* Space out content if more elements are added */
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.general-info .icon {
+  font-size: 20px; /* Slightly larger icon */
+  color: #3059c8; /* Blue icon color */
+  margin-right: 10px; /* Space between icon and text */
+}
+
+
 /* Responsive adjustments for tablets */
 @media (max-width: 768px) {
   .chart-card {
     max-width: 100%; /* Stacks charts vertically */
   }
 
-  .dashboard-container {
-    margin-left: 65px; /* Smaller margin for tablets */
+  .main-container{
+    margin-left: 65px;
+  }
+
+  .general-info{
+    font-size: 12px;
+
   }
 
   button {
