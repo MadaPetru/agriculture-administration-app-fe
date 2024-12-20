@@ -60,7 +60,7 @@ button:hover {
 }
 
 /* Updated styling for .general-info */
-.general-info {
+.general-info-container {
   background-color: #eef4ff; /* Light blue background for a clean look */
   border: 1px solid #d0e2ff; /* Subtle border to frame the content */
   border-radius: 8px; /* Rounded corners for a modern feel */
@@ -75,7 +75,7 @@ button:hover {
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
-.general-info .icon {
+.general-info-container .icon {
   font-size: 20px; /* Slightly larger icon */
   color: #3059c8; /* Blue icon color */
   margin-right: 10px; /* Space between icon and text */
@@ -93,8 +93,7 @@ button:hover {
   }
 
   .general-info{
-    font-size: 12px;
-
+    font-size: 10px;
   }
 
   button {
