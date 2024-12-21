@@ -23,19 +23,23 @@ th{
   }
 
   td{
-    font-size: 40%;
+    font-size: 25%;
   }
 
   th{
-    font-size: 40%;
+    font-size: 25%;
   }
 
   mat-icon{
-    font-size: 20px;
+    margin-top: 6px;
+    font-size: 8px;
+    color: #3059c8;
   }
 
   .operation-button{
-    width: 30px;
-    height: 30px;
-  }
+    width: 10px;
+    height: 5px;
+    background: transparent; /* Makes the background transparent */
+    border: none; /* Removes any borders */
+    outline: none; /* Removes any focus outlines */  }
 }
