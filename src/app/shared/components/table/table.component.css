@@ -1,5 +1,4 @@
 table {
-  width: 90%;
   background-color: white;
 }
 
@@ -18,27 +17,26 @@ th{
 
 @media screen and (max-width: 768px) {
   table {
-    width: 200px;
     background-color: white;
   }
 
   td{
-    font-size: 25%;
+    font-size: 30%;
   }
 
   th{
-    font-size: 25%;
+    font-size: 30%;
   }
 
   mat-icon{
-    margin-top: 6px;
-    font-size: 8px;
+    margin-top: 16px;
+    font-size: 7px;
     color: #3059c8;
   }
 
   .operation-button{
-    width: 10px;
-    height: 5px;
+    width: 8px;
+    height: 8px;
     background: transparent; /* Makes the background transparent */
     border: none; /* Removes any borders */
     outline: none; /* Removes any focus outlines */  }

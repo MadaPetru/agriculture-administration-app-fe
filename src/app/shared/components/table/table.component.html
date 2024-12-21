@@ -6,8 +6,8 @@
 
   <ng-container *ngFor="let columnName of columns;index as i" matColumnDef="{{columnName}}">
     <th mat-header-cell cdkDrag *matHeaderCellDef>
-      <div *ngIf="columnName != 'Operation column'">{{ columnName }}</div>
-      <div *ngIf="columnName === 'Operation column' && (deleteButtonVisible || editButtonVisible)"></div>
+      <div *ngIf="columnName != 'X'">{{ columnName }}</div>
+      <div *ngIf="columnName === 'X' && (deleteButtonVisible || editButtonVisible)"></div>
     </th>
     <td mat-cell *matCellDef="let element">
       {{ getAttributeBasedOnColumn(columnName, element) }}

@@ -83,6 +83,29 @@ body {
   display: inline-block;
   margin: 100px auto;
 }
-.x{
-  z-index: 1;
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .modal-confirm {
+    width: 75%;
+    margin: 0 auto;
+  }
+  .modal-confirm .modal-header {
+    flex-direction: column;
+  }
+  .modal-confirm h2 {
+    font-size: 20px;
+  }
+  .modal-confirm .icon-box {
+    width: 60px;
+    height: 60px;
+  }
+  .modal-confirm .icon-box i {
+    font-size: 36px;
+    margin-top: 10px;
+  }
+  .modal-confirm .btn {
+    min-width: 100px;
+    font-size: 12px;
+  }
 }
