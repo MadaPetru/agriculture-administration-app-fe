@@ -6,16 +6,19 @@ export class FormAttributeProvider {
 
   private static attributesForOperationForm: FormAttribute[];
   private static attributesForFieldAddForm: FormAttribute[];
+  private static attributesForImageField: FormAttribute[];
 
 
   static {
     this.attributesForOperationForm = this.initDataForOperationForm();
     this.attributesForFieldAddForm = this.initDataForFieldAddForm();
+    this.attributesForImageField = this.initDataForImageFieldAddForm();
   }
 
   public static getAttributes(type: EntitySelector): FormAttribute[] {
     if (type === EntitySelector.FIELD_OPERATION) return FormAttributeProvider.attributesForOperationForm;
-    return FormAttributeProvider.attributesForFieldAddForm;
+    if (type === EntitySelector.FIELD) return FormAttributeProvider.attributesForFieldAddForm;
+    return FormAttributeProvider.attributesForImageField;
   }
 
   private static initDataForOperationForm(): FormAttribute[] {
@@ -116,6 +119,20 @@ export class FormAttributeProvider {
       formControlName: 'areaUnitType',
       inputType: 'select',
       options: ['AR', 'HM']
+    });
+    return data;
+  }
+
+  private static initDataForImageFieldAddForm(): FormAttribute[] {
+    let data = new Array<FormAttribute>();
+    data.push({inputId: 'image', value: 'Image', labelForValue: 'image', formControlName: 'image', inputType: 'file'});
+    data.push({
+      inputId: 'at',
+      value: 'At',
+      labelForValue: 'at',
+      formControlName: 'at',
+      inputType: 'date',
+      dateTypeMaxValue: formatDate(new Date(), 'yyyy-MM-dd', 'en')
     });
     return data;
   }

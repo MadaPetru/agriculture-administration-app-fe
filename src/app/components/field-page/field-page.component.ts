@@ -18,7 +18,7 @@ import {FormComponent} from "../../shared/components/form/form.component";
 import {FieldOperationHistoryService} from "../../domains/field-operation-history/field-operation-history-service";
 import {map, Observable, Subject, takeUntil} from "rxjs";
 import {
-  CreateFieldOperationHistory
+  CreateFieldOperationHistory, isCreateFieldOperationHistory
 } from "../../domains/field-operation-history/dto/request/create-field-operation-history";
 import {FormSharedService} from "../../shared/components/form/form-shared-service";
 import {
@@ -135,12 +135,15 @@ export class FieldPageComponent implements OnInit, OnDestroy {
   subscribeFieldAddForm() {
     this.formSharedService.currentFormValue.pipe(takeUntil(this.unsubscribe))
       .subscribe({
-        next: (request: CreateFieldOperationHistory) => {
-          request.farmingLandId = <number>this.field?.id;
-          this.saveFieldOperationHistory(request).subscribe(() => {
-            this.searchFieldOperationHistories(this.searchFieldOperationRequest);
-            this.initCharts();
-          });
+        next: (request: any) => {
+          if(isCreateFieldOperationHistory(request)) {
+            request.farmingLandId = <number>this.field?.id;
+            this.saveFieldOperationHistory(request).subscribe(() => {
+              this.searchFieldOperationHistories(this.searchFieldOperationRequest);
+              this.initCharts();
+            });
+          }
+          console.log(request);
         },
         error: (response: any) => {
           console.log(response);
@@ -207,6 +210,15 @@ export class FieldPageComponent implements OnInit, OnDestroy {
       data: {
         title: 'Add new operation history',
         type: EntitySelector.FIELD_OPERATION
+      }
+    });
+  }
+
+  onUploadImage() {
+    this.dialog.open(FormComponent, {
+      data: {
+        title: 'Upload image',
+        type: EntitySelector.IMAGE_FIELD_OPERATION
       }
     });
   }

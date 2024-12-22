@@ -16,6 +16,9 @@
             <input *ngIf="attribute.inputType === 'number'" type="{{attribute.inputType}}" class="form-control"
                    id="{{attribute.inputId}}"
                    formControlName="{{attribute.formControlName}}">
+            <input *ngIf="attribute.inputType === 'file'" type="{{attribute.inputType}}" class="form-control"
+                   id="{{attribute.inputId}}"
+                   formControlName="{{attribute.formControlName}}">
             <div *ngIf="userForm?.get(''+attribute.inputId)?.invalid && userForm?.get(''+attribute.inputId)?.touched"
                  class="text-danger">
               {{ attribute.value }} is required.

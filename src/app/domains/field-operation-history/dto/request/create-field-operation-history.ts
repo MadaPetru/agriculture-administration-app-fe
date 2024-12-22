@@ -11,3 +11,21 @@ export interface CreateFieldOperationHistory {
   createdBy: string,
   appliedAt: string
 }
+
+export function isCreateFieldOperationHistory(obj: any): obj is CreateFieldOperationHistory {
+  return (
+    obj &&
+    typeof obj.operation === 'string' &&
+    typeof obj.estimatedCost === 'number' &&
+    typeof obj.farmingLandId === 'number' &&
+    typeof obj.estimatedHarvest === 'number' &&
+    typeof obj.estimatedHarvestMeasureType === 'string' &&
+    typeof obj.estimatedCostCurrencyType === 'string' &&
+    typeof obj.estimatedRevenue === 'number' &&
+    typeof obj.estimatedRevenueCurrencyType === 'string' &&
+    typeof obj.plantType === 'string' &&
+    typeof obj.createdBy === 'string' &&
+    typeof obj.appliedAt === 'string'
+  );
+}
+

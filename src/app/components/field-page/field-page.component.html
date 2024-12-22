@@ -59,4 +59,10 @@
     <app-paginator [inputLength]="totalNumberOfOperations"
                    (outputPageEvent)="onPaginationChanged($event)"></app-paginator>
   </div>
+  <div class="margin-top-15px align-center-with-flexbox-container">
+    <h2 class="images-title">Images</h2>
+  </div>
+  <div class="create-button-operation margin-top-15px">
+    <button mat-flat-button (click)="onUploadImage()">Upload image</button>
+  </div>
 </div>

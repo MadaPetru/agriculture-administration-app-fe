@@ -8,7 +8,7 @@ export class FormValidatorProvider {
   public static getUserFormValidatorFields(type: EntitySelector) {
     if (type === EntitySelector.FIELD) return this.getUserFormValidatorFieldsFieldForm();
     if (type === EntitySelector.FIELD_OPERATION) return this.getUserFormValidatorFieldsOperationForm();
-    return this.getUserFormValidatorFieldsOperationForm();
+    return this.getUserFormValidatorFieldImageForm();
   }
 
   public static getUserEditFormValidatorFields(type: EntitySelector, data: any) {
@@ -42,6 +42,10 @@ export class FormValidatorProvider {
       estimatedHarvestMeasureType: value.estimatedHarvestMeasureType,
       estimatedCostCurrencyType: value.estimatedCostCurrencyType
     };
+    if (type === EntitySelector.IMAGE_FIELD_OPERATION) return {
+      at: value.at,
+      image: value.image,
+    };
     return {}
   }
 
@@ -69,6 +73,14 @@ export class FormValidatorProvider {
       distanceFromFarm: [value.roughlyDistanceFromFarm, Validators.required],
       roughlyDistanceFromFarmUnitType: [value.roughlyDistanceFromFarmUnitType],
       areaUnitType: [value.areaUnitType]
+    }
+  }
+
+  private static getUserFormValidatorFieldImageForm() {
+    let todayDate = formatDate(new Date(), 'yyyy-MM-dd', 'en');
+    return {
+      at: [todayDate,Validators.required],
+      image: ['',Validators.required],
     }
   }
 

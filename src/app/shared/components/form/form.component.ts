@@ -52,6 +52,7 @@ export class FormComponent implements OnInit {
   submitForm(): void {
     if (this.userForm?.valid) {
       let value = this.userForm.value;
+      console.log(value);
       let formValueField = FormValidatorProvider.getFormValue(value, this.type);
       if (this.useForEdit) {
         this.fieldsSharedService.updateFormValueForEdit(formValueField);

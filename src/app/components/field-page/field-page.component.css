@@ -10,6 +10,11 @@
   margin-bottom: 15px;
 }
 
+.create-button-image {
+  float: right;
+  margin-bottom: 15px;
+}
+
 .dashboard-container {
   padding: 20px;
   display: flex;
@@ -91,6 +96,12 @@ button:hover {
     margin-bottom: 20px; /* Adjust button margin */
     text-align: center; /* Center-align the button */
   }
+
+  .create-button-image {
+    width: 100%; /* Button takes full width on smaller screens */
+    margin-bottom: 20px; /* Adjust button margin */
+    text-align: center; /* Center-align the button */
+  }
 }
 
 @media (max-width: 768px) {
@@ -98,7 +109,17 @@ button:hover {
     font-size: 13px;
   }
 
+  .images-title{
+    font-size: 13px;
+  }
+
   .create-button-operation > button{
+    float: left;
+    font-size: 10px;
+    text-align: center; /* Center-align the button */
+  }
+
+  .create-button-image > button{
     float: left;
     font-size: 10px;
     text-align: center; /* Center-align the button */
@@ -137,6 +158,12 @@ button:hover {
   }
 
   .create-button-operation {
+    width: 100%; /* Button takes full width */
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .create-button-image {
     width: 100%; /* Button takes full width */
     margin-bottom: 20px;
     text-align: center;
