@@ -17,15 +17,18 @@ th{
 
 @media screen and (max-width: 768px) {
   table {
+    width: 100%;
     background-color: white;
   }
 
-  td{
-    font-size: 30%;
+  td > div{
+    font-size: 60%;
+    margin: -10px;
   }
 
-  th{
-    font-size: 30%;
+  th > div{
+    font-size: 60%;
+    margin: -10px;
   }
 
   mat-icon{
