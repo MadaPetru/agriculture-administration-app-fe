@@ -1,12 +1,13 @@
 import {Injectable} from '@angular/core';
 import {Subject} from "rxjs";
+import {DeleteConfirmationModel} from "../../model/delete-confirmation-modal/delete-confirmation-model";
 
 @Injectable()
 export class DeleteConfirmationModalSharedService {
-  identifierToDelete: Subject<any> = new Subject<any>();
-  currentIdentifierToDelete = this.identifierToDelete.asObservable();
+  objectToDelete: Subject<DeleteConfirmationModel> = new Subject<DeleteConfirmationModel>();
+  currentObjectToDelete = this.objectToDelete.asObservable();
 
-  updateIdentifierToDelete(value: any) {
-    this.identifierToDelete.next(value);
+  updateIdentifierToDelete(value: DeleteConfirmationModel) {
+    this.objectToDelete.next(value);
   }
 }

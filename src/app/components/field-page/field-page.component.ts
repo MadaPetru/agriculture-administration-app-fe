@@ -18,8 +18,7 @@ import {FormComponent} from "../../shared/components/form/form.component";
 import {FieldOperationHistoryService} from "../../domains/field-operation-history/field-operation-history-service";
 import {map, Observable, Subject, takeUntil} from "rxjs";
 import {
-  CreateFieldOperationHistory,
-  isCreateFieldOperationHistory
+  CreateFieldOperationHistory
 } from "../../domains/field-operation-history/dto/request/create-field-operation-history";
 import {FormSharedService} from "../../shared/components/form/form-shared-service";
 import {
@@ -69,6 +68,11 @@ import {
 import {UploadFieldImageRequest} from "../../domains/field/dto/request/upload-field-image-request";
 import {ListFieldImageRequest} from "../../domains/field/dto/request/list-field-image-request";
 import {ListFieldImageResponse} from "../../domains/field/dto/response/list-field-image-response";
+import {GallerySharedService} from "../../shared/components/gallery/gallery-shared.service";
+import {
+  DeleteConfirmationModalComponent
+} from "../../shared/components/delete-confirmation-modal/delete-confirmation-modal.component";
+import {FormModel} from "../../shared/model/form/form-model";
 
 
 @Component({
@@ -115,13 +119,18 @@ export class FieldPageComponent implements OnInit, OnDestroy {
   lineChart?: Chart;
   barChartForCostPerOperationForCertainYears?: Chart;
   barChartForRevenuePerOperationForCertainYears?: Chart;
-  fieldImages = new Array<string>();
-  showImages:boolean = false;
+  fieldImages = new Array<ListFieldImageResponse>();
+  showImages: boolean = false;
+  requestListFieldImages: ListFieldImageRequest = {
+    startDate: new Date(new Date().setFullYear(new Date().getFullYear() - 1)).toISOString(),
+    endDate: new Date().toISOString()
+  };
 
   constructor(
     private route: ActivatedRoute, private fieldService: FieldService, private router: Router, private fieldOperationHistoryService: FieldOperationHistoryService,
     private menuDataFieldPageProvider: MenuDataFieldPageProvider, private dialog: MatDialog, private formSharedService: FormSharedService,
-    private confirmationModalSharedService: DeleteConfirmationModalSharedService, private farmingLandStatisticsService: FarmingLandStatisticsService
+    private confirmationModalSharedService: DeleteConfirmationModalSharedService, private farmingLandStatisticsService: FarmingLandStatisticsService,
+    private gallerySharedService: GallerySharedService
   ) {
   }
 
@@ -134,12 +143,13 @@ export class FieldPageComponent implements OnInit, OnDestroy {
     let title = this.route.snapshot.paramMap.get('title');
     title = title ? title : '';
     this.findFieldByTitle(title);
-    this.subscribeFieldAddForm();
-    this.subscribeFieldEditForm();
+    this.subscribeAddForm();
+    this.subscribeEditForm();
+    this.subscribeImageGalleryDeletePopUpModal();
     this.subscribeConfirmationModalDeleteAction();
   }
 
-  loadImages(){
+  loadImages() {
     this.showImages = true;
   }
 
@@ -154,56 +164,42 @@ export class FieldPageComponent implements OnInit, OnDestroy {
   onYearsChangeForListingImages(dateEvent: { startDate: Date | null, endDate: any }) {
     let startDate = dateEvent.startDate?.toISOString();
     let endDate = dateEvent.endDate.toISOString();
-    let request: ListFieldImageRequest = {startDate: startDate, endDate: endDate}
-    this.fieldImages = [];
-    this.fieldService.listImagesField(request, <number>this.field?.id)
-      .subscribe((response: Array<ListFieldImageResponse>) => {
-        response.forEach(x => {
-          this.fieldImages.push(x.content);
-        })
-      });
+    this.requestListFieldImages = {startDate: startDate, endDate: endDate}
+    this.propagateImagesField();
+  }
 
+  private subscribeImageGalleryDeletePopUpModal() {
+    this.gallerySharedService.currentDeletionDetails.pipe(takeUntil(this.unsubscribe))
+      .subscribe(deletionDetails => {
+        if (deletionDetails === '') return;
+        this.dialog.open(DeleteConfirmationModalComponent, {
+          data: {
+            identifier: deletionDetails.id,
+            valueToDisplayForModal: deletionDetails.fileName,
+            entity: EntitySelector.IMAGE_FIELD_OPERATION
+          }
+        });
+      });
   }
 
 
   subscribeConfirmationModalDeleteAction() {
-    this.confirmationModalSharedService.currentIdentifierToDelete.pipe(takeUntil(this.unsubscribe))
+    this.confirmationModalSharedService.currentObjectToDelete.pipe(takeUntil(this.unsubscribe))
       .subscribe({
-        next: (identifier: any) => {
-          if (!identifier) return;
-          this.deleteFieldOperationHistory('adi', identifier).subscribe(() => {
-            this.searchFieldOperationHistories(this.searchFieldOperationRequest);
-            this.initCharts();
-          });
-        },
-        error: (response: any) => {
-          console.log(response);
-        }
-      });
-  }
-
-
-  subscribeFieldAddForm() {
-    this.formSharedService.currentFormValue.pipe(takeUntil(this.unsubscribe))
-      .subscribe({
-        next: (request: any) => {
-          if (isCreateFieldOperationHistory(request)) {
-            request.farmingLandId = <number>this.field?.id;
-            this.saveFieldOperationHistory(request).subscribe(() => {
+        next: (model: any) => {
+          if (!model) return;
+          if (model.entity === EntitySelector.FIELD_OPERATION.valueOf()) {
+            this.deleteFieldOperationHistory('adi', model.identifier).subscribe(() => {
               this.searchFieldOperationHistories(this.searchFieldOperationRequest);
               this.initCharts();
             });
           }
-          let id = <number>this.field?.id;
-          let requestForUpload: UploadFieldImageRequest = {
-            at: request.at,
-            content: request.content,
-            fileName: request.fileName
-          };
-          this.fieldService.uploadImageField(requestForUpload, id).subscribe(() => {
-
-          });
-          console.log(request);
+          if (model.entity === EntitySelector.IMAGE_FIELD_OPERATION.valueOf()) {
+            this.fieldService.deleteImagesField(model.identifier).subscribe(() => {
+              this.propagateImagesField();
+            })
+            ;
+          }
         },
         error: (response: any) => {
           console.log(response);
@@ -211,14 +207,58 @@ export class FieldPageComponent implements OnInit, OnDestroy {
       });
   }
 
-  subscribeFieldEditForm() {
+
+  subscribeAddForm() {
+    this.formSharedService.currentFormValue.pipe(takeUntil(this.unsubscribe))
+      .subscribe({
+        next: (model: any) => {
+          if (model.entity === EntitySelector.FIELD_OPERATION.valueOf()) {
+            model.object.farmingLandId = <number>this.field?.id;
+            this.saveFieldOperationHistory(model.object).subscribe(() => {
+              this.searchFieldOperationHistories(this.searchFieldOperationRequest);
+              this.initCharts();
+            });
+            return;
+          }
+          if (model.entity === EntitySelector.IMAGE_FIELD_OPERATION.valueOf()) {
+            let id = <number>this.field?.id;
+            let requestForUpload: UploadFieldImageRequest = {
+              at: model.object.at,
+              content: model.object.content,
+              fileName: model.object.fileName
+            };
+            this.fieldService.uploadImageField(requestForUpload, id).subscribe(() => {
+              this.propagateImagesField();
+            });
+          }
+        },
+        error: (response: any) => {
+          console.log(response);
+        }
+      });
+  }
+
+  propagateImagesField() {
+    this.fieldImages = [];
+    this.fieldService.listImagesField(this.requestListFieldImages, <number>this.field?.id).subscribe(
+      (response: Array<ListFieldImageResponse>) => {
+        response.forEach(image => {
+          this.fieldImages.push(image);
+        })
+      }
+    );
+  }
+
+  subscribeEditForm() {
     this.formSharedService.currentFormValueForEdit.pipe(takeUntil(this.unsubscribe))
       .subscribe({
-        next: (request: UpdateFieldOperationHistory) => {
-          this.updateFieldOperationHistory(request).subscribe(() => {
-            this.searchFieldOperationHistories(this.searchFieldOperationRequest);
-            this.initCharts();
-          });
+        next: (model: FormModel) => {
+          if (model.entity === EntitySelector.FIELD.valueOf()) {
+            this.updateFieldOperationHistory(model.object).subscribe(() => {
+              this.searchFieldOperationHistories(this.searchFieldOperationRequest);
+              this.initCharts();
+            });
+          }
         },
         error: (response: any) => {
           console.log(response);

@@ -29,6 +29,7 @@ import {UpdateFieldRequest} from "../../domains/field/dto/request/update-field-r
 import {EntitySelector} from "../../shared/entity-selector";
 import {NavbarSearchSharedService} from "../../shared/components/navbar-search/navbar-search-shared.service";
 import {MenuValue} from "../../shared/model/menu/menu-value";
+import {FormModel} from "../../shared/model/form/form-model";
 
 @Component({
   selector: 'app-fields-page',
@@ -81,13 +82,15 @@ export class FieldsPageComponent implements OnInit, OnDestroy {
   }
 
   private subscribeConfirmationModalDeleteAction() {
-    this.confirmationModalSharedService.currentIdentifierToDelete.pipe(takeUntil(this.unsubscribe))
+    this.confirmationModalSharedService.currentObjectToDelete.pipe(takeUntil(this.unsubscribe))
       .subscribe({
-        next: (identifier: any) => {
-          if (!identifier) return;
-          this.deleteField('adi', identifier).subscribe(() => {
-            this.searchFields(this.searchFieldsRequest);
-          });
+        next: (model: any) => {
+          if (!model.identifier) return;
+          if (model.entity === EntitySelector.FIELD.valueOf()) {
+            this.deleteField('adi', model.identifier).subscribe(() => {
+              this.searchFields(this.searchFieldsRequest);
+            });
+          }
         },
         error: (response: any) => {
           console.log(response);
@@ -102,7 +105,8 @@ export class FieldsPageComponent implements OnInit, OnDestroy {
         this.dialog.open(DeleteConfirmationModalComponent, {
           data: {
             identifier: deletionDetails.identifier,
-            valueToDisplayForModal: deletionDetails.title
+            valueToDisplayForModal: deletionDetails.title,
+            entity: EntitySelector.FIELD
           }
         });
       });
@@ -127,10 +131,12 @@ export class FieldsPageComponent implements OnInit, OnDestroy {
   subscribeFieldEditForm() {
     this.formSharedService.currentFormValueForEdit.pipe(takeUntil(this.unsubscribe))
       .subscribe({
-        next: (request: UpdateFieldRequest) => {
-          this.updateField(request).subscribe(() => {
-            this.searchFields(this.searchFieldsRequest);
-          });
+        next: (model: FormModel) => {
+          if (model.entity === EntitySelector.FIELD.valueOf()) {
+            this.updateField(model.object).subscribe(() => {
+              this.searchFields(this.searchFieldsRequest);
+            });
+          }
         },
         error: (response: any) => {
           console.log(response);
@@ -141,9 +147,9 @@ export class FieldsPageComponent implements OnInit, OnDestroy {
   private subscribeFieldAddForm() {
     this.formSharedService.currentFormValue.pipe(takeUntil(this.unsubscribe))
       .subscribe({
-        next: (request: CreateFieldRequest) => {
-          if (!request.title) return;
-          this.saveField(request).subscribe(() => {
+        next: (model: FormModel) => {
+          if (model.entity === EntitySelector.FIELD.valueOf()) return;
+          this.saveField(model.object).subscribe(() => {
             this.searchFields(this.searchFieldsRequest);
           });
         },

@@ -69,7 +69,7 @@ export class TableComponent {
   }
 
   onDelete(id: any) {
-    this.dialog.open(DeleteConfirmationModalComponent, {data: {identifier: id, valueToDisplayForModal: 'this'}});
+    this.dialog.open(DeleteConfirmationModalComponent, {data: {identifier: id, valueToDisplayForModal: 'this',entity:EntitySelector.FIELD_OPERATION}});
   }
 
   onEdit(element: any) {

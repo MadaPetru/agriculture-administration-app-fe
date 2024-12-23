@@ -53,15 +53,16 @@ export class FormComponent implements OnInit {
 
   submitForm(): void {
     if (this.userForm?.valid) {
-      if (this.userForm.controls.image!=null) {
+      if (this.userForm.controls.image != null) {
         this.userForm.value.image = this.imageSelected;
       }
       let value = this.userForm.value;
       let formValueField = FormValidatorProvider.getFormValue(value, this.type);
+      let formModel = {object: formValueField, entity: this.type};
       if (this.useForEdit) {
-        this.fieldsSharedService.updateFormValueForEdit(formValueField);
+        this.fieldsSharedService.updateFormValueForEdit(formModel);
       } else {
-        this.fieldsSharedService.updateFormValue(formValueField);
+        this.fieldsSharedService.updateFormValue(formModel);
       }
       this.matDialogRef.close();
     }

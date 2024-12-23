@@ -1,29 +1,88 @@
+/* Container styling for gallery */
+.gallery-container {
+  display: flex;
+  flex-wrap: wrap; /* Ensures images wrap on smaller screens */
+  gap: 10px; /* Adds spacing between images */
+  justify-content: center; /* Center the gallery on the page */
+  padding: 10px;
+}
+
+/* Individual gallery item */
 div.gallery {
-  margin: 5px;
+  position: relative; /* For proper positioning of delete button */
   border: 1px solid #ccc;
-  float: left;
-  width: 500px;
+  border-radius: 8px; /* Rounded corners for aesthetic appeal */
+  overflow: hidden; /* Ensures content stays inside bounds */
+  width: 100%;
+  max-width: 500px; /* Limits gallery item width */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 div.gallery:hover {
-  border: 1px solid #777;
+  border-color: #007bff; /* Blue border on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow on hover */
 }
 
+/* Image styling */
 div.gallery img {
+  display: block; /* Removes unwanted inline space */
   width: 100%;
   height: auto;
+  object-fit: cover; /* Ensures images fit properly */
 }
 
+/* Description styling */
 div.desc {
-  padding: 15px;
+  padding: 10px;
   text-align: center;
+  background-color: #f9f9f9; /* Light background for text */
+  font-size: 14px;
+  color: #333; /* Darker text for better readability */
 }
 
+/* Delete button styling */
+.delete-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color: white; /* White icon for contrast */
+  transition: background-color 0.3s ease;
+}
+
+.delete-button:hover {
+  background-color: rgba(255, 0, 0, 0.8); /* Red background on hover */
+}
+
+/* Icon styling */
+.delete-button i {
+  font-size: 18px;
+}
+
+/* Responsive design */
 @media screen and (max-width: 768px) {
+  .gallery-container {
+    gap: 5px; /* Smaller gaps on mobile */
+  }
+
   div.gallery {
-    margin: 5px;
-    border: 1px solid #ccc;
-    float: left;
-    width: 350px;
+    max-width: 300px; /* Adjusts gallery width for smaller screens */
+  }
+
+  div.gallery img {
+    max-height: 300px; /* Restricts image height for consistency */
+  }
+
+  .delete-button {
+    width: 24px;
+    height: 24px;
+    font-size: 14px; /* Scales icon size for mobile */
   }
 }

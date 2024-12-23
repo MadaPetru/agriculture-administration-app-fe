@@ -14,8 +14,9 @@ import {
 import {FieldService} from './domains/field/field-service';
 import {FieldOperationHistoryService} from './domains/field-operation-history/field-operation-history-service';
 import {NavbarSearchSharedService} from "./shared/components/navbar-search/navbar-search-shared.service";
+import {GallerySharedService} from "./shared/components/gallery/gallery-shared.service";
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes), provideClientHydration(), provideAnimations(), importProvidersFrom(HttpClientModule), FieldService, MenuDataFieldPageProvider, FormSharedService,
-    CardSharedService, DeleteConfirmationModalSharedService, FieldOperationHistoryService, NavbarSearchSharedService]
+    CardSharedService, DeleteConfirmationModalSharedService, FieldOperationHistoryService, NavbarSearchSharedService, GallerySharedService]
 };

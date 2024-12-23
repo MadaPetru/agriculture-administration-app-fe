@@ -1,6 +1,9 @@
-<div>
+<div class="gallery-container">
   <div *ngFor="let image of images" class="gallery">
-    <img [src]="image" alt="Cinque Terre" width="600" height="400">
-<!--    <div class="desc">Add a description of the image here</div>-->
+    <div class="delete-button" title="Delete" (click)="emitDeleteEvent(image)">
+      <i class="fa fa-remove"></i>
+    </div>
+    <img [src]="image.content" alt="Image description">
+    <div class="desc" *ngIf="image">Image '{{ image.fileName }}' from: {{ image.at }}</div>
   </div>
 </div>

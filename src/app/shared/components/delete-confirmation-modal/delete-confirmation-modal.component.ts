@@ -1,6 +1,7 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {DeleteConfirmationModalSharedService} from "./delete-confirmation-modal-shared-service";
+import {EntitySelector} from "../../entity-selector";
 
 @Component({
   selector: 'app-confirmation-modal',
@@ -12,13 +13,15 @@ import {DeleteConfirmationModalSharedService} from "./delete-confirmation-modal-
 export class DeleteConfirmationModalComponent {
   identifier: string = '';
   valueToDisplayForModal: string = '';
+  entity: EntitySelector;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: {
-                identifier: string, valueToDisplayForModal: string
+                identifier: string, valueToDisplayForModal: string, entity: EntitySelector
               }, public dialogRef: MatDialogRef<DeleteConfirmationModalComponent>,
               private confirmationModalSharedService: DeleteConfirmationModalSharedService) {
     this.identifier = data.identifier;
     this.valueToDisplayForModal = data.valueToDisplayForModal;
+    this.entity = data.entity;
   }
 
   closeModal() {
@@ -26,7 +29,8 @@ export class DeleteConfirmationModalComponent {
   }
 
   onDelete() {
-    this.confirmationModalSharedService.updateIdentifierToDelete(this.identifier);
+    let model = {identifier: this.identifier, entity: this.entity};
+    this.confirmationModalSharedService.updateIdentifierToDelete(model);
     this.closeModal();
   }
 }

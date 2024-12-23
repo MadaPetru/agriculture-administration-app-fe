@@ -29,6 +29,7 @@ export class FieldService {
   DELETE_FIELD_BY_ID_URL = environment.apiUrl + '/v1/farming-lands/issuer/{issuer}/id/{id}';
   UPLOAD_IMAGE_FIELD_URL = environment.apiUrl + '/v1/farming-lands/{id}/files';
   LIST_IMAGES_FIELD_URL = environment.apiUrl + '/v1/farming-lands/{id}/files/list';
+  DELETE_IMAGE_FIELD_URL = environment.apiUrl + '/v1/farming-lands/files/{id}';
 
   constructor(
     private http: HttpClient) {
@@ -65,5 +66,10 @@ export class FieldService {
   listImagesField(request: ListFieldImageRequest, id: number): Observable<Array<ListFieldImageResponse>> {
     let url = this.LIST_IMAGES_FIELD_URL.replace("{id}", String(id));
     return this.http.post<Array<ListFieldImageResponse>>(url, request);
+  }
+
+  deleteImagesField(id: number): Observable<void> {
+    let url = this.DELETE_IMAGE_FIELD_URL.replace("{id}", String(id));
+    return this.http.delete<void>(url);
   }
 }

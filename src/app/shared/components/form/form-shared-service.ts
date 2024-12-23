@@ -1,18 +1,19 @@
 import {Injectable} from '@angular/core';
 import {Subject} from "rxjs";
+import {FormModel} from "../../model/form/form-model";
 
 @Injectable()
 export class FormSharedService {
-  formValue: Subject<any> = new Subject<any>();
-  formValueForEdit: Subject<any> = new Subject<any>();
+  formValue: Subject<FormModel> = new Subject<FormModel>();
+  formValueForEdit: Subject<FormModel> = new Subject<FormModel>();
   currentFormValue = this.formValue.asObservable();
   currentFormValueForEdit = this.formValueForEdit.asObservable();
 
-  updateFormValue(value: any) {
+  updateFormValue(value: FormModel) {
     this.formValue.next(value);
   }
 
-  updateFormValueForEdit(value: any) {
+  updateFormValueForEdit(value: FormModel) {
     this.formValueForEdit.next(value);
   }
 }
