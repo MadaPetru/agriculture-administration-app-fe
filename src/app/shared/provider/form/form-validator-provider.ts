@@ -44,7 +44,8 @@ export class FormValidatorProvider {
     };
     if (type === EntitySelector.IMAGE_FIELD_OPERATION) return {
       at: value.at,
-      image: value.image,
+      content: value.image.content,
+      fileName: value.image.fileName
     };
     return {}
   }
@@ -80,7 +81,7 @@ export class FormValidatorProvider {
     let todayDate = formatDate(new Date(), 'yyyy-MM-dd', 'en');
     return {
       at: [todayDate,Validators.required],
-      image: ['',Validators.required],
+      image: [null,Validators.required],
     }
   }
 

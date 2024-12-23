@@ -18,7 +18,8 @@ import {FormComponent} from "../../shared/components/form/form.component";
 import {FieldOperationHistoryService} from "../../domains/field-operation-history/field-operation-history-service";
 import {map, Observable, Subject, takeUntil} from "rxjs";
 import {
-  CreateFieldOperationHistory, isCreateFieldOperationHistory
+  CreateFieldOperationHistory,
+  isCreateFieldOperationHistory
 } from "../../domains/field-operation-history/dto/request/create-field-operation-history";
 import {FormSharedService} from "../../shared/components/form/form-shared-service";
 import {
@@ -50,6 +51,24 @@ import {
 } from "../../domains/farming-lang-statistics/dto/response/farming-land-statistics-profitability-per-year-response";
 import {FarmingLandStatisticsService} from "../../domains/farming-lang-statistics/farming-land-statistics.service";
 import {MenuValue} from "../../shared/model/menu/menu-value";
+import {GalleryComponent} from "../../shared/components/gallery/gallery.component";
+import {
+  MatDatepickerModule,
+  MatDatepickerToggle,
+  MatDateRangeInput,
+  MatDateRangePicker
+} from '@angular/material/datepicker';
+import {MatFormField, MatFormFieldModule} from '@angular/material/form-field';
+import {ReactiveFormsModule} from "@angular/forms";
+import {MatNativeDateModule} from "@angular/material/core";
+import {MatIconModule} from "@angular/material/icon";
+import {MatInputModule} from "@angular/material/input";
+import {
+  StartFinishDatePickerComponent
+} from "../../shared/components/start-finish-date-picker/start-finish-date-picker.component";
+import {UploadFieldImageRequest} from "../../domains/field/dto/request/upload-field-image-request";
+import {ListFieldImageRequest} from "../../domains/field/dto/request/list-field-image-request";
+import {ListFieldImageResponse} from "../../domains/field/dto/response/list-field-image-response";
 
 
 @Component({
@@ -64,7 +83,19 @@ import {MenuValue} from "../../shared/model/menu/menu-value";
     PaginatorComponent,
     MatButton,
     StartFinishYearDatePickerComponent,
-    NgIf
+    NgIf,
+    GalleryComponent,
+    ReactiveFormsModule,
+    MatFormField,
+    MatDateRangeInput,
+    MatDatepickerToggle,
+    MatDateRangePicker,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatInputModule,
+    MatIconModule,
+    StartFinishDatePickerComponent,
   ],
   templateUrl: './field-page.component.html',
   styleUrls: ['./field-page.component.css', '../../shared/shared.css']
@@ -84,6 +115,8 @@ export class FieldPageComponent implements OnInit, OnDestroy {
   lineChart?: Chart;
   barChartForCostPerOperationForCertainYears?: Chart;
   barChartForRevenuePerOperationForCertainYears?: Chart;
+  fieldImages = new Array<string>();
+  showImages:boolean = false;
 
   constructor(
     private route: ActivatedRoute, private fieldService: FieldService, private router: Router, private fieldOperationHistoryService: FieldOperationHistoryService,
@@ -106,12 +139,30 @@ export class FieldPageComponent implements OnInit, OnDestroy {
     this.subscribeConfirmationModalDeleteAction();
   }
 
+  loadImages(){
+    this.showImages = true;
+  }
+
   onPaginationChanged(pageEvent: PageEvent) {
     let size = pageEvent.pageSize;
     let page = pageEvent.pageIndex;
     let pageable: PageableRequest = {size: size, page: page};
     this.searchFieldOperationRequest = {pageable: pageable, searchBy: this.farmingLandOperationHistorySearchBy};
     this.searchFieldOperationHistories(this.searchFieldOperationRequest);
+  }
+
+  onYearsChangeForListingImages(dateEvent: { startDate: Date | null, endDate: any }) {
+    let startDate = dateEvent.startDate?.toISOString();
+    let endDate = dateEvent.endDate.toISOString();
+    let request: ListFieldImageRequest = {startDate: startDate, endDate: endDate}
+    this.fieldImages = [];
+    this.fieldService.listImagesField(request, <number>this.field?.id)
+      .subscribe((response: Array<ListFieldImageResponse>) => {
+        response.forEach(x => {
+          this.fieldImages.push(x.content);
+        })
+      });
+
   }
 
 
@@ -136,13 +187,22 @@ export class FieldPageComponent implements OnInit, OnDestroy {
     this.formSharedService.currentFormValue.pipe(takeUntil(this.unsubscribe))
       .subscribe({
         next: (request: any) => {
-          if(isCreateFieldOperationHistory(request)) {
+          if (isCreateFieldOperationHistory(request)) {
             request.farmingLandId = <number>this.field?.id;
             this.saveFieldOperationHistory(request).subscribe(() => {
               this.searchFieldOperationHistories(this.searchFieldOperationRequest);
               this.initCharts();
             });
           }
+          let id = <number>this.field?.id;
+          let requestForUpload: UploadFieldImageRequest = {
+            at: request.at,
+            content: request.content,
+            fileName: request.fileName
+          };
+          this.fieldService.uploadImageField(requestForUpload, id).subscribe(() => {
+
+          });
           console.log(request);
         },
         error: (response: any) => {

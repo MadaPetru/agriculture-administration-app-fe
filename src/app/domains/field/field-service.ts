@@ -9,6 +9,9 @@ import {FieldResponse} from "./dto/response/field-response";
 import {CreateFieldRequest} from "./dto/request/create-field-request";
 import {UpdateFieldRequest} from "./dto/request/update-field-request";
 import {environment} from "../../../environments/environment";
+import {UploadFieldImageRequest} from "./dto/request/upload-field-image-request";
+import {ListFieldImageRequest} from "./dto/request/list-field-image-request";
+import {ListFieldImageResponse} from "./dto/response/list-field-image-response";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -24,6 +27,8 @@ export class FieldService {
   UPDATE_FIELD_URL = environment.apiUrl + '/v1/farming-lands';
   FIND_FIELD_BY_TITLE_URL = environment.apiUrl + '/v1/farming-lands/title/{title}';
   DELETE_FIELD_BY_ID_URL = environment.apiUrl + '/v1/farming-lands/issuer/{issuer}/id/{id}';
+  UPLOAD_IMAGE_FIELD_URL = environment.apiUrl + '/v1/farming-lands/{id}/files';
+  LIST_IMAGES_FIELD_URL = environment.apiUrl + '/v1/farming-lands/{id}/files/list';
 
   constructor(
     private http: HttpClient) {
@@ -50,5 +55,15 @@ export class FieldService {
     let url = this.DELETE_FIELD_BY_ID_URL.replace("{id}", identifier)
       .replace("{issuer}", issuer);
     return this.http.delete<void>(url);
+  }
+
+  uploadImageField(request: UploadFieldImageRequest, id: number): Observable<void> {
+    let url = this.UPLOAD_IMAGE_FIELD_URL.replace("{id}", String(id));
+    return this.http.post<void>(url, request);
+  }
+
+  listImagesField(request: ListFieldImageRequest, id: number): Observable<Array<ListFieldImageResponse>> {
+    let url = this.LIST_IMAGES_FIELD_URL.replace("{id}", String(id));
+    return this.http.post<Array<ListFieldImageResponse>>(url, request);
   }
 }

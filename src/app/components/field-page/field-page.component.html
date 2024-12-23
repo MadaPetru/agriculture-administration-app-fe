@@ -47,22 +47,33 @@
       <button mat-flat-button (click)="onSaveNewOperationHistory()">Create new Operation</button>
     </div>
     <app-table class="operation-histories-table"
-      [inputData]="this.operationHistories"
-      [inputTableUsedAt]=EntitySelector.FIELD_OPERATION
-      [inputColumns]="TableOperationsHistoryProvider.columns"
-      [inpuGetAttributeBasedOnColumn]="TableOperationsHistoryProvider.getAttributeBasedOnColumn"
-      [inputDeleteButtonVisible]="true"
-      [inputEditButtonVisible]="true"
+               [inputData]="this.operationHistories"
+               [inputTableUsedAt]=EntitySelector.FIELD_OPERATION
+               [inputColumns]="TableOperationsHistoryProvider.columns"
+               [inpuGetAttributeBasedOnColumn]="TableOperationsHistoryProvider.getAttributeBasedOnColumn"
+               [inputDeleteButtonVisible]="true"
+               [inputEditButtonVisible]="true"
     ></app-table>
   </div>
   <div class="margin-top-15px align-center-with-flexbox-container">
     <app-paginator [inputLength]="totalNumberOfOperations"
                    (outputPageEvent)="onPaginationChanged($event)"></app-paginator>
   </div>
-  <div class="margin-top-15px align-center-with-flexbox-container">
-    <h2 class="images-title">Images</h2>
+  <div *ngIf="!showImages" class="margin-top-15px">
+    <button (click)="loadImages()">Load images</button>
   </div>
-  <div class="create-button-operation margin-top-15px">
-    <button mat-flat-button (click)="onUploadImage()">Upload image</button>
+  <div *ngIf="showImages">
+    <div class="margin-top-15px align-center-with-flexbox-container">
+      <h2 class="images-title">Images</h2>
+    </div>
+    <div class="create-button-image margin-top-15px">
+      <button mat-flat-button (click)="onUploadImage()">Upload image</button>
+    </div>
+    <div class="margin-top-15px">
+      <start-finish-date-picker (outputDateInterval)="onYearsChangeForListingImages($event)"></start-finish-date-picker>
+    </div>
+    <div class="margin-top-70px align-center-with-flexbox-container">
+      <app-gallery [inputImages]="fieldImages"></app-gallery>
+    </div>
   </div>
 </div>

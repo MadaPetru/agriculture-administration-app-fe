@@ -7,6 +7,7 @@ import {FormAttribute} from "../../model/form/form-attribute";
 import {FormValidatorProvider} from "../../provider/form/form-validator-provider";
 import {FormAttributeProvider} from "../../provider/form/form-attribute-provider";
 import {EntitySelector} from "../../entity-selector";
+import {File} from "../../model/file/file";
 
 @Component({
   selector: 'app-form',
@@ -26,6 +27,7 @@ export class FormComponent implements OnInit {
   type: EntitySelector;
   attributes: FormAttribute[] = [];
   useForEdit: boolean = false;
+  imageSelected?: File;
 
   constructor(private formBuilder: FormBuilder, private fieldsSharedService: FormSharedService,
               private matDialogRef: MatDialogRef<FormComponent>,
@@ -51,8 +53,10 @@ export class FormComponent implements OnInit {
 
   submitForm(): void {
     if (this.userForm?.valid) {
+      if (this.userForm.controls.image!=null) {
+        this.userForm.value.image = this.imageSelected;
+      }
       let value = this.userForm.value;
-      console.log(value);
       let formValueField = FormValidatorProvider.getFormValue(value, this.type);
       if (this.useForEdit) {
         this.fieldsSharedService.updateFormValueForEdit(formValueField);
@@ -60,6 +64,35 @@ export class FormComponent implements OnInit {
         this.fieldsSharedService.updateFormValue(formValueField);
       }
       this.matDialogRef.close();
+    }
+  }
+
+  onFileSelected(event: Event, controlName: string): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      const file = input.files[0]; // First selected file
+      const reader = new FileReader();
+
+      // Read file content
+      reader.onload = () => {
+        let fileContent = reader.result;
+        const fileName = file.name;
+
+        this.imageSelected = {
+          fileName: fileName,
+          content: fileContent
+        };
+
+        // Update the form control with custom data (e.g., a file object or base64 string)
+        this.userForm.get(controlName)?.setValue(this.imageSelected);
+      };
+
+      reader.onerror = (error) => {
+        console.error('Error reading file:', error);
+      };
+
+      // Read the file content as base64
+      reader.readAsDataURL(file); // Or use `readAsText(file)` for plain text files
     }
   }
 }

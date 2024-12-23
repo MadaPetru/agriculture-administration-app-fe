@@ -13,7 +13,7 @@ import {FormsModule} from "@angular/forms";
   styleUrls: ['./start-finish-year-date-picker.component.css', '../../shared.css']
 })
 export class StartFinishYearDatePickerComponent {
-  @Output('outputYearsInterval') yearsInterval = new EventEmitter<{ startYear: number, endYear: number }>()
+  @Output('outputYearsInterval') yearsInterval = new EventEmitter<{ startYear: number, endYear: number }>();
 
   startYear = new Date().getFullYear();
   endYear = new Date().getFullYear();

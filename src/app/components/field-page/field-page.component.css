@@ -90,18 +90,6 @@ button:hover {
   .chart-card {
     max-width: 100%; /* Full width for chart cards on smaller screens */
   }
-
-  .create-button-operation {
-    width: 100%; /* Button takes full width on smaller screens */
-    margin-bottom: 20px; /* Adjust button margin */
-    text-align: center; /* Center-align the button */
-  }
-
-  .create-button-image {
-    width: 100%; /* Button takes full width on smaller screens */
-    margin-bottom: 20px; /* Adjust button margin */
-    text-align: center; /* Center-align the button */
-  }
 }
 
 @media (max-width: 768px) {
@@ -155,18 +143,6 @@ button:hover {
   /* Year picker should be centered */
   .year-picker {
     justify-content: center;
-  }
-
-  .create-button-operation {
-    width: 100%; /* Button takes full width */
-    margin-bottom: 20px;
-    text-align: center;
-  }
-
-  .create-button-image {
-    width: 100%; /* Button takes full width */
-    margin-bottom: 20px;
-    text-align: center;
   }
 
   /* Make the operation histories table more flexible */

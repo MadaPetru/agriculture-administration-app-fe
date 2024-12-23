@@ -5,7 +5,7 @@
 
       <div class="form-group" *ngFor="let attribute of attributes ">
         <div *ngIf="!attribute.parentInputIdNeeded || (userForm?.get(''+attribute.parentInputIdNeeded)?.valid)">
-          <div *ngIf="attribute.inputType!='select'">
+          <div *ngIf="attribute.inputType!='select' && attribute.inputType!='file'">
             <label for="{{attribute.labelForValue}}">{{ attribute.value }}</label>
             <input *ngIf="attribute.inputType === 'date'" type="{{attribute.inputType}}" class="form-control"
                    id="{{attribute.inputId}}"
@@ -14,9 +14,6 @@
                    id="{{attribute.inputId}}"
                    formControlName="{{attribute.formControlName}}">
             <input *ngIf="attribute.inputType === 'number'" type="{{attribute.inputType}}" class="form-control"
-                   id="{{attribute.inputId}}"
-                   formControlName="{{attribute.formControlName}}">
-            <input *ngIf="attribute.inputType === 'file'" type="{{attribute.inputType}}" class="form-control"
                    id="{{attribute.inputId}}"
                    formControlName="{{attribute.formControlName}}">
             <div *ngIf="userForm?.get(''+attribute.inputId)?.invalid && userForm?.get(''+attribute.inputId)?.touched"
@@ -31,6 +28,12 @@
                 {{ option }}
               </option>
             </select>
+          </div>
+          <div *ngIf="attribute.inputType === 'image'">
+            <input type="file" class="form-control" accept="image/*"
+                   id="{{attribute.inputId}}"
+                   formControlName="{{attribute.formControlName}}"
+                   (change)="onFileSelected($event,attribute.formControlName)">
           </div>
         </div>
       </div>
