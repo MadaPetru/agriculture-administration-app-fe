@@ -148,10 +148,11 @@ export class FieldsPageComponent implements OnInit, OnDestroy {
     this.formSharedService.currentFormValue.pipe(takeUntil(this.unsubscribe))
       .subscribe({
         next: (model: FormModel) => {
-          if (model.entity === EntitySelector.FIELD.valueOf()) return;
-          this.saveField(model.object).subscribe(() => {
-            this.searchFields(this.searchFieldsRequest);
-          });
+          if (model.entity === EntitySelector.FIELD.valueOf()) {
+            this.saveField(model.object).subscribe(() => {
+              this.searchFields(this.searchFieldsRequest);
+            });
+          }
         },
         error: (response: any) => {
           console.log(response);
