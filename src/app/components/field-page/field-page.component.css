@@ -1,6 +1,6 @@
 /* General Styling */
 
-.main-container{
+.main-container {
   margin-left: 245px;
 }
 
@@ -65,6 +65,43 @@ button:hover {
   transform: translateY(-2px);
 }
 
+.gallery-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.navigation-arrows {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.navigation-arrows button {
+  background-color: var(--blue-color);
+  color: var(--white-color);
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.navigation-arrows button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.navigation-arrows span {
+  font-size: 16px;
+  color: var(--text-color);
+}
+
+
 /* Responsive adjustments */
 @media (max-width: 1200px) {
   .dashboard-container {
@@ -93,40 +130,56 @@ button:hover {
 }
 
 @media (max-width: 768px) {
-  .operation-histories-title{
+
+  .navigation-arrows {
+    flex-direction: row; /* Stack the buttons and text vertically */
+    align-items: stretch; /* Stretch buttons to full width */
+  }
+
+  .navigation-arrows button {
+    width: 80%; /* Make buttons take full width in smaller screens */
+    text-align: center;
+  }
+
+  .navigation-arrows > span {
+    font-size: 10px;
+    margin: 5px 0; /* Add spacing between the text and buttons */
+  }
+
+  .operation-histories-title {
     font-size: 13px;
   }
 
-  .images-title{
+  .images-title {
     font-size: 13px;
   }
 
-  .create-button-operation > button{
+  .create-button-operation > button {
     float: left;
     font-size: 10px;
     text-align: center; /* Center-align the button */
   }
 
-  .create-button-image > button{
+  .create-button-image > button {
     float: left;
     font-size: 10px;
     text-align: center; /* Center-align the button */
   }
 
-  .operation-histories-table{
+  .operation-histories-table {
     width: 200px;
     font-size: 10px;
   }
 
-  .main-container{
+  .main-container {
     margin-left: 70px;
   }
 
-  .details > h2{
+  .details > h2 {
     font-size: 10px;
   }
 
-  .details > h6{
+  .details > h6 {
     font-size: 8px;
   }
 

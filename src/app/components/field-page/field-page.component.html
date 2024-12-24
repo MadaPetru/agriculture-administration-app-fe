@@ -72,8 +72,15 @@
     <div class="margin-top-15px">
       <start-finish-date-picker (outputDateInterval)="onYearsChangeForListingImages($event)"></start-finish-date-picker>
     </div>
-    <div class="margin-top-70px align-center-with-flexbox-container">
-      <app-gallery [inputImages]="fieldImages"></app-gallery>
+    <div class="gallery-container" *ngIf="totalFieldImages != 0">
+      <div class="navigation-arrows">
+        <button (click)="previousPage()" [disabled]="currentPageFieldImages === 0">&larr;</button>
+        <span>Page {{ currentPageFieldImages + 1 }} of {{ totalPagesFieldImages }}</span>
+        <button (click)="nextPage()" [disabled]="currentPageFieldImages + 1 === totalPagesFieldImages">&rarr;</button>
+      </div>
+      <div class="images-grid">
+        <app-gallery [inputImages]="fieldImages"></app-gallery>
+      </div>
     </div>
   </div>
 </div>

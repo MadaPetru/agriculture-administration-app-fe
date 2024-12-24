@@ -73,6 +73,7 @@ import {
   DeleteConfirmationModalComponent
 } from "../../shared/components/delete-confirmation-modal/delete-confirmation-modal.component";
 import {FormModel} from "../../shared/model/form/form-model";
+import {ListFieldImagePaginatedResponse} from "../../domains/field/dto/response/list-field-image-paginated-response";
 
 
 @Component({
@@ -119,12 +120,20 @@ export class FieldPageComponent implements OnInit, OnDestroy {
   lineChart?: Chart;
   barChartForCostPerOperationForCertainYears?: Chart;
   barChartForRevenuePerOperationForCertainYears?: Chart;
-  fieldImages = new Array<ListFieldImageResponse>();
+  fieldImages: ListFieldImageResponse[] = [];
   showImages: boolean = false;
   requestListFieldImages: ListFieldImageRequest = {
     startDate: new Date(new Date().setFullYear(new Date().getFullYear() - 1)).toISOString(),
-    endDate: new Date().toISOString()
+    endDate: new Date().toISOString(),
+    pageable: {
+      page: 0,
+      size: 10
+    }
   };
+  currentPageFieldImages: number = 0;
+  itemsPerPageForFieldImages: number = 10;
+  totalFieldImages: number = 0;
+  totalPagesFieldImages: number = 0;
 
   constructor(
     private route: ActivatedRoute, private fieldService: FieldService, private router: Router, private fieldOperationHistoryService: FieldOperationHistoryService,
@@ -147,7 +156,34 @@ export class FieldPageComponent implements OnInit, OnDestroy {
     this.subscribeEditForm();
     this.subscribeImageGalleryDeletePopUpModal();
     this.subscribeConfirmationModalDeleteAction();
+    this.updateDisplayedImages();
   }
+
+// Function to handle previous page navigation
+  previousPage() {
+    if (this.currentPageFieldImages > 0) {
+      this.currentPageFieldImages--;
+      this.requestListFieldImages.pageable.page = this.currentPageFieldImages;
+      this.propagateImagesField();
+    }
+  }
+
+// Function to handle next page navigation
+  nextPage() {
+    if (this.currentPageFieldImages < this.totalPagesFieldImages) {
+      this.currentPageFieldImages++;
+      this.requestListFieldImages.pageable.page = this.currentPageFieldImages;
+      this.propagateImagesField();
+    }
+  }
+
+// Function to update displayed images based on the current page
+  updateDisplayedImages() {
+    const startIndex = (this.currentPageFieldImages - 1) * this.itemsPerPageForFieldImages;
+    const endIndex = startIndex + this.itemsPerPageForFieldImages;
+    this.fieldImages = this.fieldImages.slice(startIndex, endIndex);
+  }
+
 
   loadImages() {
     this.showImages = true;
@@ -164,7 +200,12 @@ export class FieldPageComponent implements OnInit, OnDestroy {
   onYearsChangeForListingImages(dateEvent: { startDate: Date | null, endDate: any }) {
     let startDate = dateEvent.startDate?.toISOString();
     let endDate = dateEvent.endDate.toISOString();
-    this.requestListFieldImages = {startDate: startDate, endDate: endDate}
+    this.requestListFieldImages = {
+      startDate: startDate, endDate: endDate, pageable: {
+        page: this.currentPageFieldImages,
+        size: this.itemsPerPageForFieldImages
+      }
+    }
     this.propagateImagesField();
   }
 
@@ -241,10 +282,10 @@ export class FieldPageComponent implements OnInit, OnDestroy {
   propagateImagesField() {
     this.fieldImages = [];
     this.fieldService.listImagesField(this.requestListFieldImages, <number>this.field?.id).subscribe(
-      (response: Array<ListFieldImageResponse>) => {
-        response.forEach(image => {
-          this.fieldImages.push(image);
-        })
+      (response: ListFieldImagePaginatedResponse) => {
+        this.fieldImages = response.content;
+        this.totalFieldImages = response.page.totalElements;
+        this.totalPagesFieldImages = response.page.totalPages;
       }
     );
   }

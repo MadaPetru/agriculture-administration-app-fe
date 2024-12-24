@@ -11,7 +11,7 @@ import {UpdateFieldRequest} from "./dto/request/update-field-request";
 import {environment} from "../../../environments/environment";
 import {UploadFieldImageRequest} from "./dto/request/upload-field-image-request";
 import {ListFieldImageRequest} from "./dto/request/list-field-image-request";
-import {ListFieldImageResponse} from "./dto/response/list-field-image-response";
+import {ListFieldImagePaginatedResponse} from "./dto/response/list-field-image-paginated-response";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -63,9 +63,9 @@ export class FieldService {
     return this.http.post<void>(url, request);
   }
 
-  listImagesField(request: ListFieldImageRequest, id: number): Observable<Array<ListFieldImageResponse>> {
+  listImagesField(request: ListFieldImageRequest, id: number): Observable<ListFieldImagePaginatedResponse> {
     let url = this.LIST_IMAGES_FIELD_URL.replace("{id}", String(id));
-    return this.http.post<Array<ListFieldImageResponse>>(url, request);
+    return this.http.post<ListFieldImagePaginatedResponse>(url, request);
   }
 
   deleteImagesField(id: number): Observable<void> {
