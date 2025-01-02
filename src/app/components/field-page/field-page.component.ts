@@ -294,7 +294,7 @@ export class FieldPageComponent implements OnInit, OnDestroy {
     this.formSharedService.currentFormValueForEdit.pipe(takeUntil(this.unsubscribe))
       .subscribe({
         next: (model: FormModel) => {
-          if (model.entity === EntitySelector.FIELD.valueOf()) {
+          if (model.entity === EntitySelector.FIELD_OPERATION.valueOf()) {
             this.updateFieldOperationHistory(model.object).subscribe(() => {
               this.searchFieldOperationHistories(this.searchFieldOperationRequest);
               this.initCharts();
