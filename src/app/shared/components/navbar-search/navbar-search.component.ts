@@ -2,7 +2,7 @@ import {Component, Input} from '@angular/core';
 import {NgIf} from "@angular/common";
 import {NavbarSearchSharedService} from "./navbar-search-shared.service";
 import {FormsModule} from "@angular/forms";
-import {KeycloakService} from "../../service/keycloak.service";
+import {AuthenticationUtils} from "../../authentication-utils";
 
 @Component({
   selector: 'app-navbar-search',
@@ -20,8 +20,8 @@ export class NavbarSearchComponent {
   valueFromSearchInput: string = '';
   @Input({alias: "inputSearchIsVisible"}) searchIsVisible = false;
 
-  constructor(private navbarSearchSharedService: NavbarSearchSharedService, private keycloakService: KeycloakService) {
-    this.username = keycloakService.profile?.username;
+  constructor(private navbarSearchSharedService: NavbarSearchSharedService) {
+    this.username = AuthenticationUtils.getUsername();
   }
 
   emitSearchValue() {

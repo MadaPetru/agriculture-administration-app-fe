@@ -1,4 +1,4 @@
-import {APP_INITIALIZER, ApplicationConfig, importProvidersFrom} from '@angular/core';
+import {ApplicationConfig, importProvidersFrom} from '@angular/core';
 import {provideRouter} from '@angular/router';
 
 import {routes} from './app.routes';
@@ -15,25 +15,25 @@ import {FieldService} from './domains/field/field-service';
 import {FieldOperationHistoryService} from './domains/field-operation-history/field-operation-history-service';
 import {NavbarSearchSharedService} from "./shared/components/navbar-search/navbar-search-shared.service";
 import {GallerySharedService} from "./shared/components/gallery/gallery-shared.service";
-import {KeycloakService} from "./shared/service/keycloak.service";
 import {HttpTokenInterceptor} from "./shared/interceptor/http-token.interceptor";
+import {UserService} from "./domains/user/user-service";
 
-export function keycloakFactory(keycloakService: KeycloakService) {
-  return () => keycloakService.init();
-}
+// export function keycloakFactory(keycloakService: KeycloakService) {
+//   return () => keycloakService.init();
+// }
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes), provideClientHydration(), provideAnimations(), importProvidersFrom(HttpClientModule), FieldService, MenuDataFieldPageProvider, FormSharedService,
     CardSharedService, DeleteConfirmationModalSharedService, FieldOperationHistoryService, NavbarSearchSharedService, GallerySharedService,
-    {
-      provide: APP_INITIALIZER,
-      deps: [KeycloakService],
-      useFactory: keycloakFactory,
-      multi: true
-    },
+    // {
+    //   provide: APP_INITIALIZER,
+    //   deps: [KeycloakService],
+    //   useFactory: keycloakFactory,
+    //   multi: true
+    // },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpTokenInterceptor,
       multi: true
-    }]
+    }, UserService]
 };

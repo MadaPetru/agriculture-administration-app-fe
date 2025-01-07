@@ -3,6 +3,7 @@ import {CommonModule} from "@angular/common";
 import {RouterLink} from "@angular/router";
 import {MenuValue} from "../../model/menu/menu-value";
 import {KeycloakService} from "../../service/keycloak.service";
+import {AuthenticationUtils} from "../../authentication-utils";
 
 @Component({
   selector: 'app-menu',
@@ -28,7 +29,7 @@ export class MenuComponent {
   }
 
   logout() {
-    this.keycloakService.keycloak.logout();
+    AuthenticationUtils.logOut();
   }
 
   toggleSideBar() {

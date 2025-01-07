@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - AgroAdmin</title>
+</head>
+<body>
+<div class="login-container">
+  <h1 class="login-title">Welcome to AgroAdmin</h1>
+  <form class="login-form" (ngSubmit)="onSubmit()" #loginForm="ngForm">
+    <input type="text" placeholder="Email Address" name="email" required [(ngModel)]="this.loginData.email">
+    <input type="password" placeholder="Password" name="password" required [(ngModel)]="this.loginData.password">
+    <button type="submit" class="login-button" [disabled]="!loginForm.form.valid">Log In</button>
+<!--    <a href="#" class="reset-password">Forgot your password?</a>-->
+  </form>
+  <div class="footer">
+<!--    <p>Don't have an account? <a href="#">Sign up here</a></p>-->
+  </div>
+</div>
+</body>
+</html>
