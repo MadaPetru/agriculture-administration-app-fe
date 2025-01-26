@@ -16,7 +16,7 @@ import {PageableRequest} from "../../shared/dto/request/pageable-request";
 import {MatDialog} from "@angular/material/dialog";
 import {FormComponent} from "../../shared/components/form/form.component";
 import {FieldOperationHistoryService} from "../../domains/field-operation-history/field-operation-history-service";
-import {map, Observable, Subject, takeUntil} from "rxjs";
+import {Subject, takeUntil} from "rxjs";
 import {
   CreateFieldOperationHistory
 } from "../../domains/field-operation-history/dto/request/create-field-operation-history";
@@ -156,7 +156,6 @@ export class FieldPageComponent implements OnInit, OnDestroy {
     this.subscribeEditForm();
     this.subscribeImageGalleryDeletePopUpModal();
     this.subscribeConfirmationModalDeleteAction();
-    this.updateDisplayedImages();
   }
 
 // Function to handle previous page navigation
@@ -176,14 +175,6 @@ export class FieldPageComponent implements OnInit, OnDestroy {
       this.propagateImagesField();
     }
   }
-
-// Function to update displayed images based on the current page
-  updateDisplayedImages() {
-    const startIndex = (this.currentPageFieldImages - 1) * this.itemsPerPageForFieldImages;
-    const endIndex = startIndex + this.itemsPerPageForFieldImages;
-    this.fieldImages = this.fieldImages.slice(startIndex, endIndex);
-  }
-
 
   loadImages() {
     this.showImages = true;
@@ -230,7 +221,7 @@ export class FieldPageComponent implements OnInit, OnDestroy {
         next: (model: any) => {
           if (!model) return;
           if (model.entity === EntitySelector.FIELD_OPERATION.valueOf()) {
-            this.deleteFieldOperationHistory('adi', model.identifier).subscribe(() => {
+            this.deleteFieldOperationHistory(model.identifier).subscribe(() => {
               this.searchFieldOperationHistories(this.searchFieldOperationRequest);
               this.initCharts();
             });
@@ -342,8 +333,8 @@ export class FieldPageComponent implements OnInit, OnDestroy {
       });
   }
 
-  deleteFieldOperationHistory(issuer: any, id: any) {
-    return this.fieldOperationHistoryService.deleteFieldOperationHistory(issuer, id);
+  deleteFieldOperationHistory(id: any) {
+    return this.fieldOperationHistoryService.deleteFieldOperationHistory(id);
   }
 
   onSaveNewOperationHistory() {
@@ -385,41 +376,28 @@ export class FieldPageComponent implements OnInit, OnDestroy {
   }
 
   initCharts() {
-    this.buildChartForProfitabilityForCertainIntervalOfYears('adi', 2024, 2024);
-    this.buildChartForCostPerOperationForCertainIntervalOfYears('adi', 2024, 2024);
-    this.buildChartForRevenuePerOperationForCertainIntervalOfYears('adi', 2024, 2024);
+    let actualYear = new Date().getFullYear();
+    this.buildChartForProfitabilityForCertainIntervalOfYears(actualYear, actualYear);
+    this.buildChartForCostPerOperationForCertainIntervalOfYears(actualYear, actualYear);
+    this.buildChartForRevenuePerOperationForCertainIntervalOfYears(actualYear, actualYear);
   }
 
   onYearsIntervalChangedForRevenues(yearsIntervalEvent: { startYear: number, endYear: number }) {
-    this.buildChartForRevenuePerOperationForCertainIntervalOfYears('adi', yearsIntervalEvent.startYear, yearsIntervalEvent.endYear)
+    this.buildChartForRevenuePerOperationForCertainIntervalOfYears(yearsIntervalEvent.startYear, yearsIntervalEvent.endYear)
   }
 
   onYearsIntervalChangedForProfitability(yearsIntervalEvent: { startYear: number, endYear: number }) {
-    this.buildChartForProfitabilityForCertainIntervalOfYears('adi', yearsIntervalEvent.startYear, yearsIntervalEvent.endYear)
+    this.buildChartForProfitabilityForCertainIntervalOfYears(yearsIntervalEvent.startYear, yearsIntervalEvent.endYear)
   }
 
   onYearsIntervalChangedForCosts(yearsIntervalEvent: { startYear: number, endYear: number }) {
-    this.buildChartForCostPerOperationForCertainIntervalOfYears('adi', yearsIntervalEvent.startYear, yearsIntervalEvent.endYear)
+    this.buildChartForCostPerOperationForCertainIntervalOfYears(yearsIntervalEvent.startYear, yearsIntervalEvent.endYear)
   }
 
-  private getValuesForCostPerOperationForCertainIntervalOfYears(createdBy: string, startYear: number, endYear: number) {
+  private buildChartForCostPerOperationForCertainIntervalOfYears(startYear: number, endYear: number) {
     let yDataSet: number[] = [];
     let xValues: string[] = [];
-    return this.farmingLandStatisticsService.profitabilityPerYearAndOperationForFarmingLand(createdBy, startYear, endYear, <number>this.field?.id)
-      .pipe(
-        map((response: FarmingLandStatisticsProfitabilityPerOperationAndYearResponse[]) => {
-          response.forEach(data => {
-            xValues.push(data.operation);
-            yDataSet.push(data.cost);
-          });
-          return {xValues, yDataSet};
-        }));
-  }
-
-  private buildChartForCostPerOperationForCertainIntervalOfYears(createdBy: string, startYear: number, endYear: number) {
-    let yDataSet: number[] = [];
-    let xValues: string[] = [];
-    this.farmingLandStatisticsService.profitabilityPerYearAndOperationForFarmingLand(createdBy, startYear, endYear, <number>this.field?.id)
+    this.farmingLandStatisticsService.profitabilityPerYearAndOperationForFarmingLand(startYear, endYear, <number>this.field?.id)
       .subscribe((response: FarmingLandStatisticsProfitabilityPerOperationAndYearResponse[]) => {
         response.forEach(data => {
           xValues.push(data.operation);
@@ -432,25 +410,10 @@ export class FieldPageComponent implements OnInit, OnDestroy {
       });
   }
 
-  private getValuesForRevenuePerOperationForCertainIntervalOfYears(createdBy: string, startYear: number, endYear: number) {
+  private buildChartForRevenuePerOperationForCertainIntervalOfYears(startYear: number, endYear: number) {
     let yDataSet: number[] = [];
     let xValues: string[] = [];
-    return this.farmingLandStatisticsService.profitabilityPerYearAndOperationForFarmingLand(createdBy, startYear, endYear, <number>this.field?.id)
-      .pipe(
-        map((response: FarmingLandStatisticsProfitabilityPerOperationAndYearResponse[]) => {
-          response.forEach(data => {
-            xValues.push(data.operation);
-            yDataSet.push(data.revenue);
-          });
-          return {xValues, yDataSet}
-        })
-      );
-  }
-
-  private buildChartForRevenuePerOperationForCertainIntervalOfYears(createdBy: string, startYear: number, endYear: number) {
-    let yDataSet: number[] = [];
-    let xValues: string[] = [];
-    this.farmingLandStatisticsService.profitabilityPerYearAndOperationForFarmingLand(createdBy, startYear, endYear, <number>this.field?.id)
+    this.farmingLandStatisticsService.profitabilityPerYearAndOperationForFarmingLand(startYear, endYear, <number>this.field?.id)
       .subscribe((response: FarmingLandStatisticsProfitabilityPerOperationAndYearResponse[]) => {
         response.forEach(data => {
           xValues.push(data.operation);
@@ -463,11 +426,11 @@ export class FieldPageComponent implements OnInit, OnDestroy {
       });
   }
 
-  private buildChartForProfitabilityForCertainIntervalOfYears(createdBy: string, startYear: number, endYear: number) {
+  private buildChartForProfitabilityForCertainIntervalOfYears(startYear: number, endYear: number) {
     let xDataSet: number[] = [];
     let yDataSet: number[] = [];
     let xValues: number[] = [];
-    this.farmingLandStatisticsService.profitabilityPerYearForFarmingLand(createdBy, startYear, endYear, <number>this.field?.id)
+    this.farmingLandStatisticsService.profitabilityPerYearForFarmingLand(startYear, endYear, <number>this.field?.id)
       .subscribe((response: FarmingLandStatisticsProfitabilityPerYearResponse[]) => {
         response.forEach(data => {
           xValues.push(data.year);
@@ -479,29 +442,6 @@ export class FieldPageComponent implements OnInit, OnDestroy {
         }
         this.lineChart = this.buildLineChart(xValues, xDataSet, yDataSet);
       });
-  }
-
-  private getValuesForChartForProfitabilityForCertainIntervalOfYears(createdBy: string, startYear: number, endYear: number): Observable<{
-    xValues: number[],
-    xDataSet: number[],
-    yDataSet: number[]
-  }> {
-    return this.farmingLandStatisticsService.profitabilityPerYearForFarmingLand(createdBy, startYear, endYear, <number>this.field?.id)
-      .pipe(
-        map((response: FarmingLandStatisticsProfitabilityPerYearResponse[]) => {
-          const xValues: number[] = [];
-          const xDataSet: number[] = [];
-          const yDataSet: number[] = [];
-
-          response.forEach(data => {
-            xValues.push(data.year);
-            xDataSet.push(data.revenue);
-            yDataSet.push(data.cost);
-          });
-
-          return {xValues, xDataSet, yDataSet};
-        })
-      );
   }
 
   buildLineChart(xValues: number[], xDataSet: number[], yDataSet: number[]) {

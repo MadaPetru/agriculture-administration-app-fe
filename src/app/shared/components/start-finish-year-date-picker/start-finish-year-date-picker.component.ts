@@ -19,7 +19,6 @@ export class StartFinishYearDatePickerComponent {
   endYear = new Date().getFullYear();
 
   emitYearsInterval() {
-    console.log(this.startYear);
     this.yearsInterval.emit({startYear: this.startYear, endYear: this.endYear});
   }
 }

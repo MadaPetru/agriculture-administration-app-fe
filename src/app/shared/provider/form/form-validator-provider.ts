@@ -23,7 +23,6 @@ export class FormValidatorProvider {
       title: value.title,
       area: value.area,
       roughlyDistanceFromFarm: value.distanceFromFarm,
-      createdBy: 'adi',
       areaUnitType: value.areaUnitType,
       roughlyDistanceFromFarmUnitType: value.roughlyDistanceFromFarmUnitType
     };
@@ -34,7 +33,6 @@ export class FormValidatorProvider {
       operation: value.operation,
       estimatedCost: value.estimatedCost,
       estimatedHarvest: value.estimatedHarvest,
-      createdBy: 'adi',
       plantType: value.typeOfPlant,
       estimatedRevenueCurrencyType: value.estimatedRevenueCurrencyType,
       estimatedRevenue: value.estimatedRevenue,

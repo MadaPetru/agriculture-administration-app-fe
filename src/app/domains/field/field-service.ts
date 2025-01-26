@@ -26,7 +26,7 @@ export class FieldService {
   SAVE_FIELD_URL = environment.apiUrl + '/v1/farming-lands';
   UPDATE_FIELD_URL = environment.apiUrl + '/v1/farming-lands';
   FIND_FIELD_BY_TITLE_URL = environment.apiUrl + '/v1/farming-lands/title/{title}';
-  DELETE_FIELD_BY_ID_URL = environment.apiUrl + '/v1/farming-lands/issuer/{issuer}/id/{id}';
+  DELETE_FIELD_BY_ID_URL = environment.apiUrl + '/v1/farming-lands/id/{id}';
   UPLOAD_IMAGE_FIELD_URL = environment.apiUrl + '/v1/farming-lands/{id}/files';
   LIST_IMAGES_FIELD_URL = environment.apiUrl + '/v1/farming-lands/{id}/files/list';
   DELETE_IMAGE_FIELD_URL = environment.apiUrl + '/v1/farming-lands/files/{id}';
@@ -52,9 +52,8 @@ export class FieldService {
     return this.http.put<void>(this.UPDATE_FIELD_URL, request);
   }
 
-  deleteField(issuer: any, identifier: any): Observable<void> {
-    let url = this.DELETE_FIELD_BY_ID_URL.replace("{id}", identifier)
-      .replace("{issuer}", issuer);
+  deleteField(identifier: any): Observable<void> {
+    let url = this.DELETE_FIELD_BY_ID_URL.replace("{id}", identifier);
     return this.http.delete<void>(url);
   }
 

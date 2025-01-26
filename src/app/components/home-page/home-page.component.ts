@@ -39,10 +39,11 @@ export class HomePageComponent implements OnInit {
   menuValues: MenuValue[] = MenuDataHomePageProvider.getMenuGroups();
 
   ngOnInit(): void {
+    let actualYear = new Date().getFullYear();
     this.initNumberOfHaFieldsAdministrated();
-    this.buildChartForProfitabilityForCeratinIntervalOfYears('adi', 2024, 2024);
-    this.buildChartForCostPerOperationForCertainIntervalOfYears('adi', 2024, 2024);
-    this.buildChartForRevenuePerOperationForCertainIntervalOfYears('adi', 2024, 2024);
+    this.buildChartForProfitabilityForCertainIntervalOfYears(actualYear, actualYear);
+    this.buildChartForCostPerOperationForCertainIntervalOfYears(actualYear, actualYear);
+    this.buildChartForRevenuePerOperationForCertainIntervalOfYears(actualYear, actualYear);
   }
 
   initNumberOfHaFieldsAdministrated() {
@@ -55,27 +56,27 @@ export class HomePageComponent implements OnInit {
     if (this.barChartForRevenuePerOperationForCertainYears != null) {
       this.barChartForRevenuePerOperationForCertainYears.destroy();
     }
-    this.buildChartForRevenuePerOperationForCertainIntervalOfYears('adi', yearsIntervalEvent.startYear, yearsIntervalEvent.endYear)
+    this.buildChartForRevenuePerOperationForCertainIntervalOfYears(yearsIntervalEvent.startYear, yearsIntervalEvent.endYear)
   }
 
   onYearsIntervalChangedForProfitability(yearsIntervalEvent: { startYear: number, endYear: number }) {
     if (this.lineChart != null) {
       this.lineChart.destroy();
     }
-    this.buildChartForProfitabilityForCeratinIntervalOfYears('adi', yearsIntervalEvent.startYear, yearsIntervalEvent.endYear)
+    this.buildChartForProfitabilityForCertainIntervalOfYears(yearsIntervalEvent.startYear, yearsIntervalEvent.endYear)
   }
 
   onYearsIntervalChangedForCosts(yearsIntervalEvent: { startYear: number, endYear: number }) {
     if (this.barChartForCostPerOperationForCertainYears != null) {
       this.barChartForCostPerOperationForCertainYears.destroy();
     }
-    this.buildChartForCostPerOperationForCertainIntervalOfYears('adi', yearsIntervalEvent.startYear, yearsIntervalEvent.endYear)
+    this.buildChartForCostPerOperationForCertainIntervalOfYears(yearsIntervalEvent.startYear, yearsIntervalEvent.endYear)
   }
 
-  private buildChartForCostPerOperationForCertainIntervalOfYears(createdBy: string, startYear: number, endYear: number) {
+  private buildChartForCostPerOperationForCertainIntervalOfYears(startYear: number, endYear: number) {
     let yDataSet: number[] = [];
     let xValues: string[] = [];
-    this.farmingLandStatisticsService.profitabilityPerYearAndOperation(createdBy, startYear, endYear)
+    this.farmingLandStatisticsService.profitabilityPerYearAndOperation(startYear, endYear)
       .subscribe((response: FarmingLandStatisticsProfitabilityPerOperationAndYearResponse[]) => {
         response.forEach(data => {
           xValues.push(data.operation);
@@ -85,10 +86,10 @@ export class HomePageComponent implements OnInit {
       });
   }
 
-  private buildChartForRevenuePerOperationForCertainIntervalOfYears(createdBy: string, startYear: number, endYear: number) {
+  private buildChartForRevenuePerOperationForCertainIntervalOfYears(startYear: number, endYear: number) {
     let yDataSet: number[] = [];
     let xValues: string[] = [];
-    this.farmingLandStatisticsService.profitabilityPerYearAndOperation(createdBy, startYear, endYear)
+    this.farmingLandStatisticsService.profitabilityPerYearAndOperation(startYear, endYear)
       .subscribe((response: FarmingLandStatisticsProfitabilityPerOperationAndYearResponse[]) => {
         response.forEach(data => {
           xValues.push(data.operation);
@@ -98,11 +99,11 @@ export class HomePageComponent implements OnInit {
       });
   }
 
-  private buildChartForProfitabilityForCeratinIntervalOfYears(createdBy: string, startYear: number, endYear: number) {
+  private buildChartForProfitabilityForCertainIntervalOfYears(startYear: number, endYear: number) {
     let xDataSet: number[] = [];
     let yDataSet: number[] = [];
     let xValues: number[] = [];
-    this.farmingLandStatisticsService.profitabilityPerYear(createdBy, startYear, endYear)
+    this.farmingLandStatisticsService.profitabilityPerYear(startYear, endYear)
       .subscribe((response: FarmingLandStatisticsProfitabilityPerYearResponse[]) => {
         response.forEach(data => {
           xValues.push(data.year);
@@ -117,7 +118,7 @@ export class HomePageComponent implements OnInit {
   }
 
   buildLineChart(xValues: number[], xDataSet: number[], yDataSet: number[]) {
-    return new Chart("all-costs-vs-all-revenue", {
+    return new Chart("all-costs-vs-all-revenue-home-page", {
       type: "line",
       data: {
         labels: xValues,
@@ -137,7 +138,7 @@ export class HomePageComponent implements OnInit {
   }
 
   buildBarChartForRevenue(xValues: string[], yDataSet: number[]) {
-    return new Chart('operation-type-revenues', {
+    return new Chart('operation-type-revenues-home-page', {
       type: "bar",
       data: {
         labels: xValues,
@@ -151,7 +152,7 @@ export class HomePageComponent implements OnInit {
   }
 
   buildBarChartForCost(xValues: string[], yDataSet: number[]) {
-    return new Chart('operation-type-costs', {
+    return new Chart('operation-type-costs-home-page', {
       type: "bar",
       data: {
         labels: xValues,

@@ -8,7 +8,6 @@ export interface CreateFieldOperationHistory {
   estimatedRevenue: number,
   estimatedRevenueCurrencyType: string,
   plantType: string,
-  createdBy: string,
   appliedAt: string
 }
 
@@ -24,7 +23,6 @@ export function isCreateFieldOperationHistory(obj: any): obj is CreateFieldOpera
     typeof obj.estimatedRevenue === 'number' &&
     typeof obj.estimatedRevenueCurrencyType === 'string' &&
     typeof obj.plantType === 'string' &&
-    typeof obj.createdBy === 'string' &&
     typeof obj.appliedAt === 'string'
   );
 }

@@ -10,6 +10,5 @@ export interface UpdateFieldOperationHistory {
   estimatedRevenue: number,
   estimatedRevenueCurrencyType: string,
   plantType: string,
-  createdBy: string,
   appliedAt: string
 }

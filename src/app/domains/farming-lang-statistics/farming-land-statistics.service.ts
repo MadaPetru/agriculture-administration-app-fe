@@ -14,7 +14,7 @@ import {environment} from "../../../environments/environment";
 })
 export class FarmingLandStatisticsService {
 
-  HA_FARMING_LANDS_ADMINISTRATED = environment.apiUrl + '/v1/farming-lands/statistics/farming-lands/ha/administrated/{username}';
+  HA_FARMING_LANDS_ADMINISTRATED = environment.apiUrl + '/v1/farming-lands/statistics/farming-lands/ha/administrated';
   PROFITABILITY_PER_YEAR_URL = environment.apiUrl + '/v1/farming-lands/statistics/profitability/from/year/{startYear}/to/year/{endYear}';
   PROFITABILITY_PER_OPERATION_AND_YEAR_URL = environment.apiUrl + '/v1/farming-lands/statistics/operations/types/profitability/from/year/{startYear}/to/year/{endYear}';
   PROFITABILITY_PER_YEAR_URL_FOR_FARMING_LAND = environment.apiUrl + '/v1/farming-lands/statistics/farming-land/{farmingLandId}/profitability/from/year/{startYear}/to/year/{endYear}';
@@ -25,32 +25,26 @@ export class FarmingLandStatisticsService {
   }
 
   haAdministrated(): Observable<number> {
-    let createdBy = 'adi';
-    let url = this.HA_FARMING_LANDS_ADMINISTRATED.replace("{username}", createdBy);
-    return this.http.get<number>(url);
+    return this.http.get<number>(this.HA_FARMING_LANDS_ADMINISTRATED);
   }
 
-  profitabilityPerYear(createdBy: string, startYear: number, endYear: number): Observable<FarmingLandStatisticsProfitabilityPerYearResponse[]> {
-    let request = {createdBy: createdBy};
+  profitabilityPerYear(startYear: number, endYear: number): Observable<FarmingLandStatisticsProfitabilityPerYearResponse[]> {
     let url = this.PROFITABILITY_PER_YEAR_URL.replace("{startYear}", String(startYear)).replace("{endYear}", String(endYear));
-    return this.http.post<FarmingLandStatisticsProfitabilityPerYearResponse[]>(url, request);
+    return this.http.get<FarmingLandStatisticsProfitabilityPerYearResponse[]>(url);
   }
 
-  profitabilityPerYearAndOperation(createdBy: string, startYear: number, endYear: number): Observable<FarmingLandStatisticsProfitabilityPerOperationAndYearResponse[]> {
-    let request = {createdBy: createdBy};
+  profitabilityPerYearAndOperation(startYear: number, endYear: number): Observable<FarmingLandStatisticsProfitabilityPerOperationAndYearResponse[]> {
     let url = this.PROFITABILITY_PER_OPERATION_AND_YEAR_URL.replace("{startYear}", String(startYear)).replace("{endYear}", String(endYear));
-    return this.http.post<FarmingLandStatisticsProfitabilityPerOperationAndYearResponse[]>(url, request);
+    return this.http.get<FarmingLandStatisticsProfitabilityPerOperationAndYearResponse[]>(url);
   }
 
-  profitabilityPerYearForFarmingLand(createdBy: string, startYear: number, endYear: number, farmingLandId: number): Observable<FarmingLandStatisticsProfitabilityPerYearResponse[]> {
-    let request = {createdBy: createdBy};
+  profitabilityPerYearForFarmingLand(startYear: number, endYear: number, farmingLandId: number): Observable<FarmingLandStatisticsProfitabilityPerYearResponse[]> {
     let url = this.PROFITABILITY_PER_YEAR_URL_FOR_FARMING_LAND.replace("{startYear}", String(startYear)).replace("{endYear}", String(endYear)).replace("{farmingLandId}", String(farmingLandId));
-    return this.http.post<FarmingLandStatisticsProfitabilityPerYearResponse[]>(url, request);
+    return this.http.get<FarmingLandStatisticsProfitabilityPerYearResponse[]>(url);
   }
 
-  profitabilityPerYearAndOperationForFarmingLand(createdBy: string, startYear: number, endYear: number, farmingLandId: number): Observable<FarmingLandStatisticsProfitabilityPerOperationAndYearResponse[]> {
-    let request = {createdBy: createdBy};
+  profitabilityPerYearAndOperationForFarmingLand(startYear: number, endYear: number, farmingLandId: number): Observable<FarmingLandStatisticsProfitabilityPerOperationAndYearResponse[]> {
     let url = this.PROFITABILITY_PER_OPERATION_AND_YEAR_URL_FOR_FARMING_LAND.replace("{startYear}", String(startYear)).replace("{endYear}", String(endYear)).replace("{farmingLandId}", String(farmingLandId));
-    return this.http.post<FarmingLandStatisticsProfitabilityPerOperationAndYearResponse[]>(url, request);
+    return this.http.get<FarmingLandStatisticsProfitabilityPerOperationAndYearResponse[]>(url);
   }
 }

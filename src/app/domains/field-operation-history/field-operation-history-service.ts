@@ -21,7 +21,7 @@ export class FieldOperationHistoryService {
   SEARCH_FIELD_OPERATION_HISTORY_URL = environment.apiUrl + '/v1/farming-lands/operation-histories/search';
   SAVE_FIELD_OPERATION_HISTORY_URL = environment.apiUrl + '/v1/farming-lands/operation-histories';
   UPDATE_FIELD_OPERATION_HISTORY_URL = environment.apiUrl + '/v1/farming-lands/operation-histories';
-  DELETE_FIELD_OPERATION_HISTORY_BY_ID_AND_ISSUER_URL = environment.apiUrl + '/v1/farming-lands/operation-histories/issuer/{issuer}/id/{id}';
+  DELETE_FIELD_OPERATION_HISTORY_BY_ID_AND_ISSUER_URL = environment.apiUrl + '/v1/farming-lands/operation-histories/id/{id}';
 
   constructor(
     private http: HttpClient) {
@@ -39,10 +39,9 @@ export class FieldOperationHistoryService {
     return this.http.put<void>(this.UPDATE_FIELD_OPERATION_HISTORY_URL, request);
   }
 
-  deleteFieldOperationHistory(issuer: any, identifier: any): Observable<void> {
+  deleteFieldOperationHistory(identifier: any): Observable<void> {
     let url = this.DELETE_FIELD_OPERATION_HISTORY_BY_ID_AND_ISSUER_URL
-      .replace("{id}", identifier)
-      .replace("{issuer}", issuer);
+      .replace("{id}", identifier);
     return this.http.delete<void>(url);
   }
 }

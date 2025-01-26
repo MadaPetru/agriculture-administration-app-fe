@@ -87,7 +87,7 @@ export class FieldsPageComponent implements OnInit, OnDestroy {
         next: (model: any) => {
           if (!model.identifier) return;
           if (model.entity === EntitySelector.FIELD.valueOf()) {
-            this.deleteField('adi', model.identifier).subscribe(() => {
+            this.deleteField(model.identifier).subscribe(() => {
               this.searchFields(this.searchFieldsRequest);
             });
           }
@@ -183,8 +183,8 @@ export class FieldsPageComponent implements OnInit, OnDestroy {
     return this.fieldsPageService.updateField(request);
   }
 
-  private deleteField(issuer: any, identifier: any) {
-    return this.fieldsPageService.deleteField(issuer, identifier);
+  private deleteField(identifier: any) {
+    return this.fieldsPageService.deleteField(identifier);
   }
 
   private searchFields(request: SearchFieldsRequest) {

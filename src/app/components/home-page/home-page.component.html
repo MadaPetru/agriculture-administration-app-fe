@@ -11,7 +11,7 @@
   <div class="dashboard-container">
     <div class="stats-section">
       <div class="chart-card">
-        <canvas id="all-costs-vs-all-revenue"> {{ lineChart }}</canvas>
+        <canvas id="all-costs-vs-all-revenue-home-page"> {{ lineChart }}</canvas>
         <div class="year-picker">
           <start-finish-year-date-picker
             (outputYearsInterval)="onYearsIntervalChangedForProfitability($event)">
@@ -19,7 +19,7 @@
         </div>
       </div>
       <div class="chart-card">
-        <canvas id="operation-type-costs"> {{ barChartForCostPerOperationForCertainYears }}</canvas>
+        <canvas id="operation-type-costs-home-page"> {{ barChartForCostPerOperationForCertainYears }}</canvas>
         <div class="year-picker">
           <start-finish-year-date-picker
             (outputYearsInterval)="onYearsIntervalChangedForCosts($event)">
@@ -27,7 +27,7 @@
         </div>
       </div>
       <div class="chart-card">
-        <canvas id="operation-type-revenues"> {{ barChartForRevenuePerOperationForCertainYears }}</canvas>
+        <canvas id="operation-type-revenues-home-page"> {{ barChartForRevenuePerOperationForCertainYears }}</canvas>
         <div class="year-picker">
           <start-finish-year-date-picker
             (outputYearsInterval)="onYearsIntervalChangedForRevenues($event)">
