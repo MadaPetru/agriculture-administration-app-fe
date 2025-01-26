@@ -127,11 +127,11 @@ export class FieldPageComponent implements OnInit, OnDestroy {
     endDate: new Date().toISOString(),
     pageable: {
       page: 0,
-      size: 5
+      size: 3
     }
   };
   currentPageFieldImages: number = 0;
-  itemsPerPageForFieldImages: number = 10;
+  itemsPerPageForFieldImages: number = 3;
   totalFieldImages: number = 0;
   totalPagesFieldImages: number = 0;
 
