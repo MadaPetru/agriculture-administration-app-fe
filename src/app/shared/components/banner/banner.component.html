@@ -1,0 +1,7 @@
+<div [ngClass]="type === 'error' ? 'error-banner' : 'info-banner'" class="alert-banner">
+  <span class="alert-icon">
+    <i *ngIf="type === 'error'" class="fa fa-times-circle"></i>
+    <i *ngIf="type === 'info'" class="fa fa-info-circle"></i>
+  </span>
+  <span class="alert-message">{{ message }}</span>
+</div>

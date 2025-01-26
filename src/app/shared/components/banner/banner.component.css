@@ -1,0 +1,65 @@
+.alert-banner {
+  position: fixed; /* Ensure it stays at the top */
+  top: 10px; /* Spacing from the top of the viewport */
+  left: 50%; /* Center it horizontally */
+  transform: translateX(-50%); /* Adjust for centering */
+  z-index: 1000; /* Ensure it's above all other elements */
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10px 20px; /* Adjust padding for better readability */
+  border-radius: 8px;
+  font-family: 'Arial', sans-serif;
+  font-size: 16px; /* Base font size */
+  max-width: 90%; /* Ensure it doesn’t overflow on small screens */
+  width: auto; /* Adjust width dynamically */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.info-banner {
+  background-color: #e8f4ff;
+  color: #1d72b8;
+  border: 1px solid #1d72b8;
+}
+
+.error-banner {
+  background-color: #ffe8e8;
+  color: #d32f2f;
+  border: 1px solid #d32f2f;
+}
+
+.alert-icon {
+  margin-right: 10px;
+  font-size: 18px;
+}
+
+.alert-message {
+  flex: 1;
+  font-weight: 500;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .alert-banner {
+    font-size: 14px; /* Reduce font size for smaller screens */
+    padding: 8px 15px; /* Adjust padding */
+  }
+
+  .alert-icon {
+    font-size: 16px; /* Adjust icon size */
+    margin-right: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .alert-banner {
+    font-size: 12px; /* Further reduce font size for very small screens */
+    padding: 6px 10px; /* Tighten padding */
+    max-width: 95%; /* Allow slightly more space for content */
+  }
+
+  .alert-icon {
+    font-size: 14px; /* Adjust icon size for very small screens */
+    margin-right: 5px;
+  }
+}
