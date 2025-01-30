@@ -1,16 +1,23 @@
-<div [ngClass]="{ 'main-container': allowedCardToRotateOnHover, 'main-container-without-hover': !allowedCardToRotateOnHover }">
+<div
+  [ngClass]="{ 'main-container': allowedCardToRotateOnHover, 'main-container-without-hover': !allowedCardToRotateOnHover }">
   <div class="back" *ngIf="allowedCardToRotateOnHover">
     <h2>{{ title }}</h2>
   </div>
   <div class="front">
-    <div class="delete-button" *ngIf="deleteButtonVisible" (click)="deleteField()">
+    <div class="delete-button" *ngIf="deleteButtonVisible" (click)="delete()">
       <i class="fa fa-remove"></i>
     </div>
-    <div class="edit-button" *ngIf="deleteButtonVisible" (click)="editField()">
+    <div class="edit-button" *ngIf="deleteButtonVisible" (click)="edit()">
       <i class="fa fa-edit"></i>
     </div>
+    <div class="reset-button" *ngIf="resetButton" (click)="reset()">
+      <i class="fa fa-refresh"></i>
+    </div>
     <div class="container-stats-front" (click)="onClickFrontCard()">
-      <h2>{{ title }}</h2>
+      <h2 *ngIf="!isUserCard">{{ title }}</h2>
+      <h2 *ngIf="isUserCard">
+        <i class="fa fa-user-o user-icon"></i>
+      </h2>
       <div class="stats-front">
         <div *ngFor="let stat of stats">
           {{ stat }}

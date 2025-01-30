@@ -20,6 +20,14 @@
   color: black; /* Optional: Change color to indicate delete action */
 }
 
+.reset-button {
+  position: relative;
+  float: right;
+  margin-right: 10px;
+  cursor: pointer; /* Change cursor to indicate clickability */
+  color: black; /* Optional: Change color to indicate delete action */
+}
+
 
 .main-container {
   width: 280px;
@@ -51,6 +59,11 @@ img {
   border-radius: 10%;
   background-color: white;
 }
+
+.user-icon{
+  float: right;
+  margin-right: 25%;
+  }
 
 .container-stats-front {
   text-align: center;
@@ -130,6 +143,15 @@ img {
   }
 
   .edit-button {
+    font-size: 10px;
+    position: relative;
+    float: right;
+    margin-right: 2px;
+    cursor: pointer; /* Change cursor to indicate clickability */
+    color: black; /* Optional: Change color to indicate delete action */
+  }
+
+  .reset-button {
     font-size: 10px;
     position: relative;
     float: right;

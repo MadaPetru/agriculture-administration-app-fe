@@ -17,12 +17,12 @@ import {CreateFieldRequest} from "../../domains/field/dto/request/create-field-r
 import {CardSharedService} from "../../shared/components/card/card-shared-service";
 import {MatDialog} from "@angular/material/dialog";
 import {
-  DeleteConfirmationModalComponent
-} from "../../shared/components/delete-confirmation-modal/delete-confirmation-modal.component";
+  ConfirmationModalComponent
+} from "../../shared/components/delete-confirmation-modal/confirmation-modal.component";
 import {Subject, takeUntil} from "rxjs";
 import {
-  DeleteConfirmationModalSharedService
-} from "../../shared/components/delete-confirmation-modal/delete-confirmation-modal-shared-service";
+  ConfirmationModalSharedService
+} from "../../shared/components/delete-confirmation-modal/confirmation-modal-shared.service";
 import {FieldService} from "../../domains/field/field-service";
 import {FormAttributeProvider} from "../../shared/provider/form/form-attribute-provider";
 import {UpdateFieldRequest} from "../../domains/field/dto/request/update-field-request";
@@ -30,6 +30,7 @@ import {EntitySelector} from "../../shared/entity-selector";
 import {NavbarSearchSharedService} from "../../shared/components/navbar-search/navbar-search-shared.service";
 import {MenuValue} from "../../shared/model/menu/menu-value";
 import {FormModel} from "../../shared/model/form/form-model";
+import {ConfirmationModalSelector} from "../../shared/confirmation-modal-selector";
 
 @Component({
   selector: 'app-fields-page',
@@ -71,7 +72,7 @@ export class FieldsPageComponent implements OnInit, OnDestroy {
 
   constructor(private fieldsPageService: FieldService, private menuDataFieldPageProvider: MenuDataFieldPageProvider,
               private formSharedService: FormSharedService, private cardSharedService: CardSharedService, private dialog: MatDialog,
-              private confirmationModalSharedService: DeleteConfirmationModalSharedService, private navbarSearchSharedService: NavbarSearchSharedService) {
+              private confirmationModalSharedService: ConfirmationModalSharedService, private navbarSearchSharedService: NavbarSearchSharedService) {
   }
 
   onPaginationChanged(pageEvent: PageEvent) {
@@ -102,11 +103,12 @@ export class FieldsPageComponent implements OnInit, OnDestroy {
     this.cardSharedService.currentDeletionDetails.pipe(takeUntil(this.unsubscribe))
       .subscribe(deletionDetails => {
         if (deletionDetails === '') return;
-        this.dialog.open(DeleteConfirmationModalComponent, {
+        this.dialog.open(ConfirmationModalComponent, {
           data: {
             identifier: deletionDetails.identifier,
             valueToDisplayForModal: deletionDetails.title,
-            entity: EntitySelector.FIELD
+            entity: EntitySelector.FIELD,
+            modalType: ConfirmationModalSelector.DELETION
           }
         });
       });

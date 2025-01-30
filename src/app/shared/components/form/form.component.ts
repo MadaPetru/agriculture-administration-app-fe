@@ -29,7 +29,7 @@ export class FormComponent implements OnInit {
   useForEdit: boolean = false;
   imageSelected?: File;
 
-  constructor(private formBuilder: FormBuilder, private fieldsSharedService: FormSharedService,
+  constructor(private formBuilder: FormBuilder, private formSharedService: FormSharedService,
               private matDialogRef: MatDialogRef<FormComponent>,
               @Inject(MAT_DIALOG_DATA) public data: {
                 title: string, type: EntitySelector, value: any, edit: boolean
@@ -60,9 +60,9 @@ export class FormComponent implements OnInit {
       let formValueField = FormValidatorProvider.getFormValue(value, this.type);
       let formModel = {object: formValueField, entity: this.type};
       if (this.useForEdit) {
-        this.fieldsSharedService.updateFormValueForEdit(formModel);
+        this.formSharedService.updateFormValueForEdit(formModel);
       } else {
-        this.fieldsSharedService.updateFormValue(formModel);
+        this.formSharedService.updateFormValue(formModel);
       }
       this.matDialogRef.close();
     }

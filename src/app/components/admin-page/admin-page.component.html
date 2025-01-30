@@ -1,0 +1,27 @@
+<app-navbar-search [inputSearchIsVisible]="true"></app-navbar-search>
+<app-menu [inputMenuGroups]="menuValues"></app-menu>
+<app-banner
+  *ngIf="resetPasswordSuccessful"
+  [inputType]="'info'"
+  [inputMessage]="'Password reset successfully!'">
+</app-banner>
+<div class="margin-left-component margin-top-70px">
+  <div class="cards">
+    <div *ngFor="let card of cards" class="card">
+      <app-field-card
+        [inputStats]="card.stats"
+        [inputData]="card.data"
+        [inputTitle]="card.title"
+        [inputIdentifier]="card.identifier"
+        [inputResetButton]="true"
+        [inputUserCard]="true"
+        [inputDeleteButtonVisible]="true"
+        [inputEditButtonVisible]="true"
+      >
+      </app-field-card>
+    </div>
+  </div>
+  <div class="align-center-with-flexbox-container margin-left-paginator">
+    <app-paginator [inputLength]="totalNumberOfCards" (outputPageEvent)="onPaginationChanged($event)"></app-paginator>
+  </div>
+</div>

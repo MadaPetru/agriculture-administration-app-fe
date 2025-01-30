@@ -16,21 +16,28 @@ export class CardComponent {
   @Input({alias: 'inputStats'}) stats: string[] = new Array<string>();
   @Input({alias: 'inputData'}) data: any;
   @Input({alias: 'inputAllowedCardToRotateOnHover'}) allowedCardToRotateOnHover: boolean = false;
+  @Input({alias: 'inputEditButtonVisible'}) editButtonVisible: boolean = true;
   @Input({alias: 'inputDeleteButtonVisible'}) deleteButtonVisible: boolean = false;
+  @Input({alias: 'inputResetButton'}) resetButton: boolean = false;
+  @Input({alias: 'inputUserCard'}) isUserCard: boolean = false;
   @Input({alias: 'inputRouteLinkOnClickFrontCard'}) routeLinkOnClickFrontCard: Array<string> = new Array<string>();
 
   constructor(private router: Router, private cardService: CardSharedService) {
   }
 
-  deleteField() {
+  delete() {
     this.cardService.updateDeletionDetails({
       identifier: this.identifier,
       title: this.title
     });
   }
 
-  editField() {
+  edit() {
     this.cardService.updateEditDetails(this.data);
+  }
+
+  reset() {
+    this.cardService.updateResetDetails(this.data);
   }
 
   onClickFrontCard() {

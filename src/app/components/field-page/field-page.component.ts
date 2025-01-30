@@ -29,8 +29,8 @@ import {
 } from "../../domains/field-operation-history/dto/response/field-operation-history-paginated-response";
 import {TableOperationHistory} from "../../shared/model/table/operations-history/table-operation-history";
 import {
-  DeleteConfirmationModalSharedService
-} from "../../shared/components/delete-confirmation-modal/delete-confirmation-modal-shared-service";
+  ConfirmationModalSharedService
+} from "../../shared/components/delete-confirmation-modal/confirmation-modal-shared.service";
 import {
   SearchByFieldOperationHistoryRequest
 } from "../../domains/field-operation-history/dto/request/search-by-field-operation-history-request";
@@ -70,10 +70,11 @@ import {ListFieldImageRequest} from "../../domains/field/dto/request/list-field-
 import {ListFieldImageResponse} from "../../domains/field/dto/response/list-field-image-response";
 import {GallerySharedService} from "../../shared/components/gallery/gallery-shared.service";
 import {
-  DeleteConfirmationModalComponent
-} from "../../shared/components/delete-confirmation-modal/delete-confirmation-modal.component";
+  ConfirmationModalComponent
+} from "../../shared/components/delete-confirmation-modal/confirmation-modal.component";
 import {FormModel} from "../../shared/model/form/form-model";
 import {ListFieldImagePaginatedResponse} from "../../domains/field/dto/response/list-field-image-paginated-response";
+import {ConfirmationModalSelector} from "../../shared/confirmation-modal-selector";
 
 
 @Component({
@@ -138,7 +139,7 @@ export class FieldPageComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute, private fieldService: FieldService, private router: Router, private fieldOperationHistoryService: FieldOperationHistoryService,
     private menuDataFieldPageProvider: MenuDataFieldPageProvider, private dialog: MatDialog, private formSharedService: FormSharedService,
-    private confirmationModalSharedService: DeleteConfirmationModalSharedService, private farmingLandStatisticsService: FarmingLandStatisticsService,
+    private confirmationModalSharedService: ConfirmationModalSharedService, private farmingLandStatisticsService: FarmingLandStatisticsService,
     private gallerySharedService: GallerySharedService
   ) {
   }
@@ -204,11 +205,12 @@ export class FieldPageComponent implements OnInit, OnDestroy {
     this.gallerySharedService.currentDeletionDetails.pipe(takeUntil(this.unsubscribe))
       .subscribe(deletionDetails => {
         if (deletionDetails === '') return;
-        this.dialog.open(DeleteConfirmationModalComponent, {
+        this.dialog.open(ConfirmationModalComponent, {
           data: {
             identifier: deletionDetails.id,
             valueToDisplayForModal: deletionDetails.fileName,
-            entity: EntitySelector.IMAGE_FIELD_OPERATION
+            entity: EntitySelector.IMAGE_FIELD_OPERATION,
+            modalType: ConfirmationModalSelector.DELETION
           }
         });
       });

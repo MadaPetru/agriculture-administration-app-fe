@@ -37,8 +37,13 @@ export class LoginPageComponent {
     };
     this.userService.login(request).subscribe({
       next: (response: UserLoginResponse) => {
+        AuthenticationUtils.initRoles(response.roles);
         AuthenticationUtils.initUsername(request.email);
         AuthenticationUtils.initAuthentication(response.token, response.expiresIn);
+        if(AuthenticationUtils.isAdmin()){
+          this.router.navigate(['/admin']);
+          return;
+        }
         this.router.navigate(['/home']);
       },
       error: () => {

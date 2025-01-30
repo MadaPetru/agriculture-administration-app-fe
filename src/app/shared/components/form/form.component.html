@@ -5,7 +5,7 @@
 
       <div class="form-group" *ngFor="let attribute of attributes ">
         <div *ngIf="!attribute.parentInputIdNeeded || (userForm?.get(''+attribute.parentInputIdNeeded)?.valid)">
-          <div *ngIf="attribute.inputType!='select' && attribute.inputType!='file'">
+          <div *ngIf="attribute.inputType!='select' && attribute.inputType!='file' && attribute.inputType!='select multiple'">
             <label for="{{attribute.labelForValue}}">{{ attribute.value }}</label>
             <input *ngIf="attribute.inputType === 'date'" type="{{attribute.inputType}}" class="form-control"
                    id="{{attribute.inputId}}"
@@ -24,6 +24,14 @@
           <div *ngIf="attribute.inputType==='select'">
             <label for="{{attribute.labelForValue}}">{{ attribute.value }}</label>
             <select class="form-control" id="{{attribute.inputId}}" formControlName="{{attribute.formControlName}}">
+              <option *ngFor="let option of attribute.options" value="{{option}}">
+                {{ option }}
+              </option>
+            </select>
+          </div>
+          <div *ngIf="attribute.inputType==='select multiple'">
+            <label for="{{attribute.labelForValue}}">{{ attribute.value }}</label>
+            <select class="form-control" id="{{attribute.inputId}}" formControlName="{{attribute.formControlName}}" multiple>
               <option *ngFor="let option of attribute.options" value="{{option}}">
                 {{ option }}
               </option>

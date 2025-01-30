@@ -13,7 +13,8 @@ export class FormValidatorProvider {
 
   public static getUserEditFormValidatorFields(type: EntitySelector, data: any) {
     if (type === EntitySelector.FIELD_OPERATION) return this.getUserFormValidatorFieldsOperationEditForm(data);
-    return this.getUserFormValidatorFieldForm(data);
+    if (type === EntitySelector.FIELD) return this.getUserFormValidatorFieldForm(data);
+    return this.getUserFormValidatorUserEditForm(data);
   }
 
   public static getFormValue(value: any, type: EntitySelector) {
@@ -44,6 +45,12 @@ export class FormValidatorProvider {
       at: value.at,
       content: value.image.content,
       fileName: value.image.fileName
+    };
+    if (type === EntitySelector.USER) return {
+      id: value.id,
+      version: value.version,
+      email: value.email,
+      roles: value.roles
     };
     return {}
   }
@@ -107,6 +114,15 @@ export class FormValidatorProvider {
       distanceFromFarm: ['', Validators.required],
       roughlyDistanceFromFarmUnitType: ['KM'],
       areaUnitType: ['AR']
+    }
+  }
+
+  private static getUserFormValidatorUserEditForm(value: any) {
+    return {
+      email: [value.email, Validators.required],
+      roles: [value.roles, Validators.required],
+      id: [value.id],
+      version: [value.version]
     }
   }
 }

@@ -5,6 +5,8 @@ import {Subject} from "rxjs";
 export class CardSharedService {
   deletionDetails: Subject<any> = new Subject<any>();
   editDetails: Subject<any> = new Subject<any>();
+  resetDetails: Subject<any> = new Subject<any>();
+  currentResetDetails = this.resetDetails.asObservable();
   currentDeletionDetails = this.deletionDetails.asObservable();
   currentEditDetails = this.editDetails.asObservable();
 
@@ -14,5 +16,9 @@ export class CardSharedService {
 
   updateEditDetails(data: any) {
     this.editDetails.next(data);
+  }
+
+  updateResetDetails(data: any) {
+    this.resetDetails.next(data);
   }
 }

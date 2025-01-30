@@ -1,4 +1,4 @@
-<nav class="sidebar" [ngClass]="{'close': !isSidebarExpanded}">
+<nav class="sidebar" [ngClass]="{'close': !isSidebarExpanded || menuValues.length === 0}">
   <div class="menu_content">
     <ul class="menu_items" *ngFor="let item of menuValues">
       <a routerLink="{{item.link}}" class="nav_link" *ngIf="item.link != null">
@@ -21,7 +21,7 @@
         <i class='bx bx-log-in'></i>
       </div>
       <div class="bottom">
-<!--        <span (click)=toggleSideBar()> Collapse</span>-->
+        <!--        <span (click)=toggleSideBar()> Collapse</span>-->
         <i class='bx bx-log-out' (click)="logout()"></i>
       </div>
     </div>

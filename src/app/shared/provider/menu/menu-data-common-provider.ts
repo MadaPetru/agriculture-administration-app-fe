@@ -9,6 +9,7 @@ export class MenuDataCommonProvider {
   public static noticeBoard = new MenuValue('bx bx-flag', 'Notice board', null);
   public static award = new MenuValue('bx bx-medal', 'Award', null);
   public static setting = new MenuValue('bx bx-cog', 'Setting', null);
+  public static admin = new MenuValue('bx bx-user', 'Admin', '/admin');
   public static features = new MenuValue('bx bx-layer', 'Features', null);
   public static overView = new MenuValue('bx bx-grid-alt', 'Overview', null);
   public static home = new MenuValue('bx bx-home-alt', 'Home', '/home');

@@ -1,3 +1,5 @@
+import {UserRole} from "../domains/user/dto/common/user-role.enum";
+
 export class AuthenticationUtils {
 
   public static initAuthentication(token: string, expiresIn: number) {
@@ -8,6 +10,18 @@ export class AuthenticationUtils {
   public static initUsername(username: string) {
     localStorage.setItem('username', username);
   }
+
+  public static initRoles(roles: Array<UserRole>) {
+    let isAdmin = roles.includes(UserRole.ADMIN);
+    localStorage.setItem('isAdmin', '' + isAdmin);
+  }
+
+  public static isAdmin() {
+    let isAdmin = localStorage.getItem('isAdmin');
+    if (isAdmin == 'true') return true;
+    return false;
+  }
+
 
   public static isAuthenticated() {
     let expiresInMillisecondsAsString = localStorage.getItem('expiresIn');

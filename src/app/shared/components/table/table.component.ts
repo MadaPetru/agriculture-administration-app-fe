@@ -17,10 +17,11 @@ import {NgFor, NgIf} from "@angular/common";
 import {TableOperationsHistoryProvider} from "../../provider/table/field-operations-history-provider";
 import {MatButton, MatMiniFabButton} from "@angular/material/button";
 import {MatDialog} from "@angular/material/dialog";
-import {DeleteConfirmationModalComponent} from "../delete-confirmation-modal/delete-confirmation-modal.component";
+import {ConfirmationModalComponent} from "../delete-confirmation-modal/confirmation-modal.component";
 import {TableOperationHistory} from "../../model/table/operations-history/table-operation-history";
 import {FormComponent} from "../form/form.component";
 import {EntitySelector} from "../../entity-selector";
+import {ConfirmationModalSelector} from "../../confirmation-modal-selector";
 
 @Component({
   selector: 'app-table',
@@ -69,7 +70,16 @@ export class TableComponent {
   }
 
   onDelete(id: any) {
-    this.dialog.open(DeleteConfirmationModalComponent, {data: {identifier: id, valueToDisplayForModal: 'this',entity:EntitySelector.FIELD_OPERATION}});
+    this.dialog.open(ConfirmationModalComponent,
+      {
+        data:
+          {
+            identifier: id,
+            valueToDisplayForModal: 'this',
+            entity: EntitySelector.FIELD_OPERATION,
+            modalType: ConfirmationModalSelector.DELETION
+          }
+      });
   }
 
   onEdit(element: any) {

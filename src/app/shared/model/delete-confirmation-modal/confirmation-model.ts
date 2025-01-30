@@ -1,6 +1,6 @@
 import {EntitySelector} from "../../entity-selector";
 
-export interface DeleteConfirmationModel {
+export interface ConfirmationModel {
   identifier: any,
   entity: EntitySelector
 }

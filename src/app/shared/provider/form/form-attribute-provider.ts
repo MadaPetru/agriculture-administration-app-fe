@@ -1,24 +1,28 @@
 import {FormAttribute} from "../../model/form/form-attribute";
 import {formatDate} from "@angular/common";
 import {EntitySelector} from "../../entity-selector";
+import {UserRole} from "../../../domains/user/dto/common/user-role.enum";
 
 export class FormAttributeProvider {
 
   private static attributesForOperationForm: FormAttribute[];
   private static attributesForFieldAddForm: FormAttribute[];
   private static attributesForImageField: FormAttribute[];
+  private static attributesForUser: FormAttribute[];
 
 
   static {
     this.attributesForOperationForm = this.initDataForOperationForm();
     this.attributesForFieldAddForm = this.initDataForFieldAddForm();
     this.attributesForImageField = this.initDataForImageFieldAddForm();
+    this.attributesForUser = this.initDataForUserEditForm();
   }
 
   public static getAttributes(type: EntitySelector): FormAttribute[] {
     if (type === EntitySelector.FIELD_OPERATION) return FormAttributeProvider.attributesForOperationForm;
     if (type === EntitySelector.FIELD) return FormAttributeProvider.attributesForFieldAddForm;
-    return FormAttributeProvider.attributesForImageField;
+    if (type === EntitySelector.IMAGE_FIELD_OPERATION) return FormAttributeProvider.attributesForImageField;
+    return FormAttributeProvider.attributesForUser;
   }
 
   private static initDataForOperationForm(): FormAttribute[] {
@@ -133,6 +137,20 @@ export class FormAttributeProvider {
       formControlName: 'at',
       inputType: 'date',
       dateTypeMaxValue: formatDate(new Date(), 'yyyy-MM-dd', 'en')
+    });
+    return data;
+  }
+
+  private static initDataForUserEditForm(): FormAttribute[] {
+    let data = new Array<FormAttribute>();
+    data.push({inputId: 'email', value: 'Email', labelForValue: 'email', formControlName: 'email', inputType: 'text'});
+    data.push({
+      inputId: 'roles',
+      value: 'Roles',
+      labelForValue: 'roles',
+      formControlName: 'roles',
+      inputType: 'select multiple',
+      options: [UserRole.USER,UserRole.ADMIN]
     });
     return data;
   }

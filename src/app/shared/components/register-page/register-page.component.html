@@ -8,16 +8,16 @@
 <body>
 <div class="register-container">
   <h2 class="register-title">Welcome to AgroAdmin</h2>
-  <form class="register-form">
-    <input type="text" placeholder="Full Name" required>
-    <input type="email" placeholder="Email Address" required>
-    <input type="password" placeholder="Password" required>
-    <input type="password" placeholder="Confirm Password" required>
-<!--    <input type="file" accept="image/*" title="Upload Profile Picture">-->
-<!--    <div class="terms">-->
-<!--      <input type="checkbox" required>-->
-<!--      <label>I agree to the <a href="#">Terms and Conditions</a></label>-->
-<!--    </div>-->
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
+    <input formControlName="fullName" type="text" placeholder="Full Name" required>
+    <input formControlName="email" type="email" placeholder="Email Address" required>
+    <input formControlName="password" type="password" placeholder="Password" required>
+    <input formControlName="confirmPassword" type="password" placeholder="Confirm Password" required>
+    <!--    <input type="file" accept="image/*" title="Upload Profile Picture">-->
+    <!--    <div class="terms">-->
+    <!--      <input type="checkbox" required>-->
+    <!--      <label>I agree to the <a href="#">Terms and Conditions</a></label>-->
+    <!--    </div>-->
     <button type="submit" class="register-button">Register</button>
   </form>
   <div class="footer">
