@@ -40,6 +40,7 @@ import {FormModel} from "../../shared/model/form/form-model";
 import {FormSharedService} from "../../shared/components/form/form-shared-service";
 import {BannerComponent} from "../../shared/components/banner/banner.component";
 import {AuthenticationUtils} from "../../shared/authentication-utils";
+import {BannerType} from "../../shared/model/banner/banner-type";
 
 @Component({
   selector: 'app-admin-page',
@@ -245,4 +246,5 @@ export class AdminPageComponent implements OnInit, OnDestroy {
   }
 
   protected readonly AuthenticationUtils = AuthenticationUtils;
+  protected readonly BannerType = BannerType;
 }

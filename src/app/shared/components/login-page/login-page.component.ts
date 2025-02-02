@@ -6,6 +6,7 @@ import {AuthenticationUtils} from "../../authentication-utils";
 import {Router} from "@angular/router";
 import {BannerComponent} from "../banner/banner.component";
 import {NgIf} from "@angular/common";
+import {BannerType} from "../../model/banner/banner-type";
 
 @Component({
   selector: 'app-login-page',
@@ -58,4 +59,6 @@ export class LoginPageComponent {
   private get5SecondsInMs() {
     return 5000;
   }
+
+  protected readonly BannerType = BannerType;
 }

@@ -2,7 +2,7 @@
 <app-menu [inputMenuGroups]="menuValues"></app-menu>
 <app-banner
   *ngIf="resetPasswordSuccessful"
-  [inputType]="'info'"
+  [inputType]="BannerType.INFO"
   [inputMessage]="'Password reset successfully!'">
 </app-banner>
 <div class="margin-left-component margin-top-70px">
