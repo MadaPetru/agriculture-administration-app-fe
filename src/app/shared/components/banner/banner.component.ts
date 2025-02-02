@@ -15,4 +15,5 @@ import {BannerType} from "../../model/banner/banner-type";
 export class BannerComponent {
   @Input({alias: 'inputType'}) type: BannerType = BannerType.INFO; // Define banner type (info or error)
   @Input({alias: 'inputMessage'}) message: string = ''; // Message to display
+  protected readonly BannerType = BannerType;
 }

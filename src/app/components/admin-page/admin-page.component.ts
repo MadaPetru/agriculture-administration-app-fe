@@ -26,12 +26,10 @@ import {CardSharedService} from "../../shared/components/card/card-shared-servic
 import {Subject, takeUntil} from "rxjs";
 import {EntitySelector} from "../../shared/entity-selector";
 import {MatDialog} from "@angular/material/dialog";
-import {
-  ConfirmationModalComponent
-} from "../../shared/components/delete-confirmation-modal/confirmation-modal.component";
+import {ConfirmationModalComponent} from "../../shared/components/confirmation-modal/confirmation-modal.component";
 import {
   ConfirmationModalSharedService
-} from "../../shared/components/delete-confirmation-modal/confirmation-modal-shared.service";
+} from "../../shared/components/confirmation-modal/confirmation-modal-shared.service";
 import {NavbarSearchSharedService} from "../../shared/components/navbar-search/navbar-search-shared.service";
 import {ConfirmationModalSelector} from "../../shared/confirmation-modal-selector";
 import {FormComponent} from "../../shared/components/form/form.component";

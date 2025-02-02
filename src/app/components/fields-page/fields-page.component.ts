@@ -16,13 +16,11 @@ import {FormSharedService} from "../../shared/components/form/form-shared-servic
 import {CreateFieldRequest} from "../../domains/field/dto/request/create-field-request";
 import {CardSharedService} from "../../shared/components/card/card-shared-service";
 import {MatDialog} from "@angular/material/dialog";
-import {
-  ConfirmationModalComponent
-} from "../../shared/components/delete-confirmation-modal/confirmation-modal.component";
+import {ConfirmationModalComponent} from "../../shared/components/confirmation-modal/confirmation-modal.component";
 import {Subject, takeUntil} from "rxjs";
 import {
   ConfirmationModalSharedService
-} from "../../shared/components/delete-confirmation-modal/confirmation-modal-shared.service";
+} from "../../shared/components/confirmation-modal/confirmation-modal-shared.service";
 import {FieldService} from "../../domains/field/field-service";
 import {FormAttributeProvider} from "../../shared/provider/form/form-attribute-provider";
 import {UpdateFieldRequest} from "../../domains/field/dto/request/update-field-request";

@@ -17,7 +17,7 @@ import {NgFor, NgIf} from "@angular/common";
 import {TableOperationsHistoryProvider} from "../../provider/table/field-operations-history-provider";
 import {MatButton, MatMiniFabButton} from "@angular/material/button";
 import {MatDialog} from "@angular/material/dialog";
-import {ConfirmationModalComponent} from "../delete-confirmation-modal/confirmation-modal.component";
+import {ConfirmationModalComponent} from "../confirmation-modal/confirmation-modal.component";
 import {TableOperationHistory} from "../../model/table/operations-history/table-operation-history";
 import {FormComponent} from "../form/form.component";
 import {EntitySelector} from "../../entity-selector";

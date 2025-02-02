@@ -30,7 +30,7 @@ import {
 import {TableOperationHistory} from "../../shared/model/table/operations-history/table-operation-history";
 import {
   ConfirmationModalSharedService
-} from "../../shared/components/delete-confirmation-modal/confirmation-modal-shared.service";
+} from "../../shared/components/confirmation-modal/confirmation-modal-shared.service";
 import {
   SearchByFieldOperationHistoryRequest
 } from "../../domains/field-operation-history/dto/request/search-by-field-operation-history-request";
@@ -71,7 +71,7 @@ import {ListFieldImageResponse} from "../../domains/field/dto/response/list-fiel
 import {GallerySharedService} from "../../shared/components/gallery/gallery-shared.service";
 import {
   ConfirmationModalComponent
-} from "../../shared/components/delete-confirmation-modal/confirmation-modal.component";
+} from "../../shared/components/confirmation-modal/confirmation-modal.component";
 import {FormModel} from "../../shared/model/form/form-model";
 import {ListFieldImagePaginatedResponse} from "../../domains/field/dto/response/list-field-image-paginated-response";
 import {ConfirmationModalSelector} from "../../shared/confirmation-modal-selector";

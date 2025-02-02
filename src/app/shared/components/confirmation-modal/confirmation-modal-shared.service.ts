@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Subject} from "rxjs";
-import {ConfirmationModel} from "../../model/delete-confirmation-modal/confirmation-model";
+import {ConfirmationModel} from "../../model/confirmation-modal/confirmation-model";
 
 @Injectable()
 export class ConfirmationModalSharedService {
