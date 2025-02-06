@@ -6,6 +6,11 @@
   <title>Register - AgroAdmin</title>
 </head>
 <body>
+<app-banner
+  *ngIf="userEmailAlreadyUsed"
+  [inputType]="BannerType.ERROR"
+  [inputMessage]="'User already register with that email!'">
+</app-banner>
 <div class="register-container">
   <h2 class="register-title">Welcome to AgroAdmin</h2>
   <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">

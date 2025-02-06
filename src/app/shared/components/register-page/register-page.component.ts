@@ -12,12 +12,18 @@ import {UserService} from "../../../domains/user/user-service";
 import {AuthenticationUtils} from "../../authentication-utils";
 import {Router} from "@angular/router";
 import {UserRegisterResponse} from "../../../domains/user/dto/response/user-register-response";
+import {BannerType} from "../../model/banner/banner-type";
+import {BannerComponent} from "../banner/banner.component";
+import {NgIf} from "@angular/common";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-register-page',
   standalone: true,
   imports: [
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BannerComponent,
+    NgIf
   ],
   templateUrl: './register-page.component.html',
   styleUrl: './register-page.component.css'
@@ -25,6 +31,7 @@ import {UserRegisterResponse} from "../../../domains/user/dto/response/user-regi
 export class RegisterPageComponent {
 
   registerForm: FormGroup;
+  userEmailAlreadyUsed: boolean = false;
 
   constructor(private fb: FormBuilder, private userService: UserService, private router: Router) {
     this.registerForm = this.fb.group({
@@ -43,10 +50,18 @@ export class RegisterPageComponent {
         fullName: formValue.fullName,
         password: formValue.password
       };
-      this.userService.register(request).subscribe((response: UserRegisterResponse) => {
-        AuthenticationUtils.initUsername(request.email);
-        AuthenticationUtils.initAuthentication(response.token, response.expiresIn);
-        this.router.navigate(['/home']);
+      this.userService.register(request).subscribe({
+        next: (response: UserRegisterResponse) => {
+          AuthenticationUtils.initUsername(request.email);
+          AuthenticationUtils.initAuthentication(response.token, response.expiresIn);
+          this.router.navigate(['/home']);
+        },
+        error: (error: HttpErrorResponse) => {
+          this.userEmailAlreadyUsed = true;
+          setTimeout(() => {
+            this.userEmailAlreadyUsed = false;
+          }, this.get5SecondsInMs());
+        }
       })
     } else {
       console.log('Form is not valid');
@@ -60,4 +75,9 @@ export class RegisterPageComponent {
     return password && confirmPassword && password.value === confirmPassword.value ? null : {passwordMismatch: true};
   };
 
+  protected readonly BannerType = BannerType;
+
+  private get5SecondsInMs() {
+    return 5000;
+  }
 }

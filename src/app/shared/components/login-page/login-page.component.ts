@@ -51,7 +51,7 @@ export class LoginPageComponent {
         this.loginFailed = true;
         setTimeout(()=>{
           this.loginFailed = false;
-        },this.get5SecondsInMs())
+        },this.get5SecondsInMs());
       }
     });
   }
