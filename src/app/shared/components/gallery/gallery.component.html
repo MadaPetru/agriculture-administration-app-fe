@@ -3,8 +3,15 @@
     <div class="delete-button" title="Delete" (click)="emitDeleteEvent(image)">
       <i class="fa fa-remove"></i>
     </div>
-    <div class="image-container" (click)="toggleZoom(image)">
-      <img [src]="image.content" alt="Image description" [ngClass]="{'zoomed': image.isZoomed}">
+    <div class="image-container"
+         (click)="toggleZoom(image)"
+         (mousemove)="dragImage($event, image)"
+         (mouseup)="stopDrag(image)"
+         (mouseleave)="stopDrag(image)">
+      <img [src]="image.content"
+           alt="Image description"
+           [ngClass]="{'zoomed': image.isZoomed}"
+           [style.transform]="'translate(' + image.offsetX + 'px, ' + image.offsetY + 'px) scale(' + (image.isZoomed ? 2 : 1) + ')'">
     </div>
     <div class="desc" *ngIf="image">Image '{{ image.fileName }}' from: {{ image.at }}</div>
   </div>

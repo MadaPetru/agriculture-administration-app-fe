@@ -3,5 +3,7 @@ export interface ListFieldImageResponse {
   at: string,
   fileName: string,
   content: string,
-  isZoomed: boolean
+  isZoomed: boolean,
+  offsetX: number,
+  offsetY: number
 }
