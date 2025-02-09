@@ -5,6 +5,7 @@
     </div>
     <div class="image-container" (click)="toggleZoom(image)">
       <img [src]="image.content" alt="Image description" [ngClass]="{'zoomed': image.isZoomed}">
-    </div>    <div class="desc" *ngIf="image">Image '{{ image.fileName }}' from: {{ image.at }}</div>
+    </div>
+    <div class="desc" *ngIf="image">Image '{{ image.fileName }}' from: {{ image.at }}</div>
   </div>
 </div>
