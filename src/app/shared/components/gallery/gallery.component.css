@@ -66,6 +66,16 @@ div.desc {
   font-size: 18px;
 }
 
+.image-container img {
+  transition: transform 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.image-container img.zoomed {
+  transform: scale(2);
+}
+
+
 /* Responsive design */
 @media screen and (max-width: 768px) {
   .gallery-container {
