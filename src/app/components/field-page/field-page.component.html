@@ -78,7 +78,7 @@
         <span>Page {{ currentPageFieldImages + 1 }} of {{ totalPagesFieldImages }}</span>
         <button (click)="nextPage()" [disabled]="currentPageFieldImages + 1 === totalPagesFieldImages">&rarr;</button>
       </div>
-      <div>
+      <div class="images-grid">
         <app-gallery [inputImages]="fieldImages"></app-gallery>
       </div>
     </div>
