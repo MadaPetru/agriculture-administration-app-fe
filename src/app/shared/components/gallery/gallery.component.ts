@@ -2,7 +2,6 @@ import {Component, Input} from '@angular/core';
 import {NgClass, NgForOf, NgIf} from "@angular/common";
 import {ListFieldImageResponse} from "../../../domains/field/dto/response/list-field-image-response";
 import {GallerySharedService} from "./gallery-shared.service";
-import {NgxImageZoomModule} from "ngx-image-zoom";
 
 @Component({
   selector: 'app-gallery',
@@ -10,7 +9,6 @@ import {NgxImageZoomModule} from "ngx-image-zoom";
   imports: [
     NgForOf,
     NgIf,
-    NgxImageZoomModule,
     NgClass
   ],
   templateUrl: './gallery.component.html',
@@ -26,7 +24,6 @@ export class GalleryComponent {
   toggleZoom(image: any) {
     image.isZoomed = !image.isZoomed;
   }
-
 
 
   emitDeleteEvent(imageModel: any) {

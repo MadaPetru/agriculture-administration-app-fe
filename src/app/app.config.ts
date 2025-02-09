@@ -15,7 +15,6 @@ import {NavbarSearchSharedService} from "./shared/components/navbar-search/navba
 import {GallerySharedService} from "./shared/components/gallery/gallery-shared.service";
 import {HttpTokenInterceptor} from "./shared/interceptor/http-token.interceptor";
 import {UserService} from "./domains/user/user-service";
-import {NgxImageZoomModule} from "ngx-image-zoom";
 
 // export function keycloakFactory(keycloakService: KeycloakService) {
 //   return () => keycloakService.init();
@@ -23,7 +22,7 @@ import {NgxImageZoomModule} from "ngx-image-zoom";
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes), provideClientHydration(), provideAnimations(), importProvidersFrom(HttpClientModule), FieldService, MenuDataFieldPageProvider, FormSharedService,
-    CardSharedService, ConfirmationModalSharedService, FieldOperationHistoryService, NavbarSearchSharedService, GallerySharedService, NgxImageZoomModule,
+    CardSharedService, ConfirmationModalSharedService, FieldOperationHistoryService, NavbarSearchSharedService, GallerySharedService,
     // {
     //   provide: APP_INITIALIZER,
     //   deps: [KeycloakService],
