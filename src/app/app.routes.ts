@@ -6,6 +6,7 @@ import {LoginPageComponent} from "./shared/components/login-page/login-page.comp
 import {authGuard} from "./shared/guard/auth.guard";
 import {RegisterPageComponent} from "./shared/components/register-page/register-page.component";
 import {AdminPageComponent} from "./components/admin-page/admin-page.component";
+import {AnimalsPageComponent} from "./components/animals-page/animals-page.component";
 
 export const routes: Routes = [
   {path: 'login', component: LoginPageComponent},
@@ -13,6 +14,7 @@ export const routes: Routes = [
   {path: 'admin', component: AdminPageComponent},
   {path: 'fields', component: FieldsPageComponent, canActivate: [authGuard]},
   {path: 'fields/:title', component: FieldPageComponent, canActivate: [authGuard]},
+  {path: 'animals', component: AnimalsPageComponent, canActivate: [authGuard]},
   {path: 'home', component: HomePageComponent, canActivate: [authGuard]},
   {path: '**', component: HomePageComponent, canActivate: [authGuard]},
 ];
