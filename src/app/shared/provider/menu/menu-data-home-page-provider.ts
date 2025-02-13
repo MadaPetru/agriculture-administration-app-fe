@@ -33,6 +33,6 @@ export class MenuDataHomePageProvider extends MenuDataCommonProvider {
 
   private static initMenuValues(): MenuValue[] {
     return Array.of(
-      this.fields, this.animals);
+      this.fields);
   }
 }
