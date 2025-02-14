@@ -21,3 +21,6 @@ FROM nginx:alpine
 
 #Copy built angular app files to NGINX HTML folder
 COPY --from=build /usr/src/app/dist/agriculture-administration-app-fe/* /usr/share/nginx/html
+
+# Copy the custom NGINX configuration
+COPY prod-nginx.conf /etc/nginx/conf.d/default.conf
