@@ -1,22 +1,22 @@
-name: Trigger auto deployment for agro-admin-fe
+name: Trigger auto deployment for agro-admin-fe-free
 
 # When this action will be executed
 on:
   # Automatically trigger it when detected changes in repo
   push:
-    branches: 
+    branches:
       [ master ]
     paths:
     - '**'
     - '.github/workflows/agro-admin-fe-AutoDeployTrigger-ab3556e2-a027-4028-a66b-7778a1cbc2d0.yml'
 
-  # Allow manual trigger 
-  workflow_dispatch:      
+  # Allow manual trigger
+  workflow_dispatch:
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    permissions: 
+    permissions:
       id-token: write #This is required for requesting the OIDC JWT Token
       contents: read #Required when GH token is used to authenticate with private repo
 
@@ -39,7 +39,7 @@ jobs:
           registryUrl: docker.io
           registryUsername: ${{ secrets.AGROADMINFE_REGISTRY_USERNAME }}
           registryPassword: ${{ secrets.AGROADMINFE_REGISTRY_PASSWORD }}
-          containerAppName: agro-admin-fe
+          containerAppName: agro-admin-fe-free
           resourceGroup: agro-admin
           imageToBuild: caleamare/agro-admin-fe:${{ github.sha }}
           _buildArgumentsKey_: |
