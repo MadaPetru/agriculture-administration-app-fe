@@ -43,4 +43,8 @@ export class CompareImagesModalComponent {
       this.rightIndex = (this.rightIndex + 1) % this.images.length;
     }
   }
+
+  closeModal(){
+    this.dialogRef.close();
+  }
 }

@@ -1,25 +1,30 @@
 <div class="compare-images-modal">
+  <h2>Compare Images</h2>
+
+  <!-- Images Container -->
   <div class="images-container">
-    <!-- Left Image -->
+    <!-- Left Image Comparison -->
     <div class="image-wrapper">
-      <img [src]="images[leftIndex].content" alt="Left image"/>
-      <button mat-icon-button (click)="prevImage('left')">
-        <mat-icon>arrow_back</mat-icon>
+      <img [src]="images[leftIndex].content" alt="Left Image for Comparison" />
+      <button class="nav-button left" (click)="prevImage('left')">
+        <mat-icon>arrow_back_ios</mat-icon>
       </button>
-      <button mat-icon-button (click)="nextImage('left')">
-        <mat-icon>arrow_forward</mat-icon>
+      <button class="nav-button right" (click)="nextImage('left')">
+        <mat-icon>arrow_forward_ios</mat-icon>
       </button>
     </div>
 
-    <!-- Right Image -->
+    <!-- Right Image Comparison -->
     <div class="image-wrapper">
-      <img [src]="images[rightIndex].content" alt="Right image"/>
-      <button mat-icon-button (click)="prevImage('right')">
-        <mat-icon>arrow_back</mat-icon>
+      <img [src]="images[rightIndex].content" alt="Right Image for Comparison" />
+      <button class="nav-button left" (click)="prevImage('right')">
+        <mat-icon>arrow_back_ios</mat-icon>
       </button>
-      <button mat-icon-button (click)="nextImage('right')">
-        <mat-icon>arrow_forward</mat-icon>
+      <button class="nav-button right" (click)="nextImage('right')">
+        <mat-icon>arrow_forward_ios</mat-icon>
       </button>
     </div>
   </div>
+
+  <button mat-button class="close-button" (click)="closeModal()">Close</button>
 </div>
