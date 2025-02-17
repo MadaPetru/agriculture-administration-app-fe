@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {FieldResponse} from "../../domains/field/dto/response/field-response";
 import {ActivatedRoute, Router} from "@angular/router";
 import {MenuDataFieldPageProvider} from "../../shared/provider/menu/menu-data-field-page-provider";
@@ -13,7 +13,7 @@ import {FieldService} from "../../domains/field/field-service";
 import {MatButton} from "@angular/material/button";
 import {PageEvent} from "@angular/material/paginator";
 import {PageableRequest} from "../../shared/dto/request/pageable-request";
-import {MatDialog} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {FormComponent} from "../../shared/components/form/form.component";
 import {FieldOperationHistoryService} from "../../domains/field-operation-history/field-operation-history-service";
 import {Subject, takeUntil} from "rxjs";
@@ -74,6 +74,7 @@ import {FormModel} from "../../shared/model/form/form-model";
 import {ListFieldImagePaginatedResponse} from "../../domains/field/dto/response/list-field-image-paginated-response";
 import {ConfirmationModalSelector} from "../../shared/confirmation-modal-selector";
 import {MatTooltip} from "@angular/material/tooltip";
+import {CompareImagesModalComponent} from "../../shared/components/compare-images-modal/compare-images-modal.component";
 
 
 @Component({
@@ -387,7 +388,11 @@ export class FieldPageComponent implements OnInit, OnDestroy {
   }
 
   openImageCompareModal() {
-
+    this.dialog.open(CompareImagesModalComponent, {
+      data: {
+        images:this.imagesToCompare
+      }
+    });
   }
 
   initCharts() {
