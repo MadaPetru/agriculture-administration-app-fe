@@ -1,0 +1,39 @@
+.compare-images-modal {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.images-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.image-wrapper {
+  position: relative;
+  width: 45%;
+}
+
+img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+button:first-of-type {
+  left: -40px;
+}
+
+button:last-of-type {
+  right: -40px;
+}

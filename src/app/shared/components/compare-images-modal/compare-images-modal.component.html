@@ -1,0 +1,25 @@
+<div class="compare-images-modal">
+  <div class="images-container">
+    <!-- Left Image -->
+    <div class="image-wrapper">
+      <img [src]="images[leftIndex].content" alt="Left image"/>
+      <button mat-icon-button (click)="prevImage('left')">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <button mat-icon-button (click)="nextImage('left')">
+        <mat-icon>arrow_forward</mat-icon>
+      </button>
+    </div>
+
+    <!-- Right Image -->
+    <div class="image-wrapper">
+      <img [src]="images[rightIndex].content" alt="Right image"/>
+      <button mat-icon-button (click)="prevImage('right')">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <button mat-icon-button (click)="nextImage('right')">
+        <mat-icon>arrow_forward</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>
