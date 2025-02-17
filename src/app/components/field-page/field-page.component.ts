@@ -69,12 +69,11 @@ import {UploadFieldImageRequest} from "../../domains/field/dto/request/upload-fi
 import {ListFieldImageRequest} from "../../domains/field/dto/request/list-field-image-request";
 import {ListFieldImageResponse} from "../../domains/field/dto/response/list-field-image-response";
 import {GallerySharedService} from "../../shared/components/gallery/gallery-shared.service";
-import {
-  ConfirmationModalComponent
-} from "../../shared/components/confirmation-modal/confirmation-modal.component";
+import {ConfirmationModalComponent} from "../../shared/components/confirmation-modal/confirmation-modal.component";
 import {FormModel} from "../../shared/model/form/form-model";
 import {ListFieldImagePaginatedResponse} from "../../domains/field/dto/response/list-field-image-paginated-response";
 import {ConfirmationModalSelector} from "../../shared/confirmation-modal-selector";
+import {MatTooltip} from "@angular/material/tooltip";
 
 
 @Component({
@@ -102,6 +101,7 @@ import {ConfirmationModalSelector} from "../../shared/confirmation-modal-selecto
     MatInputModule,
     MatIconModule,
     StartFinishDatePickerComponent,
+    MatTooltip,
   ],
   templateUrl: './field-page.component.html',
   styleUrls: ['./field-page.component.css', '../../shared/shared.css']
@@ -135,6 +135,7 @@ export class FieldPageComponent implements OnInit, OnDestroy {
   itemsPerPageForFieldImages: number = 3;
   totalFieldImages: number = 0;
   totalPagesFieldImages: number = 0;
+  imagesToCompare = new Set<any>();
 
   constructor(
     private route: ActivatedRoute, private fieldService: FieldService, private router: Router, private fieldOperationHistoryService: FieldOperationHistoryService,
@@ -156,6 +157,7 @@ export class FieldPageComponent implements OnInit, OnDestroy {
     this.subscribeAddForm();
     this.subscribeEditForm();
     this.subscribeImageGalleryDeletePopUpModal();
+    this.subscribeImageGalleryImagesSelected();
     this.subscribeConfirmationModalDeleteAction();
   }
 
@@ -213,6 +215,13 @@ export class FieldPageComponent implements OnInit, OnDestroy {
             modalType: ConfirmationModalSelector.DELETION
           }
         });
+      });
+  }
+
+  private subscribeImageGalleryImagesSelected() {
+    this.gallerySharedService.currentImagesSelected.pipe(takeUntil(this.unsubscribe))
+      .subscribe(images => {
+        this.imagesToCompare = images;
       });
   }
 
@@ -375,6 +384,10 @@ export class FieldPageComponent implements OnInit, OnDestroy {
         }
       }
     );
+  }
+
+  openImageCompareModal() {
+
   }
 
   initCharts() {

@@ -66,8 +66,16 @@
     <div class="margin-top-15px align-center-with-flexbox-container">
       <h2 class="images-title">Images</h2>
     </div>
-    <div class="create-button-image margin-top-15px">
-      <button mat-flat-button (click)="onUploadImage()">Upload image</button>
+    <div class="float-right">
+      <div class="create-button-image margin-top-15px">
+        <button mat-flat-button (click)="onUploadImage()">Upload image</button>
+      </div>
+      <div class="compare-images-button margin-top-15px tooltip-container">
+        <button mat-flat-button [disabled]="imagesToCompare.size < 2" (click)="openImageCompareModal()">
+          Compare images
+        </button>
+        <span class="tooltiptext">Select at least 2 images to compare</span>
+      </div>
     </div>
     <div class="margin-top-15px">
       <start-finish-date-picker (outputDateInterval)="onYearsChangeForListingImages($event)"></start-finish-date-picker>

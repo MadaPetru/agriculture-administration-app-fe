@@ -11,7 +11,10 @@
 }
 
 .create-button-image {
-  float: right;
+  margin-bottom: 15px;
+}
+
+.compare-images-button {
   margin-bottom: 15px;
 }
 
@@ -70,6 +73,7 @@ button:hover {
   flex-direction: column;
   align-items: center;
   gap: 20px;
+  margin-top: 50px;
 }
 
 .navigation-arrows {
@@ -161,6 +165,12 @@ button:hover {
   }
 
   .create-button-image > button {
+    float: left;
+    font-size: 10px;
+    text-align: center; /* Center-align the button */
+  }
+
+  .compare-images-button > button {
     float: left;
     font-size: 10px;
     text-align: center; /* Center-align the button */

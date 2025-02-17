@@ -75,7 +75,6 @@ div.desc {
   transform: scale(2);
 }
 
-
 /* Responsive design */
 @media screen and (max-width: 768px) {
   .gallery-container {
