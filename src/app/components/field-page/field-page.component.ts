@@ -1,4 +1,4 @@
-import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FieldResponse} from "../../domains/field/dto/response/field-response";
 import {ActivatedRoute, Router} from "@angular/router";
 import {MenuDataFieldPageProvider} from "../../shared/provider/menu/menu-data-field-page-provider";
@@ -13,7 +13,7 @@ import {FieldService} from "../../domains/field/field-service";
 import {MatButton} from "@angular/material/button";
 import {PageEvent} from "@angular/material/paginator";
 import {PageableRequest} from "../../shared/dto/request/pageable-request";
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {MatDialog} from "@angular/material/dialog";
 import {FormComponent} from "../../shared/components/form/form.component";
 import {FieldOperationHistoryService} from "../../domains/field-operation-history/field-operation-history-service";
 import {Subject, takeUntil} from "rxjs";
@@ -178,6 +178,13 @@ export class FieldPageComponent implements OnInit, OnDestroy {
       this.requestListFieldImages.pageable.page = this.currentPageFieldImages;
       this.propagateImagesField();
     }
+  }
+
+  resetImagesSelected() {
+    this.imagesToCompare.forEach((image) => {
+      image.isZoomed = false;
+    })
+    this.imagesToCompare = new Set<any>();
   }
 
   loadImages() {
@@ -390,7 +397,7 @@ export class FieldPageComponent implements OnInit, OnDestroy {
   openImageCompareModal() {
     this.dialog.open(CompareImagesModalComponent, {
       data: {
-        images:this.imagesToCompare
+        images: this.imagesToCompare
       }
     });
   }

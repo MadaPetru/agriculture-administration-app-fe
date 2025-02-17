@@ -70,14 +70,19 @@
       <div class="create-button-image margin-top-15px">
         <button mat-flat-button (click)="onUploadImage()">Upload image</button>
       </div>
-      <div class="compare-images-button margin-top-15px tooltip-container">
+      <div class="compare-images-button tooltip-container">
         <button mat-flat-button [disabled]="imagesToCompare.size < 2" (click)="openImageCompareModal()">
           Compare images
         </button>
         <span class="tooltiptext">Select at least 2 images to compare</span>
       </div>
+      <div>
+        <button mat-flat-button (click)="resetImagesSelected()">
+          Reset images selected
+        </button>
+      </div>
     </div>
-    <div class="margin-top-15px">
+    <div class="margin-top-70px">
       <start-finish-date-picker (outputDateInterval)="onYearsChangeForListingImages($event)"></start-finish-date-picker>
     </div>
     <div class="gallery-container" *ngIf="totalFieldImages != 0">
