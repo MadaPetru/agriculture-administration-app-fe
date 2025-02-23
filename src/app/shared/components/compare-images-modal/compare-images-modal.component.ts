@@ -2,6 +2,7 @@ import {Component, Inject} from '@angular/core';
 import {MatIcon} from "@angular/material/icon";
 import {MatButton, MatIconButton} from "@angular/material/button";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {NgClass} from "@angular/common";
 
 @Component({
   selector: 'app-compare-images-modal',
@@ -9,7 +10,8 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
   imports: [
     MatIcon,
     MatIconButton,
-    MatButton
+    MatButton,
+    NgClass
   ],
   templateUrl: './compare-images-modal.component.html',
   styleUrl: './compare-images-modal.component.css'
@@ -44,7 +46,7 @@ export class CompareImagesModalComponent {
     }
   }
 
-  closeModal(){
+  closeModal() {
     this.dialogRef.close();
   }
 }

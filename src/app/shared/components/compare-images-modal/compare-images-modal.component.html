@@ -5,7 +5,8 @@
   <div class="images-container">
     <!-- Left Image Comparison -->
     <div class="image-wrapper">
-      <img [src]="images[leftIndex].content" alt="Left Image for Comparison" />
+      <p class="image-date">{{ images[leftIndex].at }}</p>
+      <img [src]="images[leftIndex].content" alt="Left Image for Comparison"/>
       <button class="nav-button left" (click)="prevImage('left')">
         <mat-icon>arrow_back_ios</mat-icon>
       </button>
@@ -16,7 +17,8 @@
 
     <!-- Right Image Comparison -->
     <div class="image-wrapper">
-      <img [src]="images[rightIndex].content" alt="Right Image for Comparison" />
+      <p class="image-date">{{ images[rightIndex].at }}</p>
+      <img [src]="images[rightIndex].content" alt="Right Image for Comparison"/>
       <button class="nav-button left" (click)="prevImage('right')">
         <mat-icon>arrow_back_ios</mat-icon>
       </button>

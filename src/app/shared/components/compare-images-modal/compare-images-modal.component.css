@@ -3,10 +3,15 @@
   background-color: #f9f9f9;
   border-radius: 16px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-  width: 90%;
-  max-width: 1000px;
-  margin: 40px auto;
+  width: 95vw;
+  max-width: 1200px;
+  height: auto;
+  max-height: 90vh;
+  margin: 5vh auto;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 h2 {
@@ -15,11 +20,17 @@ h2 {
   margin-bottom: 20px;
 }
 
+/* Make sure images are flexible and responsive */
 .images-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  flex-wrap: wrap; /* Allows stacking on small screens */
   gap: 40px;
+}
+
+.image-wrapper img.zoomed {
+  transform: scale(2);
 }
 
 .image-wrapper {
@@ -32,16 +43,32 @@ h2 {
   background-color: #ffffff;
   border-radius: 16px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 48%; /* Prevents overflow */
 }
 
 img {
   max-width: 100%;
-  max-height: 500px;
+  max-height: 70vh;
   object-fit: contain;
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Date Positioning */
+.image-date {
+  position: absolute;
+  top: 10px; /* Positioned at the top of the image */
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 14px;
+  color: #333;
+  font-weight: bold;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 5px 10px;
+  border-radius: 8px;
+}
+
+/* Navigation Buttons */
 .nav-button {
   position: absolute;
   top: 50%;
@@ -73,7 +100,7 @@ img {
 
 .close-button {
   margin-top: 24px;
-  padding: 8px 16px;
+  padding: 10px 20px;
   font-size: 16px;
   color: #fff;
   background-color: #007bff;
@@ -85,4 +112,42 @@ img {
 
 .close-button:hover {
   background-color: #0056b3;
+}
+
+/* 📱 Responsive Adjustments for Small Screens */
+@media (max-width: 768px) {
+  .compare-images-modal {
+    width: 98vw;
+    height: auto;
+    max-height: none;
+    padding: 16px;
+  }
+
+  .images-container {
+    flex-direction: column; /* Stack images vertically on mobile */
+  }
+
+  .image-wrapper {
+    max-width: 90%;
+    padding: 10px;
+  }
+
+  .image-date {
+    font-size: 12px;
+    padding: 3px 8px;
+  }
+
+  img {
+    max-height: 50vh; /* Reduce size on small screens */
+  }
+
+  .nav-button {
+    width: 30px;
+    height: 30px;
+  }
+
+  .close-button {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
 }
