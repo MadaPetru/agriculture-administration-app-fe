@@ -41,13 +41,6 @@ import {EntitySelector} from "../../shared/entity-selector";
 import {
   StartFinishYearDatePickerComponent
 } from "../../shared/components/start-finish-year-date-picker/start-finish-year-date-picker.component";
-import {Chart} from "chart.js";
-import {
-  FarmingLandStatisticsProfitabilityPerOperationAndYearResponse
-} from "../../domains/farming-lang-statistics/dto/response/farming-land-statistics-profitability-per-operation-and-year-response";
-import {
-  FarmingLandStatisticsProfitabilityPerYearResponse
-} from "../../domains/farming-lang-statistics/dto/response/farming-land-statistics-profitability-per-year-response";
 import {FarmingLandStatisticsService} from "../../domains/farming-lang-statistics/farming-land-statistics.service";
 import {MenuValue} from "../../shared/model/menu/menu-value";
 import {GalleryComponent} from "../../shared/components/gallery/gallery.component";
@@ -75,6 +68,7 @@ import {ListFieldImagePaginatedResponse} from "../../domains/field/dto/response/
 import {ConfirmationModalSelector} from "../../shared/confirmation-modal-selector";
 import {MatTooltip} from "@angular/material/tooltip";
 import {CompareImagesModalComponent} from "../../shared/components/compare-images-modal/compare-images-modal.component";
+import {DashboardFinanceComponent} from "../../shared/components/dashboard-finance/dashboard-finance.component";
 
 
 @Component({
@@ -103,6 +97,7 @@ import {CompareImagesModalComponent} from "../../shared/components/compare-image
     MatIconModule,
     StartFinishDatePickerComponent,
     MatTooltip,
+    DashboardFinanceComponent,
   ],
   templateUrl: './field-page.component.html',
   styleUrls: ['./field-page.component.css', '../../shared/shared.css']
@@ -119,9 +114,6 @@ export class FieldPageComponent implements OnInit, OnDestroy {
     searchBy: this.farmingLandOperationHistorySearchBy
   };
   operationHistories: TableOperationHistory[] = [];
-  lineChart?: Chart;
-  barChartForCostPerOperationForCertainYears?: Chart;
-  barChartForRevenuePerOperationForCertainYears?: Chart;
   fieldImages: ListFieldImageResponse[] = [];
   showImages: boolean = false;
   requestListFieldImages: ListFieldImageRequest = {
@@ -242,7 +234,6 @@ export class FieldPageComponent implements OnInit, OnDestroy {
           if (model.entity === EntitySelector.FIELD_OPERATION.valueOf()) {
             this.deleteFieldOperationHistory(model.identifier).subscribe(() => {
               this.searchFieldOperationHistories(this.searchFieldOperationRequest);
-              this.initCharts();
             });
           }
           if (model.entity === EntitySelector.IMAGE_FIELD_OPERATION.valueOf()) {
@@ -267,7 +258,6 @@ export class FieldPageComponent implements OnInit, OnDestroy {
             model.object.farmingLandId = <number>this.field?.id;
             this.saveFieldOperationHistory(model.object).subscribe(() => {
               this.searchFieldOperationHistories(this.searchFieldOperationRequest);
-              this.initCharts();
             });
             return;
           }
@@ -307,7 +297,6 @@ export class FieldPageComponent implements OnInit, OnDestroy {
           if (model.entity === EntitySelector.FIELD_OPERATION.valueOf()) {
             this.updateFieldOperationHistory(model.object).subscribe(() => {
               this.searchFieldOperationHistories(this.searchFieldOperationRequest);
-              this.initCharts();
             });
           }
         },
@@ -385,7 +374,6 @@ export class FieldPageComponent implements OnInit, OnDestroy {
             searchBy: this.farmingLandOperationHistorySearchBy
           };
           this.searchFieldOperationHistories(this.searchFieldOperationRequest);
-          this.initCharts();
         },
         error: () => {
           this.router.navigate(['/error'])
@@ -398,123 +386,6 @@ export class FieldPageComponent implements OnInit, OnDestroy {
     this.dialog.open(CompareImagesModalComponent, {
       data: {
         images: this.imagesToCompare
-      }
-    });
-  }
-
-  initCharts() {
-    let actualYear = new Date().getFullYear();
-    this.buildChartForProfitabilityForCertainIntervalOfYears(actualYear, actualYear);
-    this.buildChartForCostPerOperationForCertainIntervalOfYears(actualYear, actualYear);
-    this.buildChartForRevenuePerOperationForCertainIntervalOfYears(actualYear, actualYear);
-  }
-
-  onYearsIntervalChangedForRevenues(yearsIntervalEvent: { startYear: number, endYear: number }) {
-    this.buildChartForRevenuePerOperationForCertainIntervalOfYears(yearsIntervalEvent.startYear, yearsIntervalEvent.endYear)
-  }
-
-  onYearsIntervalChangedForProfitability(yearsIntervalEvent: { startYear: number, endYear: number }) {
-    this.buildChartForProfitabilityForCertainIntervalOfYears(yearsIntervalEvent.startYear, yearsIntervalEvent.endYear)
-  }
-
-  onYearsIntervalChangedForCosts(yearsIntervalEvent: { startYear: number, endYear: number }) {
-    this.buildChartForCostPerOperationForCertainIntervalOfYears(yearsIntervalEvent.startYear, yearsIntervalEvent.endYear)
-  }
-
-  private buildChartForCostPerOperationForCertainIntervalOfYears(startYear: number, endYear: number) {
-    let yDataSet: number[] = [];
-    let xValues: string[] = [];
-    this.farmingLandStatisticsService.profitabilityPerYearAndOperationForFarmingLand(startYear, endYear, <number>this.field?.id)
-      .subscribe((response: FarmingLandStatisticsProfitabilityPerOperationAndYearResponse[]) => {
-        response.forEach(data => {
-          xValues.push(data.operation);
-          yDataSet.push(data.cost);
-        });
-        if (this.barChartForCostPerOperationForCertainYears != null) {
-          this.barChartForCostPerOperationForCertainYears.destroy();
-        }
-        this.barChartForCostPerOperationForCertainYears = this.buildBarChartForCost(xValues, yDataSet);
-      });
-  }
-
-  private buildChartForRevenuePerOperationForCertainIntervalOfYears(startYear: number, endYear: number) {
-    let yDataSet: number[] = [];
-    let xValues: string[] = [];
-    this.farmingLandStatisticsService.profitabilityPerYearAndOperationForFarmingLand(startYear, endYear, <number>this.field?.id)
-      .subscribe((response: FarmingLandStatisticsProfitabilityPerOperationAndYearResponse[]) => {
-        response.forEach(data => {
-          xValues.push(data.operation);
-          yDataSet.push(data.revenue);
-        });
-        if (this.barChartForRevenuePerOperationForCertainYears != null) {
-          this.barChartForRevenuePerOperationForCertainYears.destroy();
-        }
-        this.barChartForRevenuePerOperationForCertainYears = this.buildBarChartForRevenue(xValues, yDataSet);
-      });
-  }
-
-  private buildChartForProfitabilityForCertainIntervalOfYears(startYear: number, endYear: number) {
-    let xDataSet: number[] = [];
-    let yDataSet: number[] = [];
-    let xValues: number[] = [];
-    this.farmingLandStatisticsService.profitabilityPerYearForFarmingLand(startYear, endYear, <number>this.field?.id)
-      .subscribe((response: FarmingLandStatisticsProfitabilityPerYearResponse[]) => {
-        response.forEach(data => {
-          xValues.push(data.year);
-          xDataSet.push(data.revenue);
-          yDataSet.push(data.cost);
-        });
-        if (this.lineChart != null) {
-          this.lineChart.destroy();
-        }
-        this.lineChart = this.buildLineChart(xValues, xDataSet, yDataSet);
-      });
-  }
-
-  buildLineChart(xValues: number[], xDataSet: number[], yDataSet: number[]) {
-    return new Chart("all-costs-vs-all-revenue", {
-      type: "line",
-      data: {
-        labels: xValues,
-        datasets: [{
-          data: xDataSet,
-          borderColor: "green",
-          fill: false,
-          label: 'Roughly profit'
-        }, {
-          data: yDataSet,
-          borderColor: "blue",
-          fill: false,
-          label: 'Roughly costs'
-        }]
-      }
-    });
-  }
-
-  buildBarChartForRevenue(xValues: string[], yDataSet: number[]) {
-    return new Chart('operation-type-revenues', {
-      type: "bar",
-      data: {
-        labels: xValues,
-        datasets: [{
-          data: yDataSet,
-          borderColor: "green",
-          label: 'Revenue'
-        }]
-      }
-    });
-  }
-
-  buildBarChartForCost(xValues: string[], yDataSet: number[]) {
-    return new Chart('operation-type-costs', {
-      type: "bar",
-      data: {
-        labels: xValues,
-        datasets: [{
-          data: yDataSet,
-          borderColor: "green",
-          label: 'Cost'
-        }]
       }
     });
   }

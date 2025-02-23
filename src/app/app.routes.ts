@@ -1,12 +1,12 @@
 import {Routes} from '@angular/router';
-import {HomePageComponent} from "./components/home-page/home-page.component";
-import {FieldsPageComponent} from "./components/fields-page/fields-page.component";
-import {FieldPageComponent} from "./components/field-page/field-page.component";
 import {LoginPageComponent} from "./shared/components/login-page/login-page.component";
 import {authGuard} from "./shared/guard/auth.guard";
 import {RegisterPageComponent} from "./shared/components/register-page/register-page.component";
-import {AdminPageComponent} from "./components/admin-page/admin-page.component";
-import {AnimalsPageComponent} from "./components/animals-page/animals-page.component";
+import {AdminPageComponent} from "./pages/admin-page/admin-page.component";
+import {AnimalsPageComponent} from "./pages/animals-page/animals-page.component";
+import {HomePageComponent} from "./pages/home-page/home-page.component";
+import {FieldsPageComponent} from "./pages/fields-page/fields-page.component";
+import {FieldPageComponent} from "./pages/field-page/field-page.component";
 
 export const routes: Routes = [
   {path: 'login', component: LoginPageComponent},

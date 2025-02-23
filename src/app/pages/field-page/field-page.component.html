@@ -10,34 +10,7 @@
     <h6>Updated: {{ field?.updatedAt }}</h6>
   </div>
   <div class="margin-top-15px" *ngIf="this.operationHistories.length > 0">
-    <div class="dashboard-container">
-      <div class="stats-section">
-        <div class="chart-card">
-          <canvas id="all-costs-vs-all-revenue"> {{ lineChart }}</canvas>
-          <div class="year-picker">
-            <start-finish-year-date-picker
-              (outputYearsInterval)="onYearsIntervalChangedForProfitability($event)">
-            </start-finish-year-date-picker>
-          </div>
-        </div>
-        <div class="chart-card">
-          <canvas id="operation-type-costs"> {{ barChartForCostPerOperationForCertainYears }}</canvas>
-          <div class="year-picker">
-            <start-finish-year-date-picker
-              (outputYearsInterval)="onYearsIntervalChangedForCosts($event)">
-            </start-finish-year-date-picker>
-          </div>
-        </div>
-        <div class="chart-card">
-          <canvas id="operation-type-revenues"> {{ barChartForRevenuePerOperationForCertainYears }}</canvas>
-          <div class="year-picker">
-            <start-finish-year-date-picker
-              (outputYearsInterval)="onYearsIntervalChangedForRevenues($event)">
-            </start-finish-year-date-picker>
-          </div>
-        </div>
-      </div>
-    </div>
+    <app-dashboard-finance [inputFarmingLandId] = this.field?.id></app-dashboard-finance>
   </div>
   <div class="margin-top-15px align-center-with-flexbox-container">
     <h2 class="operation-histories-title">Operation histories</h2>
