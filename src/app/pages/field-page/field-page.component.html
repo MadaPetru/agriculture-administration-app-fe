@@ -10,12 +10,12 @@
     <h6>Updated: {{ field?.updatedAt }}</h6>
   </div>
   <div class="margin-top-15px" *ngIf="this.operationHistories.length > 0">
-    <app-dashboard-finance [inputFarmingLandId] = this.field?.id></app-dashboard-finance>
+    <app-dashboard-finance [inputFarmingLandId]=this.field?.id></app-dashboard-finance>
   </div>
-  <div class="margin-top-15px align-center-with-flexbox-container">
+  <div class="margin-top-15px align-center-with-flexbox-container operation-histories-title-container">
     <h2 class="operation-histories-title">Operation histories</h2>
   </div>
-  <div class="margin-top-15px">
+  <div class="margin-top-15px create-button-operation-container">
     <div class="create-button-operation">
       <button mat-flat-button (click)="onSaveNewOperationHistory()">Create new Operation</button>
     </div>
@@ -28,18 +28,18 @@
                [inputEditButtonVisible]="true"
     ></app-table>
   </div>
-  <div class="margin-top-15px align-center-with-flexbox-container">
+  <div class="margin-top-15px align-center-with-flexbox-container paginator-operation-histories">
     <app-paginator [inputLength]="totalNumberOfOperations"
                    (outputPageEvent)="onPaginationChanged($event)"></app-paginator>
   </div>
-  <div *ngIf="!showImages" class="margin-top-15px">
-    <button (click)="loadImages()">Load images</button>
+  <div *ngIf="!showImages" class="margin-top-15px load-images-container">
+    <button (click)="loadImages()" class="load-images" mat-flat-button>Load images</button>
   </div>
-  <div *ngIf="showImages">
-    <div class="margin-top-15px align-center-with-flexbox-container">
+  <div *ngIf="showImages" class="images">
+    <div class="margin-top-15px align-center-with-flexbox-container images-title-container">
       <h2 class="images-title">Images</h2>
     </div>
-    <div class="float-right">
+    <div class="float-right buttons">
       <div class="create-button-image margin-top-15px">
         <button mat-flat-button (click)="onUploadImage()">Upload image</button>
       </div>

@@ -5,28 +5,34 @@
   gap: 20px;
   background-color: var(--white-color);
   border-radius: 10px;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .stats-section {
-  background-color: #f9fbff;
+  background-color: var(--background-color);
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
   justify-content: space-between;
 }
 
+.chart-card canvas{
+  background-color: var(--background-color);
+  color: var(--text-collor);
+}
+
 .chart-card {
   flex: 1;
   max-width: 35%;
   background-color: var(--white-color);
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--chart-card-collor);
   border-radius: 10px;
   padding: 15px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .year-picker {
+  color: var(--text-collor);
   margin-top: 15px;
   display: flex;
   justify-content: center;

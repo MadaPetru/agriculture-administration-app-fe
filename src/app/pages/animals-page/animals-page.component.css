@@ -85,13 +85,13 @@ body {
   }
 }
 
-.margin-left-component {
+.main-container {
   margin-left: 245px;
 }
 
 @media screen and (max-width: 768px) {
   /* For small screens (mobile devices) */
-  .margin-left-component {
+  .main-container {
     margin-left: 70px;
   }
 

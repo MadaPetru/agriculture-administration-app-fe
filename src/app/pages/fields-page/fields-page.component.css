@@ -1,6 +1,6 @@
 /* Body styling */
 body {
-  background-color: #e733fd;
+  background-color: var(--background-color);
   transition: all 0.5s ease;
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
@@ -9,6 +9,7 @@ body {
 }
 
 .cards {
+  background-color: var(--background-color);
   width: 90%;
   display: flex; /* Enables flexbox for the parent */
   flex-direction: row; /* Ensures child divs are aligned in a row */
@@ -19,6 +20,7 @@ body {
 }
 
 .card {
+  background-color: var(--background-color);
   text-align: center;
   border: none; /* No borders */
   box-shadow: none; /* No shadows */
@@ -36,14 +38,7 @@ body {
 
 /* Set width for containers */
 .margin-left-paginator {
-  width: 100%;
-}
-
-/* Center align with flexbox container */
-.align-center-with-flexbox-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background-color: var(--background-color);
   width: 100%;
 }
 
@@ -85,13 +80,14 @@ body {
   }
 }
 
-.margin-left-component {
+.main-container {
+  background-color: var(--background-color);
   margin-left: 245px;
 }
 
 @media screen and (max-width: 768px) {
   /* For small screens (mobile devices) */
-  .margin-left-component {
+  .main-container {
     margin-left: 70px;
   }
 

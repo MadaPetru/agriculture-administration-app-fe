@@ -1,55 +1,36 @@
 /* General Styling */
 
 .main-container {
+  background-color: var(--background-color);
   margin-left: 245px;
 }
 
+.create-button-operation-container {
+  background-color: var(--background-color);
+}
+
+.load-images-container {
+  background-color: var(--background-color);
+}
+
+.load-images {
+  background-color: var(--white-color);
+}
 
 .create-button-operation {
+  background-color: var(--background-color);
   float: right;
   margin-bottom: 15px;
 }
 
 .create-button-image {
+  background-color: var(--background-color);
   margin-bottom: 15px;
 }
 
 .compare-images-button {
   margin-bottom: 15px;
-}
-
-.dashboard-container {
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  background-color: var(--white-color);
-  border-radius: 10px;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.stats-section {
-  background-color: #f9fbff;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: space-between;
-}
-
-.chart-card {
-  flex: 1;
-  max-width: 45%;
-  background-color: var(--white-color);
-  border: 1px solid #e0e0e0;
-  border-radius: 10px;
-  padding: 15px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.year-picker {
-  margin-top: 15px;
-  display: flex;
-  justify-content: center;
+  background-color: var(--background-color);
 }
 
 /* Buttons inside the year picker */
@@ -64,7 +45,7 @@ button {
 }
 
 button:hover {
-  background-color: #3059c8;
+  background-color: var(--button-hover);
   transform: translateY(-2px);
 }
 
@@ -82,11 +63,16 @@ button:hover {
   justify-content: center;
   gap: 10px;
   margin-bottom: 20px;
+  background-color: var(--background-color);
+}
+
+.navigation-arrows span {
+  background-color: var(--background-color);
 }
 
 .navigation-arrows button {
-  background-color: var(--blue-color);
-  color: var(--white-color);
+  background-color: var(--white-color-always);
+  color: var(--text-collor);
   border: none;
   padding: 10px 15px;
   border-radius: 5px;
@@ -100,37 +86,60 @@ button:hover {
   cursor: not-allowed;
 }
 
+.paginator-operation-histories {
+  background-color: var(--background-color);
+}
+
+.images {
+  background-color: var(--background-color);
+}
+
+.images > div {
+  background-color: var(--background-color);
+}
+
+.images > h2 {
+  background-color: var(--background-color);
+}
+
+.buttons {
+  background-color: var(--background-color);
+}
+
+.details {
+  background-color: var(--background-color);
+  color: var(--text-collor);
+}
+
+.details > h2 {
+  background-color: var(--background-color);
+}
+
+.details > h6 {
+  background-color: var(--background-color);
+}
+
+.operation-histories-title {
+  background-color: var(--background-color);
+  color: var(--text-collor);
+}
+
+.operation-histories-title-container {
+  background-color: var(--background-color);
+}
+
+.images-title-container {
+  background-color: var(--background-color);
+}
+
+.images-title {
+  background-color: var(--background-color);
+  color: var(--text-collor);
+}
+
 .navigation-arrows span {
   font-size: 16px;
-  color: var(--text-color);
-}
-
-
-/* Responsive adjustments */
-@media (max-width: 1200px) {
-  .dashboard-container {
-    padding: 15px; /* Reduced padding for medium screens */
-  }
-
-  .chart-card {
-    max-width: 48%; /* Adjust for better fit */
-  }
-}
-
-@media (max-width: 992px) {
-  /* For medium-sized screens (tablets) */
-  .dashboard-container {
-    padding: 10px; /* Adjust padding for better fit on tablets */
-  }
-
-  .stats-section {
-    flex-direction: column; /* Stack stats section vertically */
-    gap: 10px; /* Reduce gap between chart cards */
-  }
-
-  .chart-card {
-    max-width: 100%; /* Full width for chart cards on smaller screens */
-  }
+  color: var(--text-collor);
 }
 
 @media (max-width: 768px) {
@@ -151,10 +160,12 @@ button:hover {
   }
 
   .operation-histories-title {
+    color: var(--text-collor);
     font-size: 13px;
   }
 
   .images-title {
+    color: var(--text-collor);
     font-size: 13px;
   }
 
@@ -191,21 +202,6 @@ button:hover {
 
   .details > h6 {
     font-size: 8px;
-  }
-
-  /* For smaller screens (mobile phones) */
-  .dashboard-container {
-    padding: 10px; /* Reduce padding for smaller screens */
-  }
-
-  .chart-card {
-    max-width: 100%; /* Stack the chart cards vertically */
-    margin-bottom: 20px; /* Add spacing between stacked chart cards */
-  }
-
-  /* Year picker should be centered */
-  .year-picker {
-    justify-content: center;
   }
 
   /* Make the operation histories table more flexible */

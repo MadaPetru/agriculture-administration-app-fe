@@ -2,6 +2,10 @@
   margin-top: 15px;
 }
 
+.container{
+  color: var(--text-collor);
+}
+
 .align-center-with-flexbox-container {
   display: flex;
   justify-content: center;

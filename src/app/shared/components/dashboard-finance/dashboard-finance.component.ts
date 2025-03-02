@@ -148,12 +148,12 @@ export class DashboardFinanceComponent implements OnInit {
         labels: xValues,
         datasets: [{
           data: xDataSet,
-          borderColor: "green",
+          backgroundColor: "green",
           fill: false,
           label: 'Roughly profit'
         }, {
           data: yDataSet,
-          borderColor: "blue",
+          backgroundColor: "red",
           fill: false,
           label: 'Roughly costs'
         }]
@@ -168,7 +168,7 @@ export class DashboardFinanceComponent implements OnInit {
         labels: xValues,
         datasets: [{
           data: yDataSet,
-          borderColor: "green",
+          backgroundColor: "green",
           label: 'Revenue'
         }]
       }
@@ -182,7 +182,7 @@ export class DashboardFinanceComponent implements OnInit {
         labels: xValues,
         datasets: [{
           data: yDataSet,
-          borderColor: "green",
+          backgroundColor: "red",
           label: 'Cost'
         }]
       }
