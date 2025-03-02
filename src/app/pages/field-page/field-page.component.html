@@ -43,15 +43,9 @@
       <div class="create-button-image margin-top-15px">
         <button mat-flat-button (click)="onUploadImage()">Upload image</button>
       </div>
-      <div class="compare-images-button tooltip-container">
-        <button mat-flat-button [disabled]="imagesToCompare.size < 2" (click)="openImageCompareModal()">
+      <div class="compare-images-button">
+        <button mat-flat-button (click)="openImageCompareModal()">
           Compare images
-        </button>
-        <span class="tooltiptext">Select at least 2 images to compare</span>
-      </div>
-      <div>
-        <button mat-flat-button (click)="resetImagesSelected()">
-          Reset images selected
         </button>
       </div>
     </div>

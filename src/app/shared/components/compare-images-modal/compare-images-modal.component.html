@@ -6,7 +6,10 @@
     <!-- Left Image Comparison -->
     <div class="image-wrapper">
       <p class="image-date">{{ images[leftIndex].at }}</p>
-      <img [src]="images[leftIndex].content" alt="Left Image for Comparison"/>
+      <div class="image-container">
+        <img [src]="images[leftIndex].content" alt="Left Image for Comparison" (click)="toggleZoom(images[leftIndex])"
+             [ngClass]="{'zoomed': images[leftIndex].isZoomed}"/>
+      </div>
       <button class="nav-button left" (click)="prevImage('left')">
         <mat-icon>arrow_back_ios</mat-icon>
       </button>
@@ -18,7 +21,10 @@
     <!-- Right Image Comparison -->
     <div class="image-wrapper">
       <p class="image-date">{{ images[rightIndex].at }}</p>
-      <img [src]="images[rightIndex].content" alt="Right Image for Comparison"/>
+      <div class="image-container">
+        <img [src]="images[rightIndex].content" alt="Right Image for Comparison"
+             (click)="toggleZoom(images[rightIndex])" [ngClass]="{'zoomed': images[rightIndex].isZoomed}"/>
+      </div>
       <button class="nav-button left" (click)="prevImage('right')">
         <mat-icon>arrow_back_ios</mat-icon>
       </button>

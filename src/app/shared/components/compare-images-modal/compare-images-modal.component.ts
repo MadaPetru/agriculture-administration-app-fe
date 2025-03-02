@@ -27,7 +27,10 @@ export class CompareImagesModalComponent {
     data.images.forEach((imageReceived) => {
       this.images.push(imageReceived);
     })
-    console.log(this.images[0]);
+  }
+
+  toggleZoom(image: any) {
+    image.isZoomed = !image.isZoomed;
   }
 
   prevImage(side: 'left' | 'right') {

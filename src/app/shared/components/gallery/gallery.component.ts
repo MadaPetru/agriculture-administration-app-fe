@@ -18,24 +18,11 @@ export class GalleryComponent {
 
   @Input({alias: 'inputImages'}) images: ListFieldImageResponse[] = [];
 
-  imagesSelected = new Set<any>();
-
   constructor(private gallerySharedService: GallerySharedService) {
   }
 
   toggleZoom(image: any) {
-    this.sendEventImagesSelected(image);
     image.isZoomed = !image.isZoomed;
-  }
-
-
-  sendEventImagesSelected(image: any) {
-    if (this.imagesSelected.has(image)) {
-      this.imagesSelected.delete(image);
-    } else {
-      this.imagesSelected.add(image);
-    }
-    this.gallerySharedService.updateImagesSelected(this.imagesSelected);
   }
 
   emitDeleteEvent(imageModel: any) {

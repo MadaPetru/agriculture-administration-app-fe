@@ -29,7 +29,21 @@ h2 {
   gap: 40px;
 }
 
-.image-wrapper img.zoomed {
+.image-container{
+  display: block; /* Removes unwanted inline space */
+  width: 100%;
+  border-color: black;
+  border-width: 10px;
+  height: auto;
+  object-fit: cover; /* Ensures images fit properly */
+  position: relative; /* For proper positioning of delete button */
+  border-radius: 8px; /* Rounded corners for aesthetic appeal */
+  overflow: hidden; /* Ensures content stays inside bounds */
+  max-width: 500px; /* Limits gallery item width */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.image-container img.zoomed{
   transform: scale(2);
 }
 
@@ -66,6 +80,7 @@ img {
   background: rgba(255, 255, 255, 0.7);
   padding: 5px 10px;
   border-radius: 8px;
+  z-index: 100;
 }
 
 /* Navigation Buttons */
@@ -135,6 +150,7 @@ img {
   .image-date {
     font-size: 12px;
     padding: 3px 8px;
+    z-index: 100;
   }
 
   img {
