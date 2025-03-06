@@ -2,7 +2,6 @@ body {
   font-family: 'Varela Round', sans-serif;
 }
 .modal-confirm {
-  color: #636363;
   width: 400px;
 }
 .modal-confirm .modal-content {
@@ -11,6 +10,7 @@ body {
   border: none;
   text-align: center;
   font-size: 14px;
+  background-color: var(--white-color);
 }
 .modal-confirm .modal-header {
   border-bottom: none;
@@ -26,9 +26,15 @@ body {
   top: -5px;
   right: -2px;
 }
-.modal-confirm .modal-body {
-  color: #999;
+
+.confirmation-title{
+  color: var(--text-collor);
 }
+
+.modal-confirm .modal-body {
+  color: var(--text-collor);
+}
+
 .modal-confirm .modal-footer {
   border: none;
   text-align: center;
