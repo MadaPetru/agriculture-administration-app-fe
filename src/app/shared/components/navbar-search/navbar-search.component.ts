@@ -19,8 +19,8 @@ import {ThemeSelector} from "../../theme-selector";
 export class NavbarSearchComponent implements OnInit{
 
   username?: string;
-  iconBasedOnCurrentTheme = 'bx-sun';
   valueFromSearchInput: string = '';
+  iconBasedOnCurrentTheme = 'bx-sun';
   @Input({alias: "inputSearchIsVisible"}) searchIsVisible = false;
 
   constructor(private navbarSearchSharedService: NavbarSearchSharedService) {

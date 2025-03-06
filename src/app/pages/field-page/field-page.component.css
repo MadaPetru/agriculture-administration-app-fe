@@ -49,6 +49,10 @@ button:hover {
   transform: translateY(-2px);
 }
 
+.dashboard-finance{
+  background-color: var(--background-color);
+}
+
 .gallery-container {
   display: flex;
   flex-direction: column;

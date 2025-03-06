@@ -9,7 +9,7 @@
     <h6>Created: {{ field?.createdAt }}</h6>
     <h6>Updated: {{ field?.updatedAt }}</h6>
   </div>
-  <div class="margin-top-15px" *ngIf="this.operationHistories.length > 0">
+  <div class="margin-top-15px dashboard-finance" *ngIf="this.operationHistories.length > 0">
     <app-dashboard-finance [inputFarmingLandId]=this.field?.id></app-dashboard-finance>
   </div>
   <div class="margin-top-15px align-center-with-flexbox-container operation-histories-title-container">

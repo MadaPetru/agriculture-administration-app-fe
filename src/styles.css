@@ -33,5 +33,10 @@ body.dark {
 
 html {
   height: 0;
-  background-color: var(--background-color);
+  background-color: #eef4ff;
+}
+
+html.dark {
+  height: 0;
+  background-color: #333;
 }
