@@ -22,7 +22,6 @@ th{
 @media screen and (max-width: 768px) {
   table {
     width: 100%;
-    background-color: white;
   }
 
   td > div{

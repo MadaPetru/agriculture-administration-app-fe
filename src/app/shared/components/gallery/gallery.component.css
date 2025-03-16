@@ -15,7 +15,7 @@ div.gallery {
   border-radius: 8px; /* Rounded corners for aesthetic appeal */
   overflow: hidden; /* Ensures content stays inside bounds */
   width: 100%;
-  max-width: 500px; /* Limits gallery item width */
+  max-width: 400px; /* Limits gallery item width */
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 

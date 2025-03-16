@@ -1,10 +1,27 @@
 .paginator {
-  background-color: var(--background-color-common);
+  background-color: var(--background-color);
   width: 530px;
   font-size: 60%;
+  color: var(--text-collor);
+}
+
+.paginator i {
+  color: var(--text-collor);
+}
+
+.paginator select {
+  color: var(--text-collor);
+}
+
+.paginator span{
+  color: var(--text-collor);
 }
 
 .paginator svg{
+  color: var(--text-collor);
+}
+
+.paginator button{
   color: var(--text-collor);
 }
 

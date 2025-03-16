@@ -86,7 +86,7 @@
 }
 
 .navlink_icon:hover {
-  background: var(--blue-color);
+  background: var(--button-hover);
 }
 
 .sidebar .nav_link {
@@ -106,11 +106,11 @@
 .nav_link:hover {
   cursor: pointer;
   color: var(--white-color);
-  background: var(--blue-color);
+  background: var(--button-hover);
 }
 
 .sidebar.close .nav_link:hover {
-  background: var(--white-color);
+  background: var(--button-hover);
 }
 
 .submenu_item {

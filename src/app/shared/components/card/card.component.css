@@ -1,4 +1,4 @@
-.main-container-without-hover {
+.card-main-container-without-hover {
   width: 280px;
   height: 299px;
   float: left; /* stack each div horizontally */
@@ -30,7 +30,7 @@
 }
 
 
-.main-container {
+.card-main-container {
   background-color: var(--background-color);
   width: 280px;
   height: 299px;
@@ -95,7 +95,7 @@ img {
 }
 
 /* style the maincontainer class with all child div's of class .front */
-.main-container > .front {
+.card-main-container > .front {
   position: relative;
   transform: perspective(600px) rotateY(0deg);
 
@@ -107,7 +107,7 @@ img {
 }
 
 /* style the maincontainer class with all child div's of class .back */
-.main-container > .back {
+.card-main-container > .back {
   position: absolute;
   transform: perspective(600px) rotateY(180deg);
   background: #262626;
@@ -120,12 +120,12 @@ img {
   transition: transform .5s linear 0s;
 }
 
-.main-container-without-hover{
+.card-main-container-without-hover{
   background-color: var(--background-color);
 }
 
 /* style the maincontainer class with all child div's of class .front */
-.main-container-without-hover > .front {
+.card-main-container-without-hover > .front {
   border: 1px solid var(--border-collor); /* Subtle border to frame the content */
   position: relative;
   transform: perspective(600px) rotateY(0deg);
@@ -137,11 +137,11 @@ img {
   transition: transform .5s linear 0s;
 }
 
-.main-container:hover > .front {
+.card-main-container:hover > .front {
   transform: perspective(600px) rotateY(-180deg);
 }
 
-.main-container:hover > .back {
+.card-main-container:hover > .back {
   transform: perspective(600px) rotateY(0deg);
 }
 
@@ -175,14 +175,19 @@ img {
     color: black; /* Optional: Change color to indicate delete action */
   }
 
-  .main-container-without-hover {
-    width: 120px;
+  .card-main-container-without-hover {
+    width: 25%;
     height: 90px;
     float: left; /* stack each div horizontally */
   }
 
+  .card-main-container-without-hover > .front {
+    width: 150px;
+    height: 90px;
+  }
 
-  .main-container {
+
+  .card-main-container {
     width: 100px;
     height: 299px;
     float: left; /* stack each div horizontally */

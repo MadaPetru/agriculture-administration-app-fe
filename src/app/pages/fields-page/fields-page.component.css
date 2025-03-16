@@ -1,13 +1,3 @@
-/* Body styling */
-body {
-  background-color: var(--background-color);
-  transition: all 0.5s ease;
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-  height: 100%;
-  overflow-x: hidden;
-}
-
 .cards {
   background-color: var(--background-color);
   width: 90%;
@@ -73,37 +63,17 @@ body {
     margin-bottom: 15px;
     width: 100%; /* Make cards take full width */
   }
-
-  /* Adjust paginator layout */
-  .align-center-with-flexbox-container {
-    margin-top: 20px; /* Add some margin between the cards and pagination */
-  }
-}
-
-.main-container {
-  background-color: var(--background-color);
-  margin-left: 245px;
 }
 
 @media screen and (max-width: 768px) {
-  /* For small screens (mobile devices) */
-  .main-container {
-    margin-left: 70px;
-  }
-
   /* Adjust the width of the cards for mobile screens */
   app-field-card {
     width: 30%;
     margin-bottom: 10px; /* Reduce bottom margin for cards */
   }
 
-  /* Adjust the paginator alignment */
-  .align-center-with-flexbox-container {
-    margin-top: 10px; /* Reduce the margin for pagination */
-  }
-
   /* Ensure the paginator fits well */
   app-paginator {
-    width: 100%;
+    margin-top: 20px;
   }
 }

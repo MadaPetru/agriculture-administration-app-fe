@@ -16,12 +16,12 @@
     </ul>
     <!-- Sidebar Open / Close -->
     <div class="bottom_content">
-      <div class="bottom">
+      <div class="bottom expand_sidebar">
         <span (click)=toggleSideBar()> Expand</span>
-        <i class='bx bx-log-in'></i>
+        <i class='bx bx-log-in' (click)="logout()"></i>
       </div>
-      <div class="bottom">
-        <!--        <span (click)=toggleSideBar()> Collapse</span>-->
+      <div class="bottom collapse_sidebar">
+        <span (click)=toggleSideBar()> Collapse</span>
         <i class='bx bx-log-out' (click)="logout()"></i>
       </div>
     </div>
