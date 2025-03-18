@@ -11,7 +11,7 @@ import {FormsModule} from "@angular/forms";
     FormsModule
   ],
   templateUrl: './language-selector.component.html',
-  styleUrl: './language-selector.component.css'
+  styleUrls: ['./language-selector.component.css','../../shared.css']
 })
 export class LanguageSelectorComponent {
 

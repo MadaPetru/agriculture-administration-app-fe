@@ -1,5 +1,38 @@
-select {
-  padding: 5px;
-  border-radius: 5px;
+.custom-select {
+  width: 120px;
+  padding: 10px 15px;
+  border-radius: 8px;
   font-size: 14px;
+  font-family: 'Arial', sans-serif;
+  background-color: var(--white-color);
+  border: 1px solid #ccc;
+  transition: all 0.3s ease;
+  color: var(--text-collor);
+}
+
+.custom-select:hover {
+  border-color: #007bff; /* Change border color on hover */
+  background-color: var(--white-color); /* Slightly darker background on hover */
+}
+
+.custom-select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Blue glow on focus */
+}
+
+option {
+  padding: 10px;
+  font-size: 14px;
+  font-family: 'Arial', sans-serif;
+}
+
+.custom-select option {
+  background-color: var(--white-color);
+  color: var(--text-collor);
+}
+
+.custom-select option:checked {
+  background-color: var(--white-color);
+  color: var(--text-collor);
 }
