@@ -10,6 +10,7 @@ import {
 } from "../../../domains/farming-lang-statistics/dto/response/farming-land-statistics-profitability-per-year-response";
 import {Chart} from "chart.js";
 import {FarmingLandStatisticsService} from "../../../domains/farming-lang-statistics/farming-land-statistics.service";
+import {I18nService} from "../../service/i18n.service";
 
 @Component({
   selector: 'app-dashboard-finance',
@@ -27,7 +28,8 @@ export class DashboardFinanceComponent implements OnInit {
   barChartForCostPerOperationForCertainYears?: Chart;
   barChartForRevenuePerOperationForCertainYears?: Chart;
 
-  constructor(private farmingLandStatisticsService: FarmingLandStatisticsService) {
+  constructor(private farmingLandStatisticsService: FarmingLandStatisticsService,
+              private i18n: I18nService) {
   }
 
   ngOnInit(): void {
@@ -113,7 +115,7 @@ export class DashboardFinanceComponent implements OnInit {
     let xDataSet: number[] = [];
     let yDataSet: number[] = [];
     let xValues: number[] = [];
-    if(this.farmingLandId == -1){
+    if (this.farmingLandId == -1) {
       this.farmingLandStatisticsService.profitabilityPerYear(startYear, endYear)
         .subscribe((response: FarmingLandStatisticsProfitabilityPerYearResponse[]) => {
           response.forEach(data => {
@@ -142,6 +144,8 @@ export class DashboardFinanceComponent implements OnInit {
   }
 
   buildLineChart(xValues: number[], xDataSet: number[], yDataSet: number[]) {
+    let roughlyProfitLabel = this.i18n.value("common.roughly-profit");
+    let roughlyCostsLabel = this.i18n.value("common.roughly-costs");
     return new Chart("all-costs-vs-all-revenue", {
       type: "line",
       data: {
@@ -150,12 +154,12 @@ export class DashboardFinanceComponent implements OnInit {
           data: xDataSet,
           backgroundColor: "green",
           fill: false,
-          label: 'Roughly profit'
+          label: roughlyProfitLabel
         }, {
           data: yDataSet,
           backgroundColor: "red",
           fill: false,
-          label: 'Roughly costs'
+          label: roughlyCostsLabel
         }]
       }
     });

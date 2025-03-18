@@ -13,13 +13,14 @@ import {
 } from "../../shared/components/start-finish-year-date-picker/start-finish-year-date-picker.component";
 import {MenuValue} from "../../shared/model/menu/menu-value";
 import {DashboardFinanceComponent} from "../../shared/components/dashboard-finance/dashboard-finance.component";
+import {TranslatePipe} from "@ngx-translate/core";
 
 
 @Component({
   selector: 'app-home-page',
   standalone: true,
   imports: [
-    MenuComponent, CommonModule, NavbarSearchComponent, CardComponent, PaginatorComponent, MatFormField, MatInput, StartFinishYearDatePickerComponent, DashboardFinanceComponent
+    MenuComponent, CommonModule, NavbarSearchComponent, CardComponent, PaginatorComponent, MatFormField, MatInput, StartFinishYearDatePickerComponent, DashboardFinanceComponent, TranslatePipe
   ],
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.css', '../../shared/shared.css']

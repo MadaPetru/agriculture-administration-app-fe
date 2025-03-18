@@ -1,0 +1,22 @@
+{
+  "common": {
+    "to":"to",
+    "home":"home",
+    "fields":"Fields",
+    "expand":"Expand",
+    "collapse":"Collapse",
+    "cost":"Cost",
+    "revenue":"Revenue",
+    "roughly-profit":"Roughly profit",
+    "roughly-costs":"Roughly costs",
+    "year-from":"Year from:",
+    "calculate":"Calculate"
+  },
+  "page": {
+    "home": {
+      "body": {
+        "number-of-fields-administrated": "Number of fields administrated:"
+      }
+    }
+  }
+}

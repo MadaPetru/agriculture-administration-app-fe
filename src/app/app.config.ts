@@ -1,10 +1,10 @@
-import {ApplicationConfig, importProvidersFrom} from '@angular/core';
+import {ApplicationConfig, importProvidersFrom, provideZoneChangeDetection} from '@angular/core';
 import {provideRouter} from '@angular/router';
 
 import {routes} from './app.routes';
 import {provideClientHydration} from '@angular/platform-browser';
 import {provideAnimations} from '@angular/platform-browser/animations';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule, provideHttpClient} from '@angular/common/http';
 import {MenuDataFieldPageProvider} from './shared/provider/menu/menu-data-field-page-provider';
 import {FormSharedService} from './shared/components/form/form-shared-service';
 import {CardSharedService} from './shared/components/card/card-shared-service';
@@ -15,10 +15,16 @@ import {NavbarSearchSharedService} from "./shared/components/navbar-search/navba
 import {GallerySharedService} from "./shared/components/gallery/gallery-shared.service";
 import {HttpTokenInterceptor} from "./shared/interceptor/http-token.interceptor";
 import {UserService} from "./domains/user/user-service";
+import {provideTranslateService, TranslateLoader, TranslateModule} from "@ngx-translate/core";
+import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 
 // export function keycloakFactory(keycloakService: KeycloakService) {
 //   return () => keycloakService.init();
 // }
+
+export function httpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes), provideClientHydration(), provideAnimations(), importProvidersFrom(HttpClientModule), FieldService, MenuDataFieldPageProvider, FormSharedService,
@@ -29,6 +35,15 @@ export const appConfig: ApplicationConfig = {
     //   useFactory: keycloakFactory,
     //   multi: true
     // },
+    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideHttpClient(),
+    provideTranslateService({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: httpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpTokenInterceptor,

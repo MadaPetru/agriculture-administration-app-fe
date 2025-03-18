@@ -1,7 +1,7 @@
 <div id="education-range">
-  <div>Year from:</div>
+  <div>{{'common.year-from' | translate}}</div>
   <input type="text" [(ngModel)]="startYear">
-  <div>to</div>
+  <div>{{'common.to' | translate}}</div>
   <input type="text" [(ngModel)]="endYear">
-  <button mat-flat-button (click)="emitYearsInterval()">Calculate</button>
+  <button mat-flat-button (click)="emitYearsInterval()">{{'common.calculate' | translate}}</button>
 </div>
