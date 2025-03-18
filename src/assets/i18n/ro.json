@@ -1,0 +1,22 @@
+{
+  "common": {
+    "to":"până",
+    "home":"Acasă",
+    "fields":"Terenuri",
+    "expand":"Deschis",
+    "collapse":"Închis",
+    "cost":"Cost",
+    "revenue":"Profit",
+    "roughly-profit":"Profit estimat",
+    "roughly-costs":"Cost estimat",
+    "year-from":"Din anul:",
+    "calculate":"Calculează"
+  },
+  "page": {
+    "home": {
+      "body": {
+        "number-of-fields-administrated": "Suprafață totală administrată:"
+      }
+    }
+  }
+}
