@@ -1,0 +1,5 @@
+<select [(ngModel)]="selectedLanguage" (change)="changeLanguage(selectedLanguage)">
+  <option *ngFor="let lang of languages" [value]="lang.code" [selected]="lang.code === translate.currentLang">
+    {{ lang.label }}
+  </option>
+</select>

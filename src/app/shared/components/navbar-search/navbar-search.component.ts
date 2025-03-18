@@ -5,13 +5,15 @@ import {FormsModule} from "@angular/forms";
 import {AuthenticationUtils} from "../../authentication-utils";
 import {ThemeUtils} from "../../theme-utils";
 import {ThemeSelector} from "../../theme-selector";
+import {LanguageSelectorComponent} from "../language-selector/language-selector.component";
 
 @Component({
   selector: 'app-navbar-search',
   standalone: true,
   imports: [
     NgIf,
-    FormsModule
+    FormsModule,
+    LanguageSelectorComponent
   ],
   templateUrl: './navbar-search.component.html',
   styleUrl: './navbar-search.component.css'
