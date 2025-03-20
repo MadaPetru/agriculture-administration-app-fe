@@ -7,7 +7,7 @@
   background-color: var(--white-color);
   border: 1px solid #ccc;
   transition: all 0.3s ease;
-  color: var(--text-collor);
+  color: var(--grey-color);
 }
 
 .custom-select:hover {
@@ -29,10 +29,10 @@ option {
 
 .custom-select option {
   background-color: var(--white-color);
-  color: var(--text-collor);
+  color: var(--grey-color);
 }
 
 .custom-select option:checked {
   background-color: var(--white-color);
-  color: var(--text-collor);
+  color: var(--grey-color);
 }
