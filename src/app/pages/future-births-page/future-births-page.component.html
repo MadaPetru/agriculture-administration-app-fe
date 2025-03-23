@@ -1,1 +1,35 @@
-<p>future-births-page works!</p>
+<app-navbar-search [inputSearchIsVisible]="false"></app-navbar-search>
+<app-menu [inputMenuGroups]="menuValues"></app-menu>
+
+<div class="future-births-container main-container margin-top-70px">
+  <!-- Sidebar -->
+  <aside class="future-births-sidebar">
+    <h2>Upcoming Births</h2>
+
+    <!-- 🔎 Sidebar Search -->
+    <input type="text" [(ngModel)]="searchQuery" (input)="filterBirths()" placeholder="Search by name or date..."
+           class="search-box"/>
+
+    <div *ngFor="let birth of filteredBirths" class="birth-card">
+      <p class="animal">{{ birth.animal }}</p>
+      <p class="date-time">Expected birth date: {{ birth.date }}</p>
+      <p class="date-time">Insemination date: {{ birth.date }}</p>
+
+      <!-- Edit & Delete Buttons -->
+      <div class="birth-actions">
+        <button (click)="editBirth(birth)" class="edit-btn">✏️ Edit</button>
+        <button (click)="deleteBirth(birth)" class="delete-btn">🗑️ Delete</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Calendar -->
+  <div class="calendar-container">
+    <h1>Future Births Calendar</h1>
+
+    <!-- 🔎 Calendar Search by Year -->
+        <input type="text" [(ngModel)]="initialDate" (change)="filterCalendarEvents()" placeholder="Enter date" class="search-box"/>
+
+    <full-calendar [options]="calendarOptions"></full-calendar>
+  </div>
+</div>

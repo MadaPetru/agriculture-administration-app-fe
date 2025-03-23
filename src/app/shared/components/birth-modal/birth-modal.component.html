@@ -1,0 +1,14 @@
+<h2>Birth Details for {{ data.date }}</h2>
+
+<div *ngIf="data.births.length > 0; else noBirths">
+  <div *ngFor="let birth of data.births" class="birth-detail">
+    <p><strong>{{ birth.animal }}</strong></p>
+    <p>Expected at {{ birth.expectedTime }}</p>
+  </div>
+</div>
+
+<ng-template #noBirths>
+  <p>No births expected on this date.</p>
+</ng-template>
+
+<button mat-button color="primary" (click)="close()">Close</button>
