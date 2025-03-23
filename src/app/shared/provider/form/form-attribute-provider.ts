@@ -129,7 +129,7 @@ export class FormAttributeProvider {
 
   private static initDataForImageFieldAddForm(): FormAttribute[] {
     let data = new Array<FormAttribute>();
-    data.push({inputId: 'image', value: 'Image', labelForValue: 'image', formControlName: 'image', inputType: 'image'});
+    data.push({inputId: 'images', value: 'Images', labelForValue: 'images', formControlName: 'images', inputType: 'image'});
     data.push({
       inputId: 'at',
       value: 'At',

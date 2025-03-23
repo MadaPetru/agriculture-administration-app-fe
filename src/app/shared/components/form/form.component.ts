@@ -27,7 +27,7 @@ export class FormComponent implements OnInit {
   type: EntitySelector;
   attributes: FormAttribute[] = [];
   useForEdit: boolean = false;
-  imageSelected?: File;
+  imagesSelected = new Array<File>;
 
   constructor(private formBuilder: FormBuilder, private formSharedService: FormSharedService,
               private matDialogRef: MatDialogRef<FormComponent>,
@@ -53,8 +53,8 @@ export class FormComponent implements OnInit {
 
   submitForm(): void {
     if (this.userForm?.valid) {
-      if (this.userForm.controls.image != null) {
-        this.userForm.value.image = this.imageSelected;
+      if (this.userForm.controls.images != null) {
+        this.userForm.value.images = this.imagesSelected;
       }
       let value = this.userForm.value;
       let formValueField = FormValidatorProvider.getFormValue(value, this.type);
@@ -68,32 +68,26 @@ export class FormComponent implements OnInit {
     }
   }
 
-  onFileSelected(event: Event, controlName: string): void {
+  onFileSelected(event: Event): void {
+    this.imagesSelected = new Array<File>();
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
-      const file = input.files[0]; // First selected file
-      const reader = new FileReader();
+      const files = Array.from(input.files);
 
-      // Read file content
-      reader.onload = () => {
-        let fileContent = reader.result;
-        const fileName = file.name;
-
-        this.imageSelected = {
-          fileName: fileName,
-          content: fileContent
+      files.forEach((file) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          this.imagesSelected.push({
+            fileName: file.name,
+            content: reader.result
+          });
         };
 
-        // Update the form control with custom data (e.g., a file object or base64 string)
-        this.userForm.get(controlName)?.setValue(this.imageSelected);
-      };
-
-      reader.onerror = (error) => {
-        console.error('Error reading file:', error);
-      };
-
-      // Read the file content as base64
-      reader.readAsDataURL(file); // Or use `readAsText(file)` for plain text files
+        reader.onerror = (error) => {
+          console.error('Error reading file:', error);
+        };
+        reader.readAsDataURL(file); // Read as base64
+      });
     }
   }
 }

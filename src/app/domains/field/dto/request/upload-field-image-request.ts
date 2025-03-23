@@ -1,5 +1,6 @@
+import {ImageRequest} from "../../../../shared/dto/request/image-request";
+
 export interface UploadFieldImageRequest {
   at: string,
-  content: string,
-  fileName: string
+  images: [ImageRequest]
 }
