@@ -17,6 +17,7 @@ import {HttpTokenInterceptor} from "./shared/interceptor/http-token.interceptor"
 import {UserService} from "./domains/user/user-service";
 import {provideTranslateService, TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 // export function keycloakFactory(keycloakService: KeycloakService) {
 //   return () => keycloakService.init();
@@ -48,5 +49,5 @@ export const appConfig: ApplicationConfig = {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpTokenInterceptor,
       multi: true
-    }, UserService]
+    }, UserService, provideAnimationsAsync()]
 };
