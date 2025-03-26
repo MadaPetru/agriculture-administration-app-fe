@@ -14,7 +14,6 @@ export class MenuDataCommonProvider {
   public static overView = new MenuValue('bx bx-grid-alt', 'Overview', null);
   public static home = new MenuValue('bx bx-home-alt', 'Home', '/home');
   public static fields = new MenuValue('bx bx-grid-alt', 'Fields', '/fields');
-  public static futureBirths = new MenuValue('bx bx-plus-medical', 'Future births', '/future-births');
   public static machines = new MenuValue('fa fa-gears', 'Machines', '/machines');
 
   public static getUploadNew(): MenuValue {

@@ -27,17 +27,6 @@ export class MenuDataFieldPageProvider {
     return MenuDataFieldPageProvider.menuValuesFieldsPage;
   }
 
-  public getMenuValuesForFutureBirthPage(): MenuValue[] {
-    if (MenuDataFieldPageProvider.menuValuesFutureBirthPage != null && MenuDataFieldPageProvider.menuValuesFutureBirthPage.length > 0) {
-      return MenuDataFieldPageProvider.menuValuesFutureBirthPage;
-    }
-    let uploadNew = MenuDataCommonProvider.getUploadNew();
-    uploadNew.onClickFunction = () => this.onOpenAddFutureBirth();
-    MenuDataFieldPageProvider.menuValuesFutureBirthPage = Array.of(
-      uploadNew, MenuDataCommonProvider.home);
-    return MenuDataFieldPageProvider.menuValuesFutureBirthPage;
-  }
-
   public getMenuValuesForAdminPage(): MenuValue[] {
     return [];
   }
@@ -57,11 +46,6 @@ export class MenuDataFieldPageProvider {
   onOpenAddNewField() {
     this.dialog.open(FormComponent, {
       data: {title: 'Add new field', type: EntitySelector.FIELD}
-    });
-  }
-  onOpenAddFutureBirth() {
-    this.dialog.open(FormComponent, {
-      data: {title: 'Add new inseminated event', type: EntitySelector.FUTURE_BIRTH}
     });
   }
 

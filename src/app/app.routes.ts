@@ -6,7 +6,6 @@ import {AdminPageComponent} from "./pages/admin-page/admin-page.component";
 import {HomePageComponent} from "./pages/home-page/home-page.component";
 import {FieldsPageComponent} from "./pages/fields-page/fields-page.component";
 import {FieldPageComponent} from "./pages/field-page/field-page.component";
-import {FutureBirthsPageComponent} from "./pages/future-births-page/future-births-page.component";
 
 export const routes: Routes = [
   {path: 'login', component: LoginPageComponent},
@@ -15,6 +14,5 @@ export const routes: Routes = [
   {path: 'fields', component: FieldsPageComponent, canActivate: [authGuard]},
   {path: 'fields/:title', component: FieldPageComponent, canActivate: [authGuard]},
   {path: 'home', component: HomePageComponent, canActivate: [authGuard]},
-  {path: 'future-births', component: FutureBirthsPageComponent, canActivate: [authGuard]},
   {path: '**', component: HomePageComponent, canActivate: [authGuard]},
 ];
