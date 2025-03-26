@@ -2,18 +2,21 @@ import {Validators} from "@angular/forms";
 import {formatDate} from "@angular/common";
 import {TableOperationHistory} from "../../model/table/operations-history/table-operation-history";
 import {EntitySelector} from "../../entity-selector";
+import {AnimalType} from "../../../domains/user/dto/common/animal-type.enum";
 
 export class FormValidatorProvider {
 
   public static getUserFormValidatorFields(type: EntitySelector) {
     if (type === EntitySelector.FIELD) return this.getUserFormValidatorFieldsFieldForm();
     if (type === EntitySelector.FIELD_OPERATION) return this.getUserFormValidatorFieldsOperationForm();
+    if (type === EntitySelector.FUTURE_BIRTH) return this.getUserFormValidatorInseminatedForm();
     return this.getUserFormValidatorFieldImageForm();
   }
 
   public static getUserEditFormValidatorFields(type: EntitySelector, data: any) {
     if (type === EntitySelector.FIELD_OPERATION) return this.getUserFormValidatorFieldsOperationEditForm(data);
     if (type === EntitySelector.FIELD) return this.getUserFormValidatorFieldForm(data);
+    if (type === EntitySelector.FUTURE_BIRTH) return this.getUserFormValidatorFieldForm(data);
     return this.getUserFormValidatorUserEditForm(data);
   }
 
@@ -51,6 +54,13 @@ export class FormValidatorProvider {
       email: value.email,
       roles: value.roles
     };
+    if (type == EntitySelector.FUTURE_BIRTH) {
+      return {
+        identifier: value.identifier,
+        animalType: value.animalType,
+        inseminatedDate: value.inseminatedDate
+      }
+    }
     return {}
   }
 
@@ -69,6 +79,15 @@ export class FormValidatorProvider {
     }
   }
 
+  private static getUserFormValidatorInseminatedForm() {
+    let todayDate = formatDate(new Date(), 'yyyy-MM-dd', 'en');
+    return {
+      animalType: [AnimalType.COW, Validators.required],
+      identifier: ['', Validators.required],
+      inseminatedDate: [todayDate, Validators.required]
+    }
+  }
+
   private static getUserFormValidatorFieldForm(value: any) {
     return {
       id: value.id,
@@ -84,8 +103,8 @@ export class FormValidatorProvider {
   private static getUserFormValidatorFieldImageForm() {
     let todayDate = formatDate(new Date(), 'yyyy-MM-dd', 'en');
     return {
-      at: [todayDate,Validators.required],
-      images: [null,Validators.required],
+      at: [todayDate, Validators.required],
+      images: [null, Validators.required],
     }
   }
 

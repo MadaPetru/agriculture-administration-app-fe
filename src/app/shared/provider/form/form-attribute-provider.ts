@@ -2,12 +2,14 @@ import {FormAttribute} from "../../model/form/form-attribute";
 import {formatDate} from "@angular/common";
 import {EntitySelector} from "../../entity-selector";
 import {UserRole} from "../../../domains/user/dto/common/user-role.enum";
+import {AnimalType} from "../../../domains/user/dto/common/animal-type.enum";
 
 export class FormAttributeProvider {
 
   private static attributesForOperationForm: FormAttribute[];
   private static attributesForFieldAddForm: FormAttribute[];
   private static attributesForImageField: FormAttribute[];
+  private static attributesForFutureBirth: FormAttribute[];
   private static attributesForUser: FormAttribute[];
 
 
@@ -15,6 +17,7 @@ export class FormAttributeProvider {
     this.attributesForOperationForm = this.initDataForOperationForm();
     this.attributesForFieldAddForm = this.initDataForFieldAddForm();
     this.attributesForImageField = this.initDataForImageFieldAddForm();
+    this.attributesForFutureBirth = this.initDataForFutureBirthAddForm();
     this.attributesForUser = this.initDataForUserEditForm();
   }
 
@@ -22,6 +25,7 @@ export class FormAttributeProvider {
     if (type === EntitySelector.FIELD_OPERATION) return FormAttributeProvider.attributesForOperationForm;
     if (type === EntitySelector.FIELD) return FormAttributeProvider.attributesForFieldAddForm;
     if (type === EntitySelector.IMAGE_FIELD_OPERATION) return FormAttributeProvider.attributesForImageField;
+    if (type === EntitySelector.FUTURE_BIRTH) return FormAttributeProvider.attributesForFutureBirth;
     return FormAttributeProvider.attributesForUser;
   }
 
@@ -135,6 +139,28 @@ export class FormAttributeProvider {
       value: 'At',
       labelForValue: 'at',
       formControlName: 'at',
+      inputType: 'date',
+      dateTypeMaxValue: formatDate(new Date(), 'yyyy-MM-dd', 'en')
+    });
+    return data;
+  }
+
+  private static initDataForFutureBirthAddForm(): FormAttribute[] {
+    let data = new Array<FormAttribute>();
+    data.push({inputId: 'Identifier', value: 'Identifier', labelForValue: 'identifier', formControlName: 'identifier', inputType: 'text'});
+    data.push({
+      inputId: 'animalType',
+      value: 'Animal Type',
+      labelForValue: 'animalType',
+      formControlName: 'animalType',
+      inputType: 'select',
+      options: [AnimalType.COW]
+    });
+    data.push({
+      inputId: 'inseminatedDate',
+      value: 'Inseminated Date',
+      labelForValue: 'inseminatedDate',
+      formControlName: 'inseminatedDate',
       inputType: 'date',
       dateTypeMaxValue: formatDate(new Date(), 'yyyy-MM-dd', 'en')
     });

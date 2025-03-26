@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {CalendarOption} from "@fullcalendar/angular/private-types";
 import {FullCalendarComponent, FullCalendarModule} from "@fullcalendar/angular";
 import {NgForOf} from "@angular/common";
@@ -11,6 +11,9 @@ import {NavbarSearchComponent} from "../../shared/components/navbar-search/navba
 import {MenuValue} from "../../shared/model/menu/menu-value";
 import {MenuDataFieldPageProvider} from "../../shared/provider/menu/menu-data-field-page-provider";
 import {FormsModule} from "@angular/forms";
+import {Subject, takeUntil} from "rxjs";
+import {FormSharedService} from "../../shared/components/form/form-shared-service";
+import {EntitySelector} from "../../shared/entity-selector";
 
 @Component({
   selector: 'app-future-births-page',
@@ -25,10 +28,11 @@ import {FormsModule} from "@angular/forms";
   templateUrl: './future-births-page.component.html',
   styleUrls: ['./future-births-page.component.css', '../../shared/shared.css']
 })
-export class FutureBirthsPageComponent {
+export class FutureBirthsPageComponent implements OnDestroy, OnInit {
   @ViewChild(FullCalendarComponent) calendar!: FullCalendarComponent;
 
   currentDate = new Date();
+  unsubscribe = new Subject<void>();
 
 // Get the current year and month
   currentYear = this.currentDate.getFullYear();
@@ -40,7 +44,7 @@ export class FutureBirthsPageComponent {
   // Search Data
   searchQuery: string = '';
   searchYear: number | null = null;
-  menuValues: MenuValue[] = this.menuDataFieldPageProvider.getMenuValuesForFieldsPage();
+  menuValues: MenuValue[] = this.menuDataFieldPageProvider.getMenuValuesForFutureBirthPage();
   futureBirths = [
     {id: 1, date: "2025-04-10", animal: "Cow 23", expectedTime: "10:00 AM"},
     {id: 2, date: "2025-04-15", animal: "Sheep 12", expectedTime: "2:30 PM"},
@@ -59,6 +63,15 @@ export class FutureBirthsPageComponent {
   ];
   filteredBirths = [...this.futureBirths];
 
+  ngOnDestroy(): void {
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
+  }
+
+  ngOnInit(): void {
+    this.subscribeAddForm();
+  }
+
   // 🔎 Sidebar Search (Filter by Animal Name or Date)
   filterBirths() {
     const query = this.searchQuery.toLowerCase();
@@ -72,7 +85,7 @@ export class FutureBirthsPageComponent {
   // 🔎 Calendar Search (Filter by Year)
   filterCalendarEvents() {
     let date = new Date(this.initialDate);
-    if(date.toLocaleDateString() === 'Invalid Date') return;
+    if (date.toLocaleDateString() === 'Invalid Date') return;
     this.calendar.getApi().gotoDate(date);
     if (!this.searchYear) {
       this.calendarOptions.events = this.getEvents();
@@ -108,7 +121,9 @@ export class FutureBirthsPageComponent {
     events: this.getEvents()
   };
 
-  constructor(public dialog: MatDialog, public menuDataFieldPageProvider: MenuDataFieldPageProvider) {
+  constructor(private dialog: MatDialog,
+              private formSharedService: FormSharedService,
+              private menuDataFieldPageProvider: MenuDataFieldPageProvider) {
   }
 
   handleDateClick(info: any) {
@@ -125,5 +140,26 @@ export class FutureBirthsPageComponent {
 
   deleteBirth(index: any) {
 
+  }
+
+  subscribeAddForm() {
+    this.formSharedService.currentFormValue.pipe(takeUntil(this.unsubscribe))
+      .subscribe({
+        next: (model: any) => {
+          if (model.entity === EntitySelector.FUTURE_BIRTH.valueOf()) {
+            console.log(model.object);
+          }
+          if (model.entity === EntitySelector.IMAGE_FIELD_OPERATION.valueOf()) {
+            // let id = <number>this.field?.id;
+            // let requestForUpload: UploadFieldImageRequest = {
+            //   at: model.object.at,
+            //   images: model.object.images
+            // };
+          }
+        },
+        error: (response: any) => {
+          console.log(response);
+        }
+      });
   }
 }

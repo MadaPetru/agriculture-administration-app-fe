@@ -10,6 +10,7 @@ export class MenuDataFieldPageProvider {
 
   private static menuValuesFieldsPage: MenuValue[];
   private static menuValuesFieldPage: MenuValue[];
+  private static menuValuesFutureBirthPage: MenuValue[];
 
   constructor(private dialog: MatDialog) {
 
@@ -24,6 +25,17 @@ export class MenuDataFieldPageProvider {
     MenuDataFieldPageProvider.menuValuesFieldsPage = Array.of(
       uploadNew, MenuDataCommonProvider.home);
     return MenuDataFieldPageProvider.menuValuesFieldsPage;
+  }
+
+  public getMenuValuesForFutureBirthPage(): MenuValue[] {
+    if (MenuDataFieldPageProvider.menuValuesFutureBirthPage != null && MenuDataFieldPageProvider.menuValuesFutureBirthPage.length > 0) {
+      return MenuDataFieldPageProvider.menuValuesFutureBirthPage;
+    }
+    let uploadNew = MenuDataCommonProvider.getUploadNew();
+    uploadNew.onClickFunction = () => this.onOpenAddFutureBirth();
+    MenuDataFieldPageProvider.menuValuesFutureBirthPage = Array.of(
+      uploadNew, MenuDataCommonProvider.home);
+    return MenuDataFieldPageProvider.menuValuesFutureBirthPage;
   }
 
   public getMenuValuesForAdminPage(): MenuValue[] {
@@ -45,6 +57,11 @@ export class MenuDataFieldPageProvider {
   onOpenAddNewField() {
     this.dialog.open(FormComponent, {
       data: {title: 'Add new field', type: EntitySelector.FIELD}
+    });
+  }
+  onOpenAddFutureBirth() {
+    this.dialog.open(FormComponent, {
+      data: {title: 'Add new inseminated event', type: EntitySelector.FUTURE_BIRTH}
     });
   }
 
